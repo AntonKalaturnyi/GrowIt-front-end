@@ -4,14 +4,14 @@
       <br>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form-inlin justify-content-center">
         <div class="form-group row">
-          <input type="email" class="form-control" formControlName="username" placeholder="Email">
+          <input type="email" class="form-control" formControlName="email" placeholder="Email">
         </div>
         <div class="form-group row">
           <input type="password" class="form-control" formControlName="password" placeholder="Password">
         </div>
         <button type="submit" class="btn btn-primary">Sign in</button>
       </form>
-      <div class="blue hov" (click)="toSignUp()">Create User</div>
+      <a class="blue hov" routerLink="/register">Create User</a>
       <div class="blue hov" (click)="toForgotPassword()">Forgot password?</div>
     </div>
   </div>
