@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
+import { Creds } from 'src/app/model/Creds';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +14,12 @@ export class LoginComponent implements OnInit {
 
 loginForm;
 errorMessage: string;
+creds: Creds;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, 
               private router: Router, private alertService: AlertService) {
     this.loginForm = this.formBuilder.group({
-      username: '',
+      email: '',
       password: ''
     });
   }
@@ -25,9 +27,12 @@ errorMessage: string;
   ngOnInit() {
   }
 
-  onSubmit(creds) {
+  onSubmit(form) {
+    this.creds = new Creds();
+    this.creds.username = form.email;
+    this.creds.password = form.password;
     // Process checkout data here
-    this.userService.authUser(creds).subscribe(data => {
+    this.userService.authUser(this.creds).subscribe(data => {
       data.roles.forEach(element => {
           localStorage.setItem(element.name, 'true');
         });
