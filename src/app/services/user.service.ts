@@ -1,7 +1,7 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators'
+import { catchError } from 'rxjs/operators';
 import { Creds } from '../model/Creds';
 
 @Injectable({
@@ -26,7 +26,21 @@ export class UserService {
      .pipe(catchError(this.errorHandler));
    }
 
+   getSmsCodeForUser(userId: string) {
+    const headers = this.getTokenHeader();
+    return this.http.get('http://localhost:8080/GrowIt/sms?id=' + userId, { headers })
+    .pipe(catchError(this.errorHandler));
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error || 'Server error');
+  }
+
+  private getTokenHeader() {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('token');
+    if (token) {
+      return headers = headers.append('authorization', 'Bearer ' + token);
+    }
   }
 }
