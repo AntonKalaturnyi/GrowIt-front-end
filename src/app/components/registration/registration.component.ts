@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Creds } from 'src/app/model/Creds';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 
 @Component({
   selector: 'app-registration',
@@ -18,7 +18,7 @@ export class RegistrationComponent implements OnInit {
  accountTypes: string[] = ['Borrower', 'Investor'];
  accountType: string;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService,
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private zone: NgZone,
               private router: Router, private alertService: AlertService, private matRadio: MatRadioModule) {
     this.registerForm = this.formBuilder.group({
       email: '',
@@ -42,6 +42,7 @@ export class RegistrationComponent implements OnInit {
       if (this.accountType === 'Borrower') {
         this.userService.registerBorrower(this.creds).subscribe(data => {
           this.alertService.successMessage('User successfully created', 'SignUp');
+          // this.router.navigateByUrl('new-borrower');
         }, error => {
           console.log(error);
           this.alertService.errorMessage(error.error.message, 'Invalid input');
@@ -49,6 +50,7 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.userService.registerInvestor(this.creds).subscribe(data => {
         this.alertService.successMessage('User successfully created', 'SignUp');
+        this.router.navigateByUrl('new-investor');
       }, error => {
         console.log(error);
         this.alertService.errorMessage(error.error.message, 'Invalid input');
