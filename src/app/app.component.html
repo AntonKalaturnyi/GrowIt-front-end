@@ -6,6 +6,7 @@ Navbar here
 </nav>
 </div>
 <div style="text-align: right">
+  <button (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary my-sm-0 ml-3" type="button">Log out</button>
   <a routerLink="login" routerLinkActive="active">Login</a>
 </div>
 <section>

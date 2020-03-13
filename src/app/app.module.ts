@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { InvestorRegComponent } from './components/registration/investor-reg/investor-reg.component';
+import { InvestorCabinetComponent } from './components/investor-cabinet/investor-cabinet.component';
 
 
 
@@ -29,7 +30,8 @@ import { InvestorRegComponent } from './components/registration/investor-reg/inv
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    InvestorRegComponent
+    InvestorRegComponent,
+    InvestorCabinetComponent
   ],
   imports: [
     MatButtonModule,

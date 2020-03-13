@@ -50,6 +50,12 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.userService.registerInvestor(this.creds).subscribe(data => {
         this.alertService.successMessage('User successfully created', 'SignUp');
+        data.roles.forEach(element => {
+          localStorage.setItem(element.name, 'true');
+        });
+        localStorage.setItem('token', data.token);
+        console.log(data.token);
+        localStorage.setItem('email', data.username);
         this.router.navigateByUrl('new-investor');
       }, error => {
         console.log(error);

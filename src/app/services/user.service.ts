@@ -22,13 +22,13 @@ export class UserService {
    }
 
    registerInvestor(creds: Creds) {
-    return this.http.post('http://localhost:8080/GrowIt/register/new-investor', creds)
+    return this.http.post<any>('http://localhost:8080/GrowIt/register/new-investor', creds)
      .pipe(catchError(this.errorHandler));
    }
 
-   getSmsCodeForUser(userId: string) {
+   sendInvestorInfoAndGetSmsCode(dto) {
     const headers = this.getTokenHeader();
-    return this.http.get('http://localhost:8080/GrowIt/sms?id=' + userId, { headers })
+    return this.http.post('http://localhost:8080/GrowIt/invest/fill-investor', dto, { headers })
     .pipe(catchError(this.errorHandler));
   }
 
