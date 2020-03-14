@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Creds } from '../model/Creds';
+import { InvestorPassportDto } from '../model/InvestorPassportDto';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,12 @@ export class UserService {
    sendInvestorInfoAndGetSmsCode(dto) {
     const headers = this.getTokenHeader();
     return this.http.post('http://localhost:8080/GrowIt/invest/fill-investor', dto, { headers })
+    .pipe(catchError(this.errorHandler));
+  }
+
+  saveInvestorPassportAndItn(dto: InvestorPassportDto) {
+    const headers = this.getTokenHeader();
+    return this.http.post('http://localhost:8080/GrowIt/invest/investor-save-passport-itn', dto, { headers })
     .pipe(catchError(this.errorHandler));
   }
 
