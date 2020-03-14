@@ -18,7 +18,7 @@ export class UserService {
   }
 
   registerBorrower(creds: Creds) {
-    return this.http.post('http://localhost:8080/GrowIt/register/new-borrower', creds)
+    return this.http.post<any>('http://localhost:8080/GrowIt/register/new-borrower', creds)
      .pipe(catchError(this.errorHandler));
    }
 

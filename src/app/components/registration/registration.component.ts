@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { Creds } from 'src/app/model/Creds';
@@ -16,14 +16,14 @@ export class RegistrationComponent implements OnInit {
  registerForm;
  creds: Creds;
  accountTypes: string[] = ['Borrower', 'Investor'];
- accountType: string;
 
   constructor(private formBuilder: FormBuilder, private userService: UserService, private zone: NgZone,
               private router: Router, private alertService: AlertService, private matRadio: MatRadioModule) {
     this.registerForm = this.formBuilder.group({
-      email: '',
-      password: '',
-      password2: ''
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      password2: ['', [Validators.required]],
+      accountType: ['', [Validators.required]]
     });
   }
 
@@ -32,17 +32,22 @@ export class RegistrationComponent implements OnInit {
 
   submit(form) {
 
-    if ( form.password === form.password2 && this.accountType) {
+    if ( form.password === form.password2 && form.accountType) {
       this.creds = new Creds();
       this.creds.username = form.email;
       this.creds.password = form.password;
 
     // Process checkout data here
 
-      if (this.accountType === 'Borrower') {
+      if (form.accountType === 'Borrower') {
         this.userService.registerBorrower(this.creds).subscribe(data => {
           this.alertService.successMessage('User successfully created', 'SignUp');
-          // this.router.navigateByUrl('new-borrower');
+          data.roles.forEach(element => {
+            localStorage.setItem(element.name, 'true');
+          });
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('email', data.username);
+          this.router.navigateByUrl('new-borrower');
         }, error => {
           console.log(error);
           this.alertService.errorMessage(error.error.message, 'Invalid input');
@@ -54,7 +59,6 @@ export class RegistrationComponent implements OnInit {
           localStorage.setItem(element.name, 'true');
         });
         localStorage.setItem('token', data.token);
-        console.log(data.token);
         localStorage.setItem('email', data.username);
         this.router.navigateByUrl('new-investor');
       }, error => {
