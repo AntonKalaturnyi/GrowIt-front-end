@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MatRadioModule} from '@angular/material/radio';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 
@@ -20,8 +18,8 @@ serverCode: string;
 moveToCode = false;
 genders: string[] = ['Male', 'Female'];
 
-  constructor(private radio: MatRadioModule, private formBuilder: FormBuilder, private alertService: AlertService,
-              private datepicker: MatDatepickerModule, private userService: UserService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private alertService: AlertService,
+              private userService: UserService, private router: Router) {
     this.personalInfoForm = this.formBuilder.group({
       lastName:  ['', [Validators.required]],
       name:  ['', [Validators.required]],
@@ -56,7 +54,7 @@ genders: string[] = ['Male', 'Female'];
   next(form) {
     console.log('NEXT.code = ' + form.code);
     if (form.code === this.serverCode) {
-      this.router.navigateByUrl('investor-cabinet');
+      this.router.navigateByUrl('fill-passport');
     } else {
       this.alertService.errorMessage('Please try again', 'SMS code is incorrect');
     }

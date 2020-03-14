@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="my-3 col-lg-5 offset-sm-3 text-center frm">
+        <h2>Passport & ITN</h2>
+        <br>
+        <form [formGroup]="docsForm" (ngSubmit)="submit(docsForm.value)" class="form-inlin justify-content-center">
+
+            <div class="form-group row">
+                <label id="example-radio-group-label" class="mr-5">Тип паспорта</label><br />
+                <mat-radio-group formControlName="passportType" name="passportType"
+                    aria-labelledby="example-radio-group-label" class="example-radio-group">
+                    <mat-radio-button ngDefaultControl class="example-radio-button" *ngFor="let type of passportTypes"
+                        [value]="type">
+                        <div class="mr-3">{{type}}</div>
+                    </mat-radio-button>
+                </mat-radio-group>
+            </div>
+
+            <div class="form-group row" *ngIf="docsForm.controls['passportType'].value === 'ID-картка'">
+                <label class="mr-4 my-auto">Номер ID-картки</label>
+                <input class="col-sm-3" type="text" formControlName="idPassNumber" placeholder="номер" />
+            </div>
+            <div class="form-group row" *ngIf="docsForm.controls['passportType'].value === 'Паперовий паспорт'">
+                <label class="mr-3 my-auto">Серія</label>
+                <input class="col-sm-2" type="text" formControlName="paperPassSeries" placeholder="СЕ" />
+                <label class="mr-3 ml-3 my-auto">Номер</label>
+                <input class="col-sm-2" type="text" formControlName="paperPassNumber" placeholder="123456" />
+            </div>
+
+            <label class="row">Ким виданий паспорт: сторінка 2</label>
+            <div class="form-group row">
+                <input class="col-sm-3 mr-2" type="text" formControlName="issuerRegion" placeholder="Волинським" />МВ
+                <input class="col-sm-2 mr-2 ml-2" type="text" formControlName="issuerName" placeholder="УДМС" />в
+                <input class="col-sm-3 mr-2 ml-2" type="text" formControlName="issuerLocationRegion"
+                    placeholder="Волинській" />області
+            </div>
+
+            <div class="form-group">
+                <div class="row ">
+                    <label class="mr-4 my-auto">Дата видачі</label><br />
+                    <input class="form-control col-sm-4" matInput [matDatepicker]="picker" formControlName="issueDate"
+                        placeholder="Вибрати в календарі" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="mr-3 my-auto">Ідентифікаційний код</label>
+                <input class="col-sm-3" type="text" formControlName="itnNumber" placeholder="код" />
+
+            </div>
+
+            <button type="submit" class="btn btn-primary mx-auto" 
+            [disabled]="!((!!docsForm.controls['idPassNumber'].value && docsForm.controls['idPassNumber'].value !== '') 
+            || ( (!!docsForm.controls['paperPassSeries'].value && docsForm.controls['paperPassSeries'].value !== '') 
+            && (!!docsForm.controls['paperPassNumber'].value && docsForm.controls['paperPassNumber'].value !== '') ) ) || !docsForm.valid">Next</button>
+        </form>
+
+
+    </div>
+</div>

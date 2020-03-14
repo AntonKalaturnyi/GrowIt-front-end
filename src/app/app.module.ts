@@ -22,6 +22,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { MatRadioModule } from '@angular/material/radio';
 import { InvestorRegComponent } from './components/registration/investor-reg/investor-reg.component';
 import { InvestorCabinetComponent } from './components/investor-cabinet/investor-cabinet.component';
+import { InvestorPassportFillComponent } from './components/registration/investor-passport-fill/investor-passport-fill.component';
 
 
 
@@ -31,7 +32,8 @@ import { InvestorCabinetComponent } from './components/investor-cabinet/investor
     LoginComponent,
     RegistrationComponent,
     InvestorRegComponent,
-    InvestorCabinetComponent
+    InvestorCabinetComponent,
+    InvestorPassportFillComponent
   ],
   imports: [
     MatButtonModule,
