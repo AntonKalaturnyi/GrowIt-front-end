@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,7 @@ import { InvestorRegComponent } from './components/registration/investor-reg/inv
 import { InvestorCabinetComponent } from './components/investor-cabinet/investor-cabinet.component';
 import { InvestorPassportFillComponent } from './components/registration/investor-passport-fill/investor-passport-fill.component';
 import { BorrowerRegComponent } from './components/registration/borrower-reg/borrower-reg.component';
+import { BorrowerPassportFillComponent } from './components/registration/borrower-passport-fill/borrower-passport-fill.component';
 
 
 
@@ -35,7 +37,8 @@ import { BorrowerRegComponent } from './components/registration/borrower-reg/bor
     InvestorRegComponent,
     InvestorCabinetComponent,
     InvestorPassportFillComponent,
-    BorrowerRegComponent
+    BorrowerRegComponent,
+    BorrowerPassportFillComponent
   ],
   imports: [
     MatButtonModule,
@@ -52,6 +55,7 @@ import { BorrowerRegComponent } from './components/registration/borrower-reg/bor
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSelectModule,
     MatDialogModule,
     ToastrModule.forRoot(
       {

@@ -13,7 +13,6 @@ export class InvestorRegComponent implements OnInit {
 
 personalInfoForm;
 codeForm: FormGroup;
-finalForm;
 serverCode: string;
 moveToCode = false;
 genders: string[] = ['Male', 'Female'];
