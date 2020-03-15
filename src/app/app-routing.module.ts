@@ -6,6 +6,7 @@ import { InvestorRegComponent } from './components/registration/investor-reg/inv
 import { InvestorCabinetComponent } from './components/investor-cabinet/investor-cabinet.component';
 import { InvestorPassportFillComponent } from './components/registration/investor-passport-fill/investor-passport-fill.component';
 import { BorrowerRegComponent } from './components/registration/borrower-reg/borrower-reg.component';
+import { BorrowerPassportFillComponent } from './components/registration/borrower-passport-fill/borrower-passport-fill.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,9 @@ const routes: Routes = [
   { path: 'new-investor', component: InvestorRegComponent },
   { path: 'new-borrower', component: BorrowerRegComponent },
   { path: 'investor-cabinet', component: InvestorCabinetComponent },
-  { path: 'fill-passport', component: InvestorPassportFillComponent }
+  { path: 'fill-passport', component: InvestorPassportFillComponent },
+  { path: 'borrower/fill-passport', component: BorrowerPassportFillComponent }
+
 ];
 
 @NgModule({

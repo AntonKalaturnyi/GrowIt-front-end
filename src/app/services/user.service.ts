@@ -33,6 +33,12 @@ export class UserService {
     .pipe(catchError(this.errorHandler));
   }
 
+  sendBorrowerInfoAndGetSmsCode(dto) {
+    const headers = this.getTokenHeader();
+    return this.http.post('http://localhost:8080/GrowIt/borrower/fill-borrower', dto, { headers })
+    .pipe(catchError(this.errorHandler));
+  }
+
   saveInvestorPassportAndItn(dto: InvestorPassportDto) {
     const headers = this.getTokenHeader();
     return this.http.post('http://localhost:8080/GrowIt/invest/investor-save-passport-itn', dto, { headers })
