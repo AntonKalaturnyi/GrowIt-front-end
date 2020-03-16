@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
+import { PermissionService } from 'src/app/services/permission.service';
 
 @Component({
   selector: 'app-investor-reg',
@@ -17,7 +18,7 @@ serverCode: string;
 moveToCode = false;
 genders: string[] = ['Male', 'Female'];
 
-  constructor(private formBuilder: FormBuilder, private alertService: AlertService,
+  constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
               private userService: UserService, private router: Router) {
     this.personalInfoForm = this.formBuilder.group({
       lastName:  ['', [Validators.required]],
@@ -53,7 +54,7 @@ genders: string[] = ['Male', 'Female'];
   next(form) {
     console.log('NEXT.code = ' + form.code);
     if (form.code === this.serverCode) {
-      this.router.navigateByUrl('fill-passport');
+      this.router.navigateByUrl('investor/fill-passport');
     } else {
       this.alertService.errorMessage('Please try again', 'SMS code is incorrect');
     }

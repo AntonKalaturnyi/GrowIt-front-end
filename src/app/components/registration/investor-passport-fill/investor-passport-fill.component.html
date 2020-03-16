@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="this.permissionService.registeredUserPermission() else accessDenied" class="form">
     <div class="my-3 col-lg-5 offset-sm-3 text-center frm">
         <h2>Passport & ITN</h2>
         <br>
@@ -59,3 +59,9 @@
 
     </div>
 </div>
+<ng-template #accessDenied>
+    <div class="denied mt-3 p-5 alert-danger">
+      <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
+      <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact your administrator.</p>
+    </div>
+  </ng-template>
