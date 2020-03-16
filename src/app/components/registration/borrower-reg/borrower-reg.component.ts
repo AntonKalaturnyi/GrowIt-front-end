@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { MatSelect } from '@angular/material/select';
+import { PermissionService } from 'src/app/services/permission.service';
 
 
 @Component({
@@ -22,7 +23,7 @@ genders: string[] = ['Male', 'Female'];
 matitalStatuses: string[] = ['Male', 'Female'];
 
 
-  constructor(private formBuilder: FormBuilder, private alertService: AlertService,
+  constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
               private userService: UserService, private router: Router) {
     this.personalInfoForm = this.formBuilder.group({
       lastName:  ['', [Validators.required]],

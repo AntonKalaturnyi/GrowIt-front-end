@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 import { UserService } from 'src/app/services/user.service';
 import { AlertService } from 'src/app/services/alert.service';
 import { InvestorPassportDto } from 'src/app/model/InvestorPassportDto';
+import { PermissionService } from 'src/app/services/permission.service';
 
 @Component({
   selector: 'app-investor-passport-fill',
@@ -18,7 +19,7 @@ export class InvestorPassportFillComponent implements OnInit {
   passportTypes: string[] = ['ID-картка', 'Паперовий паспорт'];
 
 
-  constructor(private formBuilder: FormBuilder, private alertService: AlertService,
+  constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
               private userService: UserService, private router: Router) {
       this.docsForm = this.formBuilder.group({
         passportType: ['', [Validators.required]],

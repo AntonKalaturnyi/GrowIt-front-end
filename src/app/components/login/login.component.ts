@@ -16,7 +16,7 @@ loginForm;
 errorMessage: string;
 creds: Creds;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, 
+  constructor(private formBuilder: FormBuilder, private userService: UserService,
               private router: Router, private alertService: AlertService) {
     this.loginForm = this.formBuilder.group({
       email: '',
@@ -34,7 +34,8 @@ creds: Creds;
     // Process checkout data here
     this.userService.authUser(this.creds).subscribe(data => {
       data.roles.forEach(element => {
-          localStorage.setItem(element.name, 'true');
+        console.log('ROLE: ' + element);
+        localStorage.setItem(element, 'true');
         });
       localStorage.setItem('token', data.token);
       console.log(data.token);

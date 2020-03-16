@@ -13,10 +13,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegistrationComponent },
   { path: 'new-investor', component: InvestorRegComponent },
-  { path: 'new-borrower', component: BorrowerRegComponent },
-  { path: 'investor-cabinet', component: InvestorCabinetComponent },
-  { path: 'fill-passport', component: InvestorPassportFillComponent },
-  { path: 'borrower/fill-passport', component: BorrowerPassportFillComponent }
+  { path: 'new-borrower', component: BorrowerRegComponent }, // +
+  { path: 'investor-cabinet', component: InvestorCabinetComponent }, // +
+  { path: 'investor/fill-passport', component: InvestorPassportFillComponent }, // +
+  { path: 'borrower/fill-passport', component: BorrowerPassportFillComponent } // +
 
 ];
 
