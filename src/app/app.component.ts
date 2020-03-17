@@ -11,7 +11,6 @@ export class AppComponent {
 
   logOut() {
     localStorage.clear();
- //   AppComponent.loggedIn = false;
   }
 
 }

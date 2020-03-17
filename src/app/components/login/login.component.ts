@@ -40,6 +40,7 @@ creds: Creds;
       localStorage.setItem('token', data.token);
       console.log(data.token);
       localStorage.setItem('email', data.username);
+      this.alertService.successMessage('Well done!', 'You have successfully logged in.');
   }, error => {
       this.errorMessage = error;
       this.alertService.timeoutError('Password or email is incorrect', 'Bad credantials', 4200);
