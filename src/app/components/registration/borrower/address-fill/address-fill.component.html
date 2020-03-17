@@ -9,8 +9,7 @@
         <input class="my-auto" type="checkbox" formControlName="sameAddressInPassport" />
       </div>
 
-      <div
-        *ngIf="!(!!dataForm.controls['sameAddressInPassport'].value) || !dataForm.controls['sameAddressInPassport'].value">
+      <div *ngIf="!(!!dataForm.controls['sameAddressInPassport'].value) || !dataForm.controls['sameAddressInPassport'].value">
         <div class="form-group row">
           <label class="mr-2 my-auto">Область</label>
           <input class="col-sm-3 mr-2" type="text" formControlName="region" placeholder="область" />
