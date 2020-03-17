@@ -1,0 +1,47 @@
+<div *ngIf="this.permissionService.registeredUserPermission() else accessDenied" class="form">
+  <div class="my-3 col-lg-7 offset-sm-3 text-center frm">
+
+    <h4>Адреса проживання</h4><br />
+
+    <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
+      <div class="form-group row">
+        <label class="mr-2 my-auto">Адреса проживання така ж як у паспорті</label>
+        <input class="my-auto" type="checkbox" formControlName="sameAddressInPassport" />
+      </div>
+
+      <div
+        *ngIf="!(!!dataForm.controls['sameAddressInPassport'].value) || !dataForm.controls['sameAddressInPassport'].value">
+        <div class="form-group row">
+          <label class="mr-2 my-auto">Область</label>
+          <input class="col-sm-3 mr-2" type="text" formControlName="region" placeholder="область" />
+          <label class="mr-2 my-auto">Район</label>
+          <input class="col-sm-3 mr-2 ml-2" type="text" formControlName="district" placeholder="район" />
+        </div>
+
+        <div class="form-group row">
+          <label class="mr-3 my-auto">Населений пункт</label>
+          <input class="col-sm-4" type="text" formControlName="settlement" placeholder="назва" />
+          <label class="mr-2 ml-3 my-auto">Поштовий індекс</label>
+          <input class="col-sm-2 mr-2 ml-2" type="text" formControlName="postalCode" placeholder="#" />
+        </div>
+        <div class="form-group row">
+          <label class="mr-3 my-auto">Вулиця</label>
+          <input class="col-sm-3" type="text" formControlName="street" placeholder="вулиця" />
+          <label class="mr-2 ml-3 my-auto">Будинок</label>
+          <input class="col-sm-1 mr-2" type="text" formControlName="number" placeholder="№" />
+          <label class="mr-2 my-auto">Корп.</label>
+          <input class="col-sm-1 mr-2 ml-2" type="text" formControlName="corpsNo" placeholder="№" />
+          <label class="mr-2 my-auto">Кв.</label>
+          <input class="col-sm-1 mr-2 ml-2" type="text" formControlName="door" placeholder="№" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid && !dataForm.controls['sameAddressInPassport'].value">Next</button>
+    </form>
+  </div>
+</div>
+<ng-template #accessDenied>
+  <div class="denied mt-3 p-5 alert-danger">
+    <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
+    <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact your administrator.</p>
+  </div>
+</ng-template>

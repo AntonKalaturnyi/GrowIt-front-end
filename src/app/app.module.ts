@@ -21,12 +21,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { InvestorRegComponent } from './components/registration/investor-reg/investor-reg.component';
 import { InvestorCabinetComponent } from './components/investor-cabinet/investor-cabinet.component';
-import { InvestorPassportFillComponent } from './components/registration/investor-passport-fill/investor-passport-fill.component';
-import { BorrowerRegComponent } from './components/registration/borrower-reg/borrower-reg.component';
-import { BorrowerPassportFillComponent } from './components/registration/borrower-passport-fill/borrower-passport-fill.component';
 import { BorrowerCabinetComponent } from './components/borrower-cabinet/borrower-cabinet.component';
+import { AddressFillComponent } from './components/registration/borrower/address-fill/address-fill.component';
+import { InvestorRegComponent } from './components/registration/investor/investor-reg/investor-reg.component';
+import { InvestorPassportFillComponent } from './components/registration/investor/investor-passport-fill/investor-passport-fill.component';
+import { BorrowerRegComponent } from './components/registration/borrower/borrower-reg/borrower-reg.component';
+import { BorrowerPassportFillComponent } from './components/registration/borrower/borrower-passport-fill/borrower-passport-fill.component';
+import { EmploymentFillComponent } from './components/registration/borrower/employment-fill/employment-fill.component';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { BorrowerCabinetComponent } from './components/borrower-cabinet/borrower
     InvestorPassportFillComponent,
     BorrowerRegComponent,
     BorrowerPassportFillComponent,
-    BorrowerCabinetComponent
+    BorrowerCabinetComponent,
+    AddressFillComponent,
+    EmploymentFillComponent
   ],
   imports: [
     MatButtonModule,
