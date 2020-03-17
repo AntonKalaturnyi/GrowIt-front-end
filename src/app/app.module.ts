@@ -26,7 +26,7 @@ import { InvestorCabinetComponent } from './components/investor-cabinet/investor
 import { InvestorPassportFillComponent } from './components/registration/investor-passport-fill/investor-passport-fill.component';
 import { BorrowerRegComponent } from './components/registration/borrower-reg/borrower-reg.component';
 import { BorrowerPassportFillComponent } from './components/registration/borrower-passport-fill/borrower-passport-fill.component';
-
+import { BorrowerCabinetComponent } from './components/borrower-cabinet/borrower-cabinet.component';
 
 
 @NgModule({
@@ -38,7 +38,8 @@ import { BorrowerPassportFillComponent } from './components/registration/borrowe
     InvestorCabinetComponent,
     InvestorPassportFillComponent,
     BorrowerRegComponent,
-    BorrowerPassportFillComponent
+    BorrowerPassportFillComponent,
+    BorrowerCabinetComponent
   ],
   imports: [
     MatButtonModule,

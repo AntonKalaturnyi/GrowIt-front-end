@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Creds } from '../model/Creds';
 import { InvestorPassportDto } from '../model/InvestorPassportDto';
+import { BorrowerPassportDto } from '../model/BorrowerPassportDto';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,12 @@ export class UserService {
   saveInvestorPassportAndItn(dto: InvestorPassportDto) {
     const headers = this.getTokenHeader();
     return this.http.post('http://localhost:8080/GrowIt/invest/investor-save-passport-itn', dto, { headers })
+    .pipe(catchError(this.errorHandler));
+  }
+
+  saveBorrowerPassportAndItn(data: FormData  ) {
+    const headers = this.getTokenHeader();
+    return this.http.post('http://localhost:8080/GrowIt/borrower/save-passport-itn', data, { headers })
     .pipe(catchError(this.errorHandler));
   }
 

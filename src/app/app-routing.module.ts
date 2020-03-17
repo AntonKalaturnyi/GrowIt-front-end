@@ -7,7 +7,7 @@ import { InvestorCabinetComponent } from './components/investor-cabinet/investor
 import { InvestorPassportFillComponent } from './components/registration/investor-passport-fill/investor-passport-fill.component';
 import { BorrowerRegComponent } from './components/registration/borrower-reg/borrower-reg.component';
 import { BorrowerPassportFillComponent } from './components/registration/borrower-passport-fill/borrower-passport-fill.component';
-
+import { BorrowerCabinetComponent } from './components/borrower-cabinet/borrower-cabinet.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'new-investor', component: InvestorRegComponent },
   { path: 'new-borrower', component: BorrowerRegComponent }, // +
   { path: 'investor-cabinet', component: InvestorCabinetComponent }, // +
+  { path: 'borrower-cabinet', component: BorrowerCabinetComponent }, // +
   { path: 'investor/fill-passport', component: InvestorPassportFillComponent }, // +
   { path: 'borrower/fill-passport', component: BorrowerPassportFillComponent } // +
 
