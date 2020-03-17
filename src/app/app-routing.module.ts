@@ -10,6 +10,7 @@ import { BorrowerPassportFillComponent } from './components/registration/borrowe
 import { BorrowerCabinetComponent } from './components/borrower-cabinet/borrower-cabinet.component';
 import { AddressFillComponent } from './components/registration/borrower/address-fill/address-fill.component';
 import { EmploymentFillComponent } from './components/registration/borrower/employment-fill/employment-fill.component';
+import { EducationFillComponent } from './components/registration/borrower/education-fill/education-fill.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,7 +22,9 @@ const routes: Routes = [
   { path: 'investor/fill-passport', component: InvestorPassportFillComponent },
   { path: 'borrower/fill-passport', component: BorrowerPassportFillComponent },
   { path: 'borrower/fill-address', component: AddressFillComponent },
-  { path: 'borrower/fill-employment', component: EmploymentFillComponent }
+  { path: 'borrower/fill-employment', component: EmploymentFillComponent },
+  { path: 'borrower/fill-education', component: EducationFillComponent }
+
 
 ];
 
