@@ -41,7 +41,7 @@ export class EmploymentFillComponent implements OnInit {
     'Рідше разу в місяць'];
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-    private userService: UserService, private router: Router) {
+              private userService: UserService, private router: Router) {
     this.dataForm = this.formBuilder.group({
       socialStatus: ['', [Validators.required]],
       workSphere: ['', [Validators.required]],

@@ -1,0 +1,37 @@
+<div *ngIf="this.permissionService.registeredUserPermission() else accessDenied"
+  class="form my-3 col-lg-7 offset-sm-3 text-center frm">
+  <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
+    <div class="card">
+      <h2>Кредитний калькулятор</h2>
+      <div class="form-group row width">
+        <ng5-slider formControlName="amount" [options]="options1"></ng5-slider>
+        <div class="">{{dataForm.controls['amount'].value}} грн<br/>До повернення: {{math.round(dataForm.controls['amount'].value * ( 1 + dataForm.controls['period'].value / 100))}} грн</div>
+      </div>
+
+      <div class="form-group row width">
+        <ng5-slider formControlName="period" [options]="optionsPeriod1"></ng5-slider>
+        <div class="">{{dataForm.controls['period'].value}} днів</div>
+      </div>
+
+      <div class="form-group row frm">
+        <label class="mr-4">Мета займу</label>
+        <mat-form-field>
+            <select class="border border-dark"  formControlName="loanPurpose" matNativeControl>
+                <option selected type="text" *ngFor="let purpose of purposes" value="{{purpose}}">{{purpose}}</option>
+            </select>
+        </mat-form-field>
+
+    </div>
+      
+    </div>
+
+    <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid">Отримати займ</button>
+  </form>
+
+</div>
+<ng-template #accessDenied>
+  <div class="denied mt-3 p-5 alert-danger">
+    <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
+    <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact Support department</p>
+  </div>
+</ng-template>
