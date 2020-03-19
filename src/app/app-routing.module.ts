@@ -11,6 +11,7 @@ import { BorrowerCabinetComponent } from './components/borrower-cabinet/borrower
 import { AddressFillComponent } from './components/registration/borrower/address-fill/address-fill.component';
 import { EmploymentFillComponent } from './components/registration/borrower/employment-fill/employment-fill.component';
 import { EducationFillComponent } from './components/registration/borrower/education-fill/education-fill.component';
+import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,7 +24,9 @@ const routes: Routes = [
   { path: 'borrower/fill-passport', component: BorrowerPassportFillComponent },
   { path: 'borrower/fill-address', component: AddressFillComponent },
   { path: 'borrower/fill-employment', component: EmploymentFillComponent },
-  { path: 'borrower/fill-education', component: EducationFillComponent }
+  { path: 'borrower/fill-education', component: EducationFillComponent },
+  { path: 'new-loan/calculator', component: LoanCalculatorComponent }
+
 
 
 ];

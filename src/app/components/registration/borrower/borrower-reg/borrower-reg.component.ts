@@ -31,7 +31,7 @@ matitalStatuses: string[] = ['Male', 'Female'];
       middleName:  ['', [Validators.required]],
       gender:  ['', [Validators.required]],
       birthday:  ['', [Validators.required]],
-      phone:  ['', [Validators.required, Validators.pattern('^(0[5-9][0-9]\\d{7})$')]],
+      phone:  ['', [Validators.required, Validators.pattern('^([5-9][0-9]\\d{7})$')]],
       email: localStorage.getItem('email'),
       maritalStatus:  ['', [Validators.required]],
       kidsBefore18yo: ['', [Validators.required]],
@@ -56,6 +56,7 @@ matitalStatuses: string[] = ['Male', 'Female'];
     console.log('Facebook: ' + form.facebook);
 
     form.birthday = JSON.stringify(form.birthday).replace('Z', '').replace('"', '').replace('"', '').replace('T', ' ');
+    form.phone = '+380' + form.phone;
     this.userService.sendBorrowerInfoAndGetSmsCode(form).subscribe((res) => {
       this.serverCode = res.toString();
       console.log('serverCode= ' + this.serverCode);

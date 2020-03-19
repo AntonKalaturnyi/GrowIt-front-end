@@ -30,6 +30,22 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+login(creds: Creds, urlToGo: string) {
+  this.userService.authUser(creds).subscribe(data => {
+    data.roles.forEach(element => {
+      console.log('ROLE: ' + element);
+      localStorage.setItem(element, 'true');
+      });
+    localStorage.setItem('token', data.token);
+    console.log(data.token);
+    localStorage.setItem('email', data.username);
+    this.alertService.successMessage('Well done!', 'You have successfully logged in.');
+    this.router.navigateByUrl(urlToGo);
+}, error => {
+    this.alertService.timeoutError('Password or email is incorrect', 'Bad credantials', 4200);
+});
+}
+
   submit(form) {
 
     if ( form.password === form.password2 && form.accountType) {
@@ -37,17 +53,10 @@ export class RegistrationComponent implements OnInit {
       this.creds.username = form.email;
       this.creds.password = form.password;
 
-    // Process checkout data here
-
       if (form.accountType === 'Borrower') {
         this.userService.registerBorrower(this.creds).subscribe(data => {
           this.alertService.successMessage('User successfully created', 'SignUp');
-          data.roles.forEach(element => {
-            localStorage.setItem(element.name, 'true');
-          });
-          localStorage.setItem('token', data.token);
-          localStorage.setItem('email', data.username);
-          this.router.navigateByUrl('new-borrower');
+          this.login(this.creds, 'new-loan/calculator');
         }, error => {
           console.log(error);
           this.alertService.errorMessage(error.error.message, 'Invalid input');
@@ -55,12 +64,7 @@ export class RegistrationComponent implements OnInit {
     } else {
       this.userService.registerInvestor(this.creds).subscribe(data => {
         this.alertService.successMessage('User successfully created', 'SignUp');
-        data.roles.forEach(element => {
-          localStorage.setItem(element.name, 'true');
-        });
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('email', data.username);
-        this.router.navigateByUrl('new-investor');
+        this.login(this.creds, 'new-investor');
       }, error => {
         console.log(error);
         this.alertService.errorMessage(error.error.message, 'Invalid input');

@@ -25,7 +25,7 @@ export class AddressFillComponent implements OnInit {
       street: ['', [Validators.required]],
       number: ['', [Validators.required]],
       corpsNo: ['', [Validators.required]],
-      door: ['', [Validators.required]],
+      door: ['', [Validators.required]]
     });
   }
   ngOnInit(): void {
