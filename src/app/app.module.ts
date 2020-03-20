@@ -34,6 +34,7 @@ import { BorrowerPassportFillComponent } from './components/registration/borrowe
 import { EmploymentFillComponent } from './components/registration/borrower/employment-fill/employment-fill.component';
 import { EducationFillComponent } from './components/registration/borrower/education-fill/education-fill.component';
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
+import { AssetsFillComponent } from './components/registration/borrower/assets-fill/assets-fill.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { LoanCalculatorComponent } from './components/loan-calculator/loan-calcu
     EmploymentFillComponent,
     EducationFillComponent,
     LoanCalculatorComponent,
+    AssetsFillComponent,
   ],
   imports: [
     BrowserAnimationsModule,
