@@ -65,6 +65,12 @@ export class UserService {
     .pipe(catchError(this.errorHandler));
   }
 
+  saveBorrowerEducation(dto) {
+    const headers = this.getTokenHeader();
+    return this.http.post('http://localhost:8080/GrowIt/borrower/set-education', dto, { headers })
+    .pipe(catchError(this.errorHandler));
+  }
+
   errorHandler(error: HttpErrorResponse) {
     return throwError(error || 'Server error');
   }
