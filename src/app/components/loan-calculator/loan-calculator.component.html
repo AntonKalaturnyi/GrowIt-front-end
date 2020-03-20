@@ -5,7 +5,8 @@
       <h2>Кредитний калькулятор</h2>
       <div class="form-group row width">
         <ng5-slider formControlName="amount" [options]="options1"></ng5-slider>
-        <div class="">{{dataForm.controls['amount'].value}} грн<br/>До повернення: {{math.round(dataForm.controls['amount'].value * ( 1 + dataForm.controls['period'].value / 100))}} грн</div>
+        <div class="">{{dataForm.controls['amount'].value}} грн<br />До повернення:
+          {{math.round(dataForm.controls['amount'].value * ( 1 + dataForm.controls['period'].value / 100))}} грн<span id="star-main"> *</span></div>
       </div>
 
       <div class="form-group row width">
@@ -16,14 +17,21 @@
       <div class="form-group row frm">
         <label class="mr-4">Мета займу</label>
         <mat-form-field>
-            <select class="border border-dark"  formControlName="loanPurpose" matNativeControl>
-                <option selected type="text" *ngFor="let purpose of purposes" value="{{purpose}}">{{purpose}}</option>
-            </select>
+          <select class="border border-dark" formControlName="loanPurpose" matNativeControl>
+            <option selected type="text" *ngFor="let purpose of purposes" value="{{purpose}}">{{purpose}}</option>
+          </select>
         </mat-form-field>
+      </div>
+      <div class="form-group frm">
+        <label class="mr-4">Опишіть, як Ви будете використовувати та повертати займ.<br />Це збільшить довіру інвесторів
+          та пришвидшить збір запрошеної Вами суми. </label>
+        <div class="row"><textarea maxlength="600" formControlName="description"></textarea> <span class="form-help">{{dataForm.controls['description'].value.length}}/600</span>
+        </div>
+      </div>
+      <span id="star-desc">* на основі середньої ставки для класу надійності B(середній)</span>
+    </div>
 
-    </div>
-      
-    </div>
+
 
     <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid">Отримати займ</button>
   </form>

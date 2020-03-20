@@ -20,7 +20,8 @@ export class LoanCalculatorComponent implements OnInit {
     this.dataForm = this.formBuilder.group({
       amount: ['', [Validators.required]],
       period: ['', [Validators.required]],
-      loanPurpose: ['', [Validators.required]]
+      loanPurpose: ['', [Validators.required]],
+      description: ['', [Validators.required]],
     });
   }
 
