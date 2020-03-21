@@ -1,18 +1,71 @@
 <div *ngIf="this.permissionService.registeredUserPermission() else accessDenied"
-    class="form my-3 col-lg-7 offset-sm-3 text-center frm">
-    <h2>Активи</h2><br /><br />
+  class="form my-3 col-lg-7 offset-sm-3 text-center frm">
+  <h2>Активи (6/6)</h2><br /><br />
 
-    <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
+  <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
 
-        <div class="form-group row">
+    <div class="form-group row">
 
-        </div>
-    </form>
+    </div>
+
+    <div class="form-group row">
+      <label id="example-radio-group-label" class="mr-5">Чи є у вас у власності квартира(и)?</label><br />
+      <mat-form-field>
+        <select class="border border-dark" formControlName="flat" matNativeControl>
+          <option selected type="text" *ngFor="let flatt of flats" value="{{flatt}}">{{flatt}}</option>
+        </select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group row">
+      <label class="mr-4">Чи є у вас у власності будинок?</label>
+      <mat-radio-group formControlName="hasHouse" name="hasHouse" aria-labelledby="example-radio-group-label"
+        class="example-radio-group">
+        <mat-radio-button ngDefaultControl class="example-radio-button mr-4" *ngFor="let opts of yesNoOptions"
+          [value]="opts">
+          {{opts}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="form-group row">
+      <label class="mr-4">Чи є у вас у власності автомобіль?</label>
+      <mat-radio-group formControlName="hasCar" name="hasCar" aria-labelledby="example-radio-group-label"
+        class="example-radio-group">
+        <mat-radio-button ngDefaultControl class="example-radio-button mr-4" *ngFor="let opts of yesNoOptions"
+          [value]="opts">
+          {{opts}}
+        </mat-radio-button>
+      </mat-radio-group>
+      <div *ngIf="dataForm.controls['hasCar'].value === 'Так'" class="row">
+        <label id="example-radio-group-label" class="ml-3 mr-4">Вік авто</label><br />
+        <mat-form-field>
+          <select class="border border-dark" formControlName="carAge" matNativeControl>
+            <option selected type="text" *ngFor="let age of carAges" value="{{age}}">{{age}}</option>
+          </select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="mr-4">Чи були ви за кордоном 
+        за останні 12 місяців?</label>
+      <mat-radio-group formControlName="wasAbroad" name="gender" aria-labelledby="example-radio-group-label"
+        class="example-radio-group">
+        <mat-radio-button ngDefaultControl class="example-radio-button mr-4" *ngFor="let opts of yesNoOptions"
+          [value]="opts">
+          {{opts}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <button type="submit" class="btn btn-primary mx-auto"
+    [disabled]="(dataForm.controls['hasCar'].value === 'Так' && dataForm.controls['carAge'].value === null) || !dataForm.valid">Відправити</button>
+  </form>
 
 </div>
 <ng-template #accessDenied>
-    <div class="denied mt-3 p-5 alert-danger">
-        <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
-        <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact Support department</p>
-    </div>
+  <div class="denied mt-3 p-5 alert-danger">
+    <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
+    <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact Support department</p>
+  </div>
 </ng-template>
