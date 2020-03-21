@@ -1,28 +1,28 @@
 <div *ngIf="this.permissionService.registeredUserPermission() else accessDenied"
   class="form my-3 col-lg-7 offset-sm-3 text-center frm">
-  <h2>Освіта</h2><br/><br/>
+  <h2>Освіта</h2><br /><br />
 
   <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
-   
+
     <div class="form-group row">
-        <label class="mr-4">Здобутий рівень освіти</label>
-        <mat-form-field>
-          <select class="border border-dark" formControlName="educationLevel" matNativeControl>
-            <option selected type="text" *ngFor="let level of levels" value="{{level}}">{{level}}</option>
-          </select>
-        </mat-form-field>
+      <label class="mr-4">Здобутий рівень освіти</label>
+      <mat-form-field>
+        <select class="border border-dark" formControlName="educationLevel" matNativeControl>
+          <option selected type="text" *ngFor="let level of levels" value="{{level}}">{{level}}</option>
+        </select>
+      </mat-form-field>
     </div>
 
     <div *ngIf="!!dataForm.controls['educationLevel'].value && 
     (dataForm.controls['educationLevel'].value !== 'Неповна середня') && 
     (dataForm.controls['educationLevel'].value !== 'Середня') && 
     (dataForm.controls['educationLevel'].value !== 'Середньотехнічна/спеціальна')" class="form-group row">
-        <label class="mr-4">Галузь</label>
-        <mat-form-field>
-          <select class="border border-dark" formControlName="educationField" matNativeControl>
-            <option selected type="text" *ngFor="let faculty of faculties" value="{{faculty}}">{{faculty}}</option>
-          </select>
-        </mat-form-field>
+      <label class="mr-4">Напрям</label>
+      <mat-form-field>
+        <select class="border border-dark" formControlName="educationField" matNativeControl>
+          <option selected type="text" *ngFor="let faculty of faculties" value="{{faculty}}">{{faculty}}</option>
+        </select>
+      </mat-form-field>
     </div>
 
     <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid 

@@ -35,13 +35,13 @@ export class BorrowerPassportFillComponent implements OnInit {
       issuerLocationRegion: ['', [Validators.required]],
       region: ['', [Validators.required]],
       district: ['', [Validators.required]],
-      postalCode: ['', [Validators.required]],
+      postalCode: ['', [Validators.required, Validators.pattern('^\\d{5}')]],
       settlement: ['', [Validators.required]],
       street: ['', [Validators.required]],
       number: ['', [Validators.required]],
-      corpsNo: ['', [Validators.required]],
+      corpsNo: [''],
       door: ['', [Validators.required]],
-      itnNumber: ['', [Validators.required]],
+      itnNumber: ['', [Validators.required, , Validators.pattern('^\\d{10}')]],
     });
   }
 
@@ -50,6 +50,10 @@ export class BorrowerPassportFillComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0] as File;
+  }
+
+  deleteFileSelected() {
+    this.selectedFile = null;
   }
 
 
@@ -66,7 +70,6 @@ export class BorrowerPassportFillComponent implements OnInit {
     this.formData = new FormData();
     this.formData.append('file', this.selectedFile);
     this.formData.append('dto', new Blob([JSON.stringify({
-      email: localStorage.getItem('email'),
       idPassport: this.dto.idPassport,
       idPassNumber: form.idPassNumber,
       paperPassSeries: form.paperPassSeries,
