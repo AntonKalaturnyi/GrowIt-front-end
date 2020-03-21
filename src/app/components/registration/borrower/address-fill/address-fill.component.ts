@@ -24,7 +24,7 @@ export class AddressFillComponent implements OnInit {
       settlement: ['', [Validators.required]],
       street: ['', [Validators.required]],
       number: ['', [Validators.required]],
-      corpsNo: ['', [Validators.required]],
+      corpsNo: [''],
       door: ['', [Validators.required]]
     });
   }

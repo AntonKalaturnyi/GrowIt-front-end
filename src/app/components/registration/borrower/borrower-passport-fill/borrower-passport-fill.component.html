@@ -74,8 +74,9 @@
 
       <div class="form-group row">
       <label class="mr-3 my-auto">Фото обличчя з паспортом</label>
-      <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput />
+      <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput/> 
       <button type="button" (click)="fileInput.click()">Вибрати файл</button><label class="ml-3">{{selectedFile?.name}}</label>
+      <button type="button" (click)="deleteFileSelected()">Видалити файл</button>
       </div>
 
       <div class="form-group row">
@@ -86,7 +87,7 @@
 
 
       <button type="submit" class="btn btn-primary mx-auto"
-        [disabled]="!((!!docsForm.controls['idPassNumber'].value && docsForm.controls['idPassNumber'].value !== '') 
+        [disabled]="selectedFile == null || !((!!docsForm.controls['idPassNumber'].value && docsForm.controls['idPassNumber'].value !== '') 
         || ( (!!docsForm.controls['paperPassSeries'].value && docsForm.controls['paperPassSeries'].value !== '') 
         && (!!docsForm.controls['paperPassNumber'].value && docsForm.controls['paperPassNumber'].value !== '') ) ) || !docsForm.valid">Next</button>
     </form>

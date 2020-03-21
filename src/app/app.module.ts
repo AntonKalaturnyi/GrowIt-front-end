@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule, MAT_DATE_FORMATS, DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { Ng5SliderModule } from 'ng5-slider';
 import { LoginComponent } from './components/login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -35,6 +36,7 @@ import { EmploymentFillComponent } from './components/registration/borrower/empl
 import { EducationFillComponent } from './components/registration/borrower/education-fill/education-fill.component';
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
 import { AssetsFillComponent } from './components/registration/borrower/assets-fill/assets-fill.component';
+import { MomentUtcDateAdapter } from './services/moment-utc-date-adapter';
 
 
 @NgModule({
@@ -57,6 +59,7 @@ import { AssetsFillComponent } from './components/registration/borrower/assets-f
   imports: [
     BrowserAnimationsModule,
     MatDatepickerModule,
+    MatMomentDateModule,
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
@@ -80,7 +83,7 @@ import { AssetsFillComponent } from './components/registration/borrower/assets-f
     ToastrModule.forRoot( {
         closeButton: true,
         disableTimeOut: true,
-        maxOpened: 6,
+        maxOpened: 3,
         progressBar: true,
         newestOnTop: true,
         autoDismiss: true,
@@ -89,7 +92,11 @@ import { AssetsFillComponent } from './components/registration/borrower/assets-f
     BrowserModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'uk' },
+    { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    { provide: DateAdapter, useClass: MomentUtcDateAdapter }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

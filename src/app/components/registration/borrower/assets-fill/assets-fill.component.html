@@ -1,1 +1,18 @@
-<p>assets-fill works!</p>
+<div *ngIf="this.permissionService.registeredUserPermission() else accessDenied"
+    class="form my-3 col-lg-7 offset-sm-3 text-center frm">
+    <h2>Активи</h2><br /><br />
+
+    <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
+
+        <div class="form-group row">
+
+        </div>
+    </form>
+
+</div>
+<ng-template #accessDenied>
+    <div class="denied mt-3 p-5 alert-danger">
+        <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
+        <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact Support department</p>
+    </div>
+</ng-template>

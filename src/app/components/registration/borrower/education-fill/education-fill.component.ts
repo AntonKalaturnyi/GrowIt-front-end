@@ -13,7 +13,7 @@ import { UserService } from 'src/app/services/user.service';
 export class EducationFillComponent implements OnInit {
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder,
-    private alertService: AlertService, private userService: UserService, private router: Router) {
+              private alertService: AlertService, private userService: UserService, private router: Router) {
     this.dataForm = this.formBuilder.group({
       educationLevel: ['', [Validators.required]],
       educationField: ['']
