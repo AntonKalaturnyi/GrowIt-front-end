@@ -15,7 +15,7 @@ export class EmploymentFillComponent implements OnInit {
   dataForm;
   socialStatuses: string[] = [
     'Повна зайнятість', 'Часткова зайнятість',
-    'Підприємець', 'Студент',
+    'Підприємець', 'Студент', 'Зайнятий студент',
     'Пенсіонер', 'Зайнятий пенсіонер',
     'Тимчасово не працюю', 'Робота за кордоном/сезонна',
     'Самозайнята особа', 'Декрента відпустка'];
@@ -40,16 +40,33 @@ export class EmploymentFillComponent implements OnInit {
     'Раз у 3 тижні', 'Раз у місяць',
     'Рідше разу в місяць'];
 
+  sources: string[] = [
+    'Фінансова(соціальна) допомога',
+    'Інша робота (підробіток)',
+    'Продаж цінних паперів',
+    'Кредити, позики',
+    'Орендний дохід',
+    'Депозити, інші вклади',
+    'Страхові виплати',
+    'Стипендія',
+    'Інший дохід'];
+
+
+
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-              private userService: UserService, private router: Router) {
+    private userService: UserService, private router: Router) {
     this.dataForm = this.formBuilder.group({
       socialStatus: ['', [Validators.required]],
-      workSphere: ['', [Validators.required]],
-      lengthOfTotalEmploymentMo: ['', [Validators.required]],
-      lengthOfCurrentEmploymentMo: ['', [Validators.required]],
-      employerCount: ['', [Validators.required]],
-      monthlyIncomeOfficial: ['', [Validators.required]],
-      monthlyIncomeAdditional: ['', [Validators.required]],
+      workSphere: [''],
+      lengthOfTotalEmploymentMo: [''],
+      lengthOfCurrentEmploymentMo: [''],
+      employerCount: [''],
+      monthlyIncomeOfficial: [''],
+      monthlyIncomeAdditional: [''],
+      additionalIncomeSource: [''],
+      scholarship: [''],
+      pension: [''],
+      employeesCount: [''],
       nextPaymentDate: ['', [Validators.required]],
       paymentFrequency: ['', [Validators.required]],
       monthlyExpenses: ['', [Validators.required]],

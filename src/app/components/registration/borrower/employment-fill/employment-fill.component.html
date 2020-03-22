@@ -1,90 +1,129 @@
 <div *ngIf="this.permissionService.registeredUserPermission() else accessDenied" class="form">
     <div class="my-3 col-lg-7 offset-sm-3 text-center frm">
 
-        <h4>Працевлаштування</h4><br />
-    <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
+        <h4>Працевлаштування (4/6)</h4><br />
+        <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
 
-    <!-- <div class="form-group row">
+            <!-- <div class="form-group row">
     </div> -->
 
-    <div class="form-group row">
-        <label class="mr-4">Соціальний статус</label>
-        <mat-form-field>
-            <select class="border border-dark"  formControlName="socialStatus" matNativeControl>
-                <option selected type="text" *ngFor="let status of socialStatuses" value="{{status}}">{{status}}</option>
-            </select>
-        </mat-form-field>
+            <div class="form-group row">
+                <label class="mr-4">Соціальний статус</label>
+                <mat-form-field>
+                    <select class="border border-dark" formControlName="socialStatus" matNativeControl>
+                        <option selected type="text" *ngFor="let status of socialStatuses" value="{{status}}">{{status}}
+                        </option>
+                    </select>
+                </mat-form-field>
 
-        <label class="mr-4 ml-5">Сфера зайнятості</label>
-        <mat-form-field>
-            <select class="border border-dark ml-1"  formControlName="workSphere" matNativeControl>
-                <option selected type="text" *ngFor="let sphere of workSpheres" value="{{sphere}}">{{sphere}}</option>
-            </select>
-        </mat-form-field>
+                
+            </div>
+
+            <div class="form-group row">
+                <div *ngIf="dataForm.controls['socialStatus'].value !== 'Студент' && dataForm.controls['socialStatus'].value !== 'Пенсіонер' && dataForm.controls['socialStatus'].value !== 'Зайнятий пенсіонер'">
+                    <label class="mr-4">Сфера зайнятості</label>
+                    <mat-form-field>
+                        <select class="border border-dark ml-1" formControlName="workSphere" matNativeControl>
+                            <option selected type="text" *ngFor="let sphere of workSpheres" value="{{sphere}}">
+                                {{sphere}}
+                            </option>
+                        </select>
+                    </mat-form-field>
+                </div>
+                
+                <div *ngIf="dataForm.controls['socialStatus'].value === 'Студент' || dataForm.controls['socialStatus'].value === 'Зайнятий студент'">
+                    <label class="mr-4 ml-5">Стипендія</label>
+                    <input class="col-sm-4 mr-2" type="text" formControlName="scholarship" placeholder="грн/міс" />
+                </div>
+
+                <div *ngIf="(dataForm.controls['socialStatus'].value === 'Пенсіонер') || (dataForm.controls['socialStatus'].value === 'Зайнятий пенсіонер')">
+                    <label class="mr-4 ml-5">Пенсія</label>
+                    <input class="col-sm-4 mr-2" type="text" formControlName="pension" placeholder="грн/міс" />
+                </div>
+            </div>
+
+            <div *ngIf="(dataForm.controls['socialStatus'].value !== 'Підприємець')" class="form-group row">
+                <label class="mr-3 my-auto">Загальний стаж роботи</label>
+                <input class="col-sm-1" type="text" formControlName="lengthOfTotalEmploymentMo" placeholder="місяців" />
+
+                <label class="mr-2 ml-3 my-auto">Стаж роботи на поточному місці</label>
+                <input class="col-sm-1 mr-2" type="text" formControlName="lengthOfCurrentEmploymentMo"
+                    placeholder="місяців" />
+
+            </div>
+
+            <!-- *ngIf="dataForm.controls['socialStatus'].value !== 'Підприємець'" -->
+            <div *ngIf="(dataForm.controls['socialStatus'].value !== 'Підприємець')" class="form-group row">
+                <label class="mr-2 my-auto">Попередня загальна кількість роботодавців</label>
+                <input class="col-sm-1 mr-2" type="text" formControlName="employerCount" placeholder="кількість" />
+            </div>
+
+            <div *ngIf="(dataForm.controls['socialStatus'].value === 'Підприємець')" class="form-group row">
+                <label class="mr-2 my-auto">Кількість найманих працівників</label>
+                <input class="col-sm-1 mr-2" type="text" formControlName="employeesCount" placeholder="кількість" />
+            </div>
+
+            <div *ngIf="!(dataForm.controls['socialStatus'].value === 'Студент' || dataForm.controls['socialStatus'].value === 'Пенсіонер')" class="form-group row mt-2">
+                <label class="mr-2 my-auto">Офіційний дохід (на міс.)</label>
+                <input class="col-sm-2 mr-2" type="text" formControlName="monthlyIncomeOfficial"
+                    placeholder="грн/міс" />
+            </div>
+
+            <div class="form-group row">
+                <label class="mr-2 my-auto">Додатковий дохід (на міс.)</label>
+                <input class="col-sm-2 ml-2" type="text" formControlName="monthlyIncomeAdditional"
+                    placeholder="грн/міс" />
+
+                <div *ngIf="!!dataForm.controls['monthlyIncomeAdditional'].value && 
+    (dataForm.controls['monthlyIncomeAdditional'].value !== '0')">
+                    <label class="mr-2  my-auto">Джерело додаткового доходу</label>
+                    <mat-form-field class="col-sm-5">
+                        <select class="border border-dark ml-1 " formControlName="additionalIncomeSource"
+                            matNativeControl>
+                            <option selected type="text" *ngFor="let source of sources" value="{{source}}">{{source}}
+                            </option>
+                        </select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="mr-4 my-auto">Дата наступної виплати</label><br />
+                    <input class="form-control col-sm-2" matInput [matDatepicker]="picker"
+                        formControlName="nextPaymentDate" placeholder="Вибрати в календарі" />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="mr-4 my-auto">Частота отримання доходу</label>
+                    <mat-form-field class="mt-3">
+                        <select class="border border-dark ml-1 " formControlName="paymentFrequency" matNativeControl>
+                            <option selected type="text" *ngFor="let frequency of frequencies" value="{{frequency}}">
+                                {{frequency}}</option>
+                        </select>
+                    </mat-form-field>
+            </div>
+
+            <div class="form-group row">
+                <label class="mr-2 my-auto">Місячні витрати</label>
+                <input class="col-sm-2 mr-2" type="text" formControlName="monthlyExpenses" placeholder="грн/міс" />
+
+                <label class="mr-2 ml-3 my-auto">Місячні боргові зобов'язання</label>
+                <input class="col-sm-2 mr-2" type="text" formControlName="monthlyObligations" placeholder="грн/міс" />
+            </div>
+
+            <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid">Next</button>
+
+        </form>
     </div>
-
-    <div class="form-group row">
-
-    </div>
-
-    <div class="form-group row">
-        <label class="mr-3 my-auto">Загальний стаж роботи</label>
-        <input class="col-sm-1" type="text" formControlName="lengthOfTotalEmploymentMo" placeholder="місяців" />
-
-        <label class="mr-2 ml-3 my-auto">Стаж роботи на поточному місці</label>
-        <input class="col-sm-1 mr-2" type="text" formControlName="lengthOfCurrentEmploymentMo" placeholder="місяців" />
-
-    </div>
-
-    <div class="form-group row">
-        <label class="mr-2 my-auto">Попередня загальна кількість роботодавців</label>
-        <input class="col-sm-1 mr-2" type="text" formControlName="employerCount" placeholder="кількість" />
-    </div>
-
-    <div class="form-group row">
-        <label class="mr-2 my-auto">Офіційний дохід (на міс.)</label>
-        <input class="col-sm-2 mr-2" type="text" formControlName="monthlyIncomeOfficial" placeholder="грн/міс" />
-
-        <label class="mr-2 ml-3 my-auto">Додатковий дохід (на міс.)</label>
-        <input class="col-sm-2 mr-2" type="text" formControlName="monthlyIncomeAdditional" placeholder="грн/міс" />
-    </div>
-
-    <div class="form-group">
-        <div class="row">
-          <label class="mr-4 my-auto">Дата наступної виплати</label><br />
-          <input class="form-control col-sm-2" matInput [matDatepicker]="picker" formControlName="nextPaymentDate"
-            placeholder="Вибрати в календарі" />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-
-          <label class="mr-4 ml-4 my-auto">Частота отримання доходу</label>
-          <mat-form-field class="mt-3">
-              <select class="border border-dark ml-1 "  formControlName="paymentFrequency" matNativeControl>
-                  <option selected type="text" *ngFor="let frequency of frequencies" value="{{frequency}}">{{frequency}}</option>
-              </select>
-          </mat-form-field>
-        </div>
-      </div>
-
-    <div class="form-group row">
-    </div>
-
-    <div class="form-group row">
-        <label class="mr-2 my-auto">Місячні витрати</label>
-        <input class="col-sm-2 mr-2" type="text" formControlName="monthlyExpenses" placeholder="грн/міс" />
-
-        <label class="mr-2 ml-3 my-auto">Місячні боргові зобов'язання</label>
-        <input class="col-sm-2 mr-2" type="text" formControlName="monthlyObligations" placeholder="грн/міс" />
-    </div>
-
-    <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid">Next</button>
-
-    </form>
-</div>
 </div>
 <ng-template #accessDenied>
     <div class="denied mt-3 p-5 alert-danger">
-      <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
-      <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact your administrator.</p>
+        <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
+        <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact your administrator.
+        </p>
     </div>
-  </ng-template>
+</ng-template>
