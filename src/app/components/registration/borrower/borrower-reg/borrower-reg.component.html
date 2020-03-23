@@ -109,7 +109,7 @@
                 <input type="text" class="form-control" formControlName="facebook" placeholder="Link to Facebook profile" />
             </div>
 
-            <button *ngIf="!moveToCode" type="submit" class="btn btn-primary"
+            <button *ngIf="!moveToCode" type="submit" class="btn btn-info"
                 [disabled]="!personalInfoForm.valid">Далі</button>
         </form>
 
@@ -119,7 +119,7 @@
                 <input type="text" class="form-control col-sm-2" formControlName="code" placeholder="code" />
             </div>
 
-            <button type="submit" class="btn btn-primary mx-auto" [disabled]="!personalInfoForm.valid">Підтвердити</button>
+            <button type="submit" class="btn btn-info mx-auto" [disabled]="!personalInfoForm.valid">Підтвердити</button>
         </form>
 
 

@@ -34,6 +34,9 @@
           <input class="col-sm-1 mr-2 ml-2" type="text" formControlName="door" placeholder="№" />
         </div>
       </div>
+      
+      <button type="button" (click)="goBack()" class="btn btn-primary mr-5">Назад</button>
+
       <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid && !dataForm.controls['sameAddressInPassport'].value">Next</button>
     </form>
   </div>

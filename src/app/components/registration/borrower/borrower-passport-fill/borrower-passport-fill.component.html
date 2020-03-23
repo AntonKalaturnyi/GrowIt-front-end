@@ -75,7 +75,7 @@
       <div class="form-group row">
       <label class="mr-3 my-auto">Фото обличчя з паспортом</label>
       <input style="display: none;" type="file" (change)="onFileSelected($event)" #fileInput/> 
-      <button type="button" (click)="fileInput.click()">Вибрати файл</button><label class="ml-3">{{selectedFile?.name}}</label>
+      <button type="button" (click)="fileInput.click()">Вибрати файл</button><label class="ml-3 mr-3">{{selectedFile?.name}}</label>
       <button type="button" (click)="deleteFileSelected()">Видалити файл</button>
       </div>
 

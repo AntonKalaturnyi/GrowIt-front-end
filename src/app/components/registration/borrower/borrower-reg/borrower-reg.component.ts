@@ -16,7 +16,6 @@ import { BorrowerRegData } from 'src/app/model/BorrowerRegData';
 })
 export class BorrowerRegComponent implements OnInit {
 
-email: string;
 phoneNum: string;
 regData: BorrowerRegData;
 personalInfoForm;
@@ -50,39 +49,30 @@ matitalStatuses: string[] = ['Male', 'Female'];
    }
 
   ngOnInit(): void {
-    this.email = localStorage.getItem('email');
-    console.log('ngOnInit EMAIL: ' + this.email);
+
     this.dataService.getBorrowerRegInputData().subscribe(data => {
       this.regData = data;
-      this.personalInfoForm.controls['lastName'].setValue(this.regData.lastName);
-      this.personalInfoForm.controls['name'].setValue(this.regData.name);
-      this.personalInfoForm.controls['middleName'].setValue(this.regData.middleName);
-      this.personalInfoForm.controls['gender'].setValue(this.regData.gender);
-      this.personalInfoForm.controls['birthday'].setValue(this.regData.birthday);
-      this.personalInfoForm.controls['phone'].setValue(this.regData.phone);
+      this.personalInfoForm.controls.lastName.setValue(this.regData.lastName);
+      this.personalInfoForm.controls.name.setValue(this.regData.name);
+      this.personalInfoForm.controls.middleName.setValue(this.regData.middleName);
+      this.personalInfoForm.controls.gender.setValue(this.regData.gender);
+      this.personalInfoForm.controls.birthday.setValue(this.regData.birthday);
+      this.personalInfoForm.controls.phone.setValue(this.regData.phone);
       this.phoneNum = this.regData.phone;
-      this.personalInfoForm.controls['maritalStatus'].setValue(this.regData.maritalStatus);
-      this.personalInfoForm.controls['kidsBefore18yo'].setValue(this.regData.kidsBefore18yo);
-      this.personalInfoForm.controls['kidsAfter18yo'].setValue(this.regData.kidsAfter18yo);
-      this.personalInfoForm.controls['instagram'].setValue(this.regData.instagram);
-      this.personalInfoForm.controls['facebook'].setValue(this.regData.facebook);
+      this.personalInfoForm.controls.maritalStatus.setValue(this.regData.maritalStatus);
+      this.personalInfoForm.controls.kidsBefore18yo.setValue(this.regData.kidsBefore18yo);
+      this.personalInfoForm.controls.kidsAfter18yo.setValue(this.regData.kidsAfter18yo);
+      this.personalInfoForm.controls.instagram.setValue(this.regData.instagram);
+      this.personalInfoForm.controls.facebook.setValue(this.regData.facebook);
       console.log(this.regData.birthday);
     });
   }
 
   submit(form) {
-    console.log('STATUS: ' + form.maritalStatus);
-    console.log('Before: ' + form.kidsBefore18yo);
-    console.log('After: ' + form.kidsAfter18yo);
-    console.log('Instagram: ' + form.instagram);
-    console.log('Facebook: ' + form.facebook);
-
     form.birthday = JSON.stringify(form.birthday).replace('Z', '').replace('"', '').replace('"', '').replace('T', ' ');
     form.phone = '+380' + form.phone;
     this.userService.sendBorrowerInfoAndGetSmsCode(form).subscribe((res) => {
       this.serverCode = res.toString();
-      console.log('this.phoneNum= ' + '+380' + this.phoneNum);
-      console.log('form.phone)= ' + form.phone);
       if (('+380' + this.phoneNum) !== form.phone) {
         console.log('serverCode= ' + this.serverCode);
         this.moveToCode = true;
