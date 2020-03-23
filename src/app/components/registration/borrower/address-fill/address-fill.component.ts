@@ -31,6 +31,12 @@ export class AddressFillComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  goBack() {
+    this.router.navigateByUrl('borrower/fill-passport');
+  }
+
+
   submit(form) {
     console.log('sameAddressInPassport: ' + form.sameAddressInPassport);
     this.userService.saveBorrowerAddress(form).subscribe(data => {
