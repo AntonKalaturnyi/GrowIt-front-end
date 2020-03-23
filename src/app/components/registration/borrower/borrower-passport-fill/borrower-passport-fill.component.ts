@@ -56,6 +56,10 @@ export class BorrowerPassportFillComponent implements OnInit {
     this.selectedFile = null;
   }
 
+  goBack() {
+    this.router.navigateByUrl('new-borrower');
+  }
+
 
 
   submit(form) {

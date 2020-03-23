@@ -85,11 +85,13 @@
       </div>
 
 
+      <button type="button" (click)="goBack()" class="btn btn-primary mr-5"
+        [disabled]="">Назад</button>
 
-      <button type="submit" class="btn btn-primary mx-auto"
+      <button type="submit" class="btn btn-info ml-5"
         [disabled]="selectedFile == null || !((!!docsForm.controls['idPassNumber'].value && docsForm.controls['idPassNumber'].value !== '') 
         || ( (!!docsForm.controls['paperPassSeries'].value && docsForm.controls['paperPassSeries'].value !== '') 
-        && (!!docsForm.controls['paperPassNumber'].value && docsForm.controls['paperPassNumber'].value !== '') ) ) || !docsForm.valid">Next</button>
+        && (!!docsForm.controls['paperPassNumber'].value && docsForm.controls['paperPassNumber'].value !== '') ) ) || !docsForm.valid">Далі</button>
     </form>
 
 
