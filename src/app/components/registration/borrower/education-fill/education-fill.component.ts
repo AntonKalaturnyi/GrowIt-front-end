@@ -4,6 +4,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { PrevDataService } from 'src/app/services/prev-data.service';
+import { BorrowerEducationData } from 'src/app/model/BorrowerEducationData';
 
 @Component({
   selector: 'app-education-fill',
@@ -13,7 +15,8 @@ import { UserService } from 'src/app/services/user.service';
 export class EducationFillComponent implements OnInit {
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder,
-              private alertService: AlertService, private userService: UserService, private router: Router) {
+              private alertService: AlertService, private dataService: PrevDataService,
+              private userService: UserService, private router: Router) {
     this.dataForm = this.formBuilder.group({
       educationLevel: ['', [Validators.required]],
       educationField: ['']
@@ -21,6 +24,7 @@ export class EducationFillComponent implements OnInit {
   }
 
   dataForm;
+  eduData: BorrowerEducationData;
 
   levels: string[] = [
     'Неповна середня',
@@ -53,8 +57,12 @@ export class EducationFillComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.dataService.getBorrowerEducationData().subscribe(data => {
+      this.eduData = data;
+      this.dataForm.controls.educationLevel.setValue(this.eduData.educationLevel);
+      this.dataForm.controls.educationField.setValue(this.eduData.educationField);
+    });
   }
-
 
   goBack() {
     this.router.navigateByUrl('borrower/fill-employment');

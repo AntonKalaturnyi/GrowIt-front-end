@@ -34,7 +34,6 @@ export class AddressFillComponent implements OnInit {
 
 
   ngOnInit(): void {
-
     this.dataService.getBorrowerAddressData().subscribe(data => {
       this.addrData = data;
       this.dataForm.controls.sameAddressInPassport.setValue(this.addrData.sameAddressInPassport);
