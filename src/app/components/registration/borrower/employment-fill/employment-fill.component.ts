@@ -77,18 +77,11 @@ export class EmploymentFillComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  goBack() {
+    this.router.navigateByUrl('borrower/fill-address');
+  }
+
   submit(form) {
-    // console.log('socialStatus: ' + form.socialStatus);
-    // console.log('workSphere: ' + form.workSphere);
-    // console.log('totalExperienceMo: ' + form.totalExperienceMo);
-    // console.log('currentJobExperienceMo: ' + form.currentJobExperienceMo);
-    // console.log('employerCount: ' + form.employerCount);
-    // console.log('monthlyIncomeOfficial: ' + form.monthlyIncomeOfficial);
-    // console.log('monthlyIncomeAdditional: ' + form.monthlyIncomeAdditional);
-    // console.log('nextPaymentDate: ' + form.nextPaymentDate);
-    // console.log('paymentFrequency: ' + form.paymentFrequency);
-    // console.log('monthlyExpenses: ' + form.monthlyExpenses);
-    // console.log('monthlyObligations: ' + form.monthlyObligations);
     form.nextPaymentDate = JSON.stringify(form.nextPaymentDate).replace('Z', '').replace('"', '').replace('"', '').replace('T', ' ');
     this.userService.saveBorrowerEmployment(form).subscribe(data => {
       this.alertService.successMessage('Залишилось лише 2 кроки!', 'Супер');

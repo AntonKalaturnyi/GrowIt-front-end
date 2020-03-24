@@ -37,6 +37,7 @@ import { EducationFillComponent } from './components/registration/borrower/educa
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
 import { AssetsFillComponent } from './components/registration/borrower/assets-fill/assets-fill.component';
 import { MomentUtcDateAdapter } from './services/moment-utc-date-adapter';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { MomentUtcDateAdapter } from './services/moment-utc-date-adapter';
     EducationFillComponent,
     LoanCalculatorComponent,
     AssetsFillComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserAnimationsModule,
