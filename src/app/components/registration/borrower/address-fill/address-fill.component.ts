@@ -35,7 +35,7 @@ export class AddressFillComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.dataService.getBorrowerAddressInputData().subscribe(data => {
+    this.dataService.getBorrowerAddressData().subscribe(data => {
       this.addrData = data;
       this.dataForm.controls.sameAddressInPassport.setValue(this.addrData.sameAddressInPassport);
       this.dataForm.controls.region.setValue(this.addrData.region);
@@ -56,7 +56,6 @@ export class AddressFillComponent implements OnInit {
 
 
   submit(form) {
-    console.log('sameAddressInPassport: ' + form.sameAddressInPassport);
     this.userService.saveBorrowerAddress(form).subscribe(data => {
       this.alertService.successMessage('Адресу успішно збережено!', 'Супер');
       this.router.navigateByUrl('borrower/fill-employment');

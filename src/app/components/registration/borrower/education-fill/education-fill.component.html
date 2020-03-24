@@ -25,7 +25,9 @@
       </mat-form-field>
     </div>
 
-    <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid 
+    <button type="button" (click)="goBack()" class="btn btn-primary mr-5">Назад</button>
+
+    <button type="submit" class="btn btn-primary ml-5" [disabled]="!dataForm.valid 
     || (!!dataForm.controls['educationLevel'].value && 
     (dataForm.controls['educationLevel'].value !== 'Неповна середня') && 
     (dataForm.controls['educationLevel'].value !== 'Середня') && 
