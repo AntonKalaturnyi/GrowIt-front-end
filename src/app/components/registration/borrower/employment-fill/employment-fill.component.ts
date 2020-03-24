@@ -4,6 +4,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { BorrowerEmploymentData } from 'src/app/model/BorrowerEmploymentData';
+import { PrevDataService } from 'src/app/services/prev-data.service';
 
 @Component({
   selector: 'app-employment-fill',
@@ -13,6 +15,7 @@ import { Router } from '@angular/router';
 export class EmploymentFillComponent implements OnInit {
 
   dataForm;
+  emplData: BorrowerEmploymentData;
   socialStatuses: string[] = [
     'Повна зайнятість', 'Часткова зайнятість',
     'Підприємець', 'Студент', 'Зайнятий студент',
@@ -54,7 +57,7 @@ export class EmploymentFillComponent implements OnInit {
 
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-    private userService: UserService, private router: Router) {
+    private userService: UserService, private dataService: PrevDataService, private router: Router) {
     this.dataForm = this.formBuilder.group({
       socialStatus: ['', [Validators.required]],
       workSphere: [''],
@@ -75,6 +78,25 @@ export class EmploymentFillComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.dataService.getBorrowerEmploymentData().subscribe(data => {
+      this.emplData = data;
+      this.dataForm.controls.socialStatus.setValue(this.emplData.socialStatus);
+      this.dataForm.controls.workSphere.setValue(this.emplData.workSphere);
+      this.dataForm.controls.lengthOfTotalEmploymentMo.setValue(this.emplData.lengthOfTotalEmploymentMo);
+      this.dataForm.controls.lengthOfCurrentEmploymentMo.setValue(this.emplData.lengthOfCurrentEmploymentMo);
+      this.dataForm.controls.employerCount.setValue(this.emplData.employerCount);
+      this.dataForm.controls.monthlyIncomeOfficial.setValue(this.emplData.monthlyIncomeOfficial);
+      this.dataForm.controls.monthlyIncomeAdditional.setValue(this.emplData.monthlyIncomeAdditional);
+      this.dataForm.controls.additionalIncomeSource.setValue(this.emplData.additionalIncomeSource);
+      this.dataForm.controls.scholarship.setValue(this.emplData.scholarship);
+      this.dataForm.controls.pension.setValue(this.emplData.pension);
+      this.dataForm.controls.employeesCount.setValue(this.emplData.employeesCount);
+      this.dataForm.controls.nextPaymentDate.setValue(this.emplData.nextPaymentDate);
+      this.dataForm.controls.paymentFrequency.setValue(this.emplData.paymentFrequency);
+      this.dataForm.controls.monthlyExpenses.setValue(this.emplData.monthlyExpenses);
+      this.dataForm.controls.monthlyObligations.setValue(this.emplData.monthlyObligations);
+    });
   }
 
   goBack() {

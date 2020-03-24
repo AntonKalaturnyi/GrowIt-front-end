@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { BorrowerRegData } from '../model/BorrowerRegData';
 import { BorrowerDocsData } from '../model/BorrowerDocsData';
 import { BorrowerAddressData } from '../model/BorrowerAddressData';
+import { BorrowerEmploymentData } from '../model/BorrowerEmploymentData';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +28,18 @@ export class PrevDataService {
   }
 
 
-  getBorrowerAddressInputData(): Observable<BorrowerAddressData> {
+  getBorrowerAddressData(): Observable<BorrowerAddressData> {
     const headers = this.getTokenHeader();
     return this.http.get<BorrowerAddressData>('http://localhost:8080/GrowIt/borrower/address-data', { headers })
     .pipe(catchError(this.errorHandler));
   }
+
+  getBorrowerEmploymentData(): Observable<BorrowerEmploymentData> {
+    const headers = this.getTokenHeader();
+    return this.http.get<BorrowerEmploymentData>('http://localhost:8080/GrowIt/borrower/employment-data', { headers })
+    .pipe(catchError(this.errorHandler));
+  }
+
 
 
 
