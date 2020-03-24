@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { PrevDataService } from 'src/app/services/prev-data.service';
 
 @Component({
   selector: 'app-assets-fill',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class AssetsFillComponent implements OnInit {
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-              private userService: UserService, private router: Router) {
+              private userService: UserService, private dataService: PrevDataService, private router: Router) {
                 this.dataForm = this.formBuilder.group({
                   flat: ['', [Validators.required]],
                   hasHouse: ['', [Validators.required]],
@@ -31,6 +32,10 @@ export class AssetsFillComponent implements OnInit {
 
 
   ngOnInit(): void {
+  }
+
+  goBack() {
+    this.router.navigateByUrl('borrower/fill-education');
   }
 
   submit(form) {

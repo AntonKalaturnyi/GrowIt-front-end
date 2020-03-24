@@ -6,6 +6,7 @@ import { BorrowerRegData } from '../model/BorrowerRegData';
 import { BorrowerDocsData } from '../model/BorrowerDocsData';
 import { BorrowerAddressData } from '../model/BorrowerAddressData';
 import { BorrowerEmploymentData } from '../model/BorrowerEmploymentData';
+import { BorrowerEducationData } from '../model/BorrowerEducationData';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,12 @@ export class PrevDataService {
   getBorrowerEmploymentData(): Observable<BorrowerEmploymentData> {
     const headers = this.getTokenHeader();
     return this.http.get<BorrowerEmploymentData>('http://localhost:8080/GrowIt/borrower/employment-data', { headers })
+    .pipe(catchError(this.errorHandler));
+  }
+
+  getBorrowerEducationData(): Observable<BorrowerEducationData> {
+    const headers = this.getTokenHeader();
+    return this.http.get<BorrowerEducationData>('http://localhost:8080/GrowIt/borrower/education-data', { headers })
     .pipe(catchError(this.errorHandler));
   }
 
