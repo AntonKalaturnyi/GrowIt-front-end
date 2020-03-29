@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { Ng5SliderModule } from 'ng5-slider';
 import { LoginComponent } from './components/login/login.component';
@@ -38,6 +39,7 @@ import { LoanCalculatorComponent } from './components/loan-calculator/loan-calcu
 import { AssetsFillComponent } from './components/registration/borrower/assets-fill/assets-fill.component';
 import { MomentUtcDateAdapter } from './services/moment-utc-date-adapter';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -57,6 +59,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     LoanCalculatorComponent,
     AssetsFillComponent,
     DashboardComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -74,6 +77,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatButtonModule,
     MatDialogModule,
     MatRadioModule,
+    MatTableModule,
     Ng5SliderModule,
     BrowserModule,
     NgbModule,

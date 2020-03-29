@@ -13,6 +13,7 @@ import { EmploymentFillComponent } from './components/registration/borrower/empl
 import { EducationFillComponent } from './components/registration/borrower/education-fill/education-fill.component';
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
 import { AssetsFillComponent } from './components/registration/borrower/assets-fill/assets-fill.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -28,7 +29,8 @@ const routes: Routes = [
   { path: 'borrower/fill-education', component: EducationFillComponent },
   { path: 'new-loan/calculator', component: LoanCalculatorComponent },
   { path: 'borrower/fill-education', component: EducationFillComponent },
-  { path: 'borrower/fill-assets', component: AssetsFillComponent }
+  { path: 'borrower/fill-assets', component: AssetsFillComponent },
+  { path: 'dashboard', component: DashboardComponent }
 
 ];
 
