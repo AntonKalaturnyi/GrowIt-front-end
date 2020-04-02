@@ -18,6 +18,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatPaginatorModule } from '@angular/material/paginator'; 
+import { MatSortModule } from '@angular/material/sort';
 import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { Ng5SliderModule } from 'ng5-slider';
 import { LoginComponent } from './components/login/login.component';
@@ -80,6 +83,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     MatRadioModule,
     MatTableModule,
     MatProgressBarModule,
+    MatExpansionModule,
+    MatPaginatorModule,
+    MatSortModule,
     Ng5SliderModule,
     BrowserModule,
     NgbModule,

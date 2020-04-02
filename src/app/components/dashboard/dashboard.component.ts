@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
 import { PermissionService } from 'src/app/services/permission.service';
 import { FormBuilder } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { Router } from '@angular/router';
 import { LoanService } from 'src/app/services/loan.service';
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild } from '@angular/core';
+import { Observable  } from 'rxjs/Observable';
+import { of  } from 'rxjs/observable/of';
+import { map } from 'rxjs/operators';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { fromMatSort, sortRows } from './datasource-utils';
+import { fromMatPaginator, paginateRows } from './datasource-utils';
 
 export interface DashboardLoanDto {
   rank: string;
@@ -15,6 +22,7 @@ export interface DashboardLoanDto {
   applyDate: Date;
   timeLeft: number;
   amountFunded: number;
+  fulfillment: number;
   description: string;
 }
 
@@ -26,22 +34,29 @@ export interface DashboardLoanDto {
 })
 export class DashboardComponent implements OnInit {
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
               private loanService: LoanService, private router: Router) { }
 
+  // tslint:disable-next-line: max-line-length
   displayedColumns: string[] = ['rating', 'amount', 'term', 'profitability', 'loanPurpose', 'applyDate', 'timeLeft', 'amountFunded', 'button'];
   dataSource: DashboardLoanDto[];
-  daysLeft;
-  showInput = false;
+  displayedRows$: Observable<DashboardLoanDto[]>;
+  totalRows$: Observable<number>;
+
 
   ngOnInit(): void {
     this.loanService.getDashboardLoans().subscribe(data => {
       this.dataSource = data;
-      // this.dataSource.forEach(element => {
-      //   element.daysLeft = moment(new Date().getTime()).diff(moment(element.applyDate.getTime()));
-      // });
-    });
 
+      const sortEvents$: Observable<Sort> = fromMatSort(this.sort);
+      const pageEvents$: Observable<PageEvent> = fromMatPaginator(this.paginator);
+      const rows$ = of(this.dataSource);
+      this.totalRows$ = rows$.pipe(map(rows => rows.length));
+      this.displayedRows$ = rows$.pipe(sortRows(sortEvents$), paginateRows(pageEvents$));
+    });
 
   }
 
