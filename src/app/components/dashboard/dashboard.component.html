@@ -1,11 +1,11 @@
 <div *ngIf="this.permissionService.registeredUserPermission() else accessDenied" class="dash">
 
-
+<span class="frm">{{summarizedInvestment}}</span>
   <mat-accordion displayMode="flat" multi class="mat-table">
     <section matSort class="mat-elevation-z2 mat-header-row">
       <span class="mat-header-cell" mat-sort-header="score">Рейтинг</span>
       <span class="mat-header-cell" mat-sort-header="amount">Сума</span>
-      <span class="mat-header-cell" mat-sort-header="term">Термін</span>
+      <span class="mat-header-cell" mat-sort-header="absoluteTerm">Термін</span>
       <span class="mat-header-cell" mat-sort-header="profitability">Дохідність</span>
       <span class="mat-header-cell" mat-sort-header="loanPurpose">Призначення</span>
       <span class="mat-header-cell" mat-sort-header="applyDate">Дата подачі</span>
@@ -26,45 +26,65 @@
         <span class="mat-cell">({{divide(element.amountFunded, element.amount)}}%) {{element.amountFunded}} /
           {{element.amount}} </span>
       </mat-expansion-panel-header>
-      <div>Заповненість: {{element.fulfillment}} %</div>
-      <p>Заповненість: {{element.fulfillment}} %</p>
       <div class="container">
         <div class="row">
-          <div class="col">
-            1 of 3
+
+          <div class="col details">
+            <!-- Дані позичальника -->
+            Дата реєстрації<br />
+            Сімейний стан<br />
+           <div *ngIf="element.kidsBefore18yo !== '0'"> Діти до 18 р.<br /></div>
+
+           <div *ngIf="element.kidsBefore18yo == '0' && element.kidsAfter18yo == '0'">Діти<br /></div>
+
+            <div *ngIf="element.kidsAfter18yo !== '0'">Діти старше 18 р.<br /></div>
+            Місце проживання<br />
           </div>
-          <div class="col">
-            content 1
+          <div class="col details font-weight-light">
+            {{element.registrationDate}}<br />
+            {{element.maritalStatus}}<br />
+            {{element.kidsBefore18yo}}<br />
+            <div *ngIf="element.kidsAfter18yo !== '0'">{{element.kidsAfter18yo}}<br /></div>
+            {{element.placeOfLiving}}<br />
           </div>
-          <div class="col">
-            2 of 3 (wider)
+          <div class="col details">
+            Вік<br />
+            Соціальний статус<br />
+            Щомісячний дохід<br />
+            Щомісячні витрати<br />
+            PTI<br />
           </div>
-          <div class="col">
-            content 2
+          <div class="col details font-weight-light">
+            {{element.age}} р.<br />
+            {{element.socialStatus}}<br />
+            {{element.monthlyIncome}} грн<br />
+            {{element.monthlyExpenses}} грн<br />
+            {{element.pti}}%<br />
           </div>
-          <div class="col">
-            3 of 3
+          <div class="col-3 details">
+            Відкритих кр. на зараз<br />
+            <div *ngIf="element.currentOpenCredits !== 0">Cума поточної заборгованості<br /></div>
+            <div *ngIf="element.hasDelayInCurrentPeriod">Прострочка за цей період<br /></div>
+            <div *ngIf="element.hasDelayInCurrentPeriod">Тривалість просрочки<br /></div>
+            Виплачених у інших орг.<br />
+            Виплачених на GrowIt<br />
           </div>
-          <div class="col">
-            content 3
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            1 of 3
-          </div>
-          <div class="col">
-            2 of 3 (wider)
-          </div>
-          <div class="col">
-            3 of 3
+          <div class="col details font-weight-light">
+            {{element.currentOpenCredits}}<br />
+            <div *ngIf="element.currentOpenCredits !== 0">{{element.currentDebtAmount}} грн<br /></div>
+            <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentOverdueDebtAmount}} грн<br /></div>
+            <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentDelayInDays}} дн.<br /></div>
+            {{element.payedOffInOtherOrgs}}<br />
+            {{element.payedInGrowit}}<br />
+
           </div>
         </div>
       </div>
       <mat-action-row>
-        <span>кіко </span>
-        <input class="border border-light" matInput maxlength="5" placeholder=" грн">
-        <button mat-flat-button color="accent">Додати</button>
+        <span *ngIf="investment.value >= 100" class="my-auto mr-5"><span class="mr-3">Плановий дохід: </span>{{(toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm)))) | number:'1.1-2' : 'uk'}}  грн</span> 
+        
+        <input #investment class="border border-light" min="100" matInput maxlength="5" placeholder="  грн">
+        <button [disabled]="investment.value < 100" (click)="onInvestmentSelected(investment.value)" mat-flat-button color="accent">Додати</button>
       </mat-action-row>
     </mat-expansion-panel>
 
