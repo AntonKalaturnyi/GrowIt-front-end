@@ -11,6 +11,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { fromMatSort, sortRows } from './datasource-utils';
 import { fromMatPaginator, paginateRows } from './datasource-utils';
+import { InvestService } from 'src/app/services/invest.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,14 +24,17 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-    private loanService: LoanService, private router: Router) { }
+    private loanService: LoanService, private investService: InvestService, private router: Router) { }
 
   // tslint:disable-next-line: max-line-length
   displayedColumns: string[] = ['rating', 'amount', 'term', 'profitability', 'loanPurpose', 'applyDate', 'timeLeft', 'amountFunded', 'button'];
   dataSource: DashboardLoanDto[];
   displayedRows$: Observable<DashboardLoanDto[]>;
   totalRows$: Observable<number>;
-  summarizedInvestment: number = 0;
+  summarizedInvestment = 0;
+  prevSummarizedInvestment = 0;
+  percentIncome = 0;
+  investments: InvestmentDto[] = [];
 
 
   ngOnInit(): void {
@@ -61,16 +65,57 @@ export class DashboardComponent implements OnInit {
     return Math.round((Number(val1) / Number(val2)) * 100);
   }
 
-  onInvestmentSelected(amount) {
-    this.summarizedInvestment += +amount;
+  deepIndexOf(arr, obj) {
+    return arr.findIndex(function (cur) {
+      return Object.keys(obj).every(function (key) {
+        return obj[key] === cur[key];
+      });
+    });
   }
 
-  addToSelectedInvestments(amount: number) {
-    this.summarizedInvestment += amount;
+  onDeleteInvestment(amt: number, id: number, percent: number) {
+    if (isNaN(amt)) { return; }
+    this.summarizedInvestment -= amt;
+    this.prevSummarizedInvestment -= amt;
+    this.percentIncome -= percent;
+    const index = this.deepIndexOf(this.investments, { loanId: id, amount: amt });
+    console.log('INDEX1: ' + index);
+    if (index > -1) {
+      this.investments.splice(index, 1);
+    }
+  }
+
+  addToSelectedInvestments(amt: number, id: number, percent: number) {
+    this.prevSummarizedInvestment = this.summarizedInvestment;
+    this.summarizedInvestment += amt;
+    this.percentIncome += percent;
+    this.investments.push({ loanId: id, amount: amt });
+
+    console.log('^^^ amt: ' + this.investments[0].amount + ' id: ' + this.investments[0].loanId);
+  }
+
+  addToPercentIncome(amount: number) {
+    this.percentIncome += amount;
+  }
+
+  sendInvestments() {
+    this.investService.submitInvestments(this.investments).subscribe(data => {
+      this.alertService.successMessage('Інвестицію(ї) оформлено!', 'Супер');
+      // this.router.navigateByUrl('new-borrower');
+    }, error => {
+      console.log(error);
+      this.alertService.errorMessage(error.error.message, 'Помилка!');
+    });
   }
 }
 
+export interface InvestmentDto {
+  loanId: number;
+  amount: number;
+}
+
 export interface DashboardLoanDto {
+  loanId: number;
   /*** Front loan data*/
   rank: string;
   score: number;
@@ -105,5 +150,6 @@ export interface DashboardLoanDto {
   currentDelayInDays: number; // Текущее кол-во дней просрочки
   payedOffInOtherOrgs: number; // DTO
   payedInGrowit: number;
+  clicked: boolean;
 }
 
