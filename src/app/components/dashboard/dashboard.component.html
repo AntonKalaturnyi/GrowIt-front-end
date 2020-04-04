@@ -1,6 +1,19 @@
 <div *ngIf="this.permissionService.registeredUserPermission() else accessDenied" class="dash">
+  <div class="orient">
+    <div class="row">
+      <div class="col-3 ml-5">Вибрано інвестицій на суму<br />
+        Потенційний відсотковий дохід
+      </div>
+      <div class="col-1 mr-5">
+        {{summarizedInvestment | number:'1.1-2' : 'uk'}} грн<br />
+        {{percentIncome  | number:'1.1-2' : 'uk'}} грн
+      </div>
+      <div class="col-1">
+        <button [disabled]="summarizedInvestment == 0" mat-flat-button (click)="sendInvestments()" color="accent">Підтвердити </button>
+      </div>
+    </div>
+  </div>
 
-<span class="frm">{{summarizedInvestment}}</span>
   <mat-accordion displayMode="flat" multi class="mat-table">
     <section matSort class="mat-elevation-z2 mat-header-row">
       <span class="mat-header-cell" mat-sort-header="score">Рейтинг</span>
@@ -33,10 +46,8 @@
             <!-- Дані позичальника -->
             Дата реєстрації<br />
             Сімейний стан<br />
-           <div *ngIf="element.kidsBefore18yo !== '0'"> Діти до 18 р.<br /></div>
-
-           <div *ngIf="element.kidsBefore18yo == '0' && element.kidsAfter18yo == '0'">Діти<br /></div>
-
+            <div *ngIf="element.kidsBefore18yo !== '0'"> Діти до 18 р.<br /></div>
+            <div *ngIf="element.kidsBefore18yo == '0' && element.kidsAfter18yo == '0'">Діти<br /></div>
             <div *ngIf="element.kidsAfter18yo !== '0'">Діти старше 18 р.<br /></div>
             Місце проживання<br />
           </div>
@@ -76,24 +87,28 @@
             <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentDelayInDays}} дн.<br /></div>
             {{element.payedOffInOtherOrgs}}<br />
             {{element.payedInGrowit}}<br />
-
           </div>
         </div>
       </div>
       <mat-action-row>
-        <span *ngIf="investment.value >= 100" class="my-auto mr-5"><span class="mr-3">Плановий дохід: </span>{{(toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm)))) | number:'1.1-2' : 'uk'}}  грн</span> 
-        
-        <input #investment class="border border-light" min="100" matInput maxlength="5" placeholder="  грн">
-        <button [disabled]="investment.value < 100" (click)="onInvestmentSelected(investment.value)" mat-flat-button color="accent">Додати</button>
+        <span *ngIf="investment.value >= 100" class="my-auto mr-5"><span class="mr-3">Плановий дохід:
+          </span>{{(toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm)))) | number:'1.1-2' : 'uk'}}
+          грн</span>
+
+        <input #investment class="border border-light" min="100" matInput maxlength="5" placeholder="грн">
+        <button [disabled]="investment.value < 100"
+          (click)="addToSelectedInvestments(toInt(investment.value), toInt(element.loanId), (toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm))))-toInt(investment.value)); "
+          mat-flat-button color="accent">Додати</button>
+        <button #del
+          [disabled]="investment.value=='' || (investment.value < 100) && ( (prevSummarizedInvestment + investment.value) >= summarizedInvestment) ||  prevSummarizedInvestment === summarizedInvestment"
+          (click)="onDeleteInvestment(toInt(investment.value), toInt(element.loanId), (toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm))))-toInt(investment.value)); investment.value=''"
+          mat-flat-button color="warn">Видалити</button>
       </mat-action-row>
     </mat-expansion-panel>
-
   </mat-accordion>
 
   <mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-
-
 </div>
 <ng-template #accessDenied>
   <div class="denied mt-3 p-5 alert-danger">
