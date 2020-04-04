@@ -37,7 +37,7 @@ export class AddressFillComponent implements OnInit {
     this.dataService.getBorrowerAddressData().subscribe(data => {
       this.addrData = data;
       this.dataForm.controls.sameAddressInPassport.setValue(this.addrData.sameAddressInPassport);
-      this.dataForm.controls.region.setValue(this.addrData.region);
+      this.dataForm.controls.region.setValue(this.addrData.region + ' область');
       this.dataForm.controls.district.setValue(this.addrData.district);
       this.dataForm.controls.postalCode.setValue(this.addrData.postalCode);
       this.dataForm.controls.settlement.setValue(this.addrData.settlement);
