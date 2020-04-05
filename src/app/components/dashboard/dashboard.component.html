@@ -96,12 +96,12 @@
           грн</span>
 
         <input #investment class="border border-light" min="100" matInput maxlength="5" placeholder="грн">
-        <button [disabled]="investment.value < 100"
-          (click)="addToSelectedInvestments(toInt(investment.value), toInt(element.loanId), (toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm))))-toInt(investment.value)); "
+        <button [disabled]="investment.added || investment.value < 100"
+          (click)="addToSelectedInvestments(toInt(investment.value), toInt(element.loanId), (toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm))))-toInt(investment.value)); investment.added=true"
           mat-flat-button color="accent">Додати</button>
         <button #del
           [disabled]="investment.value=='' || (investment.value < 100) && ( (prevSummarizedInvestment + investment.value) >= summarizedInvestment) ||  prevSummarizedInvestment === summarizedInvestment"
-          (click)="onDeleteInvestment(toInt(investment.value), toInt(element.loanId), (toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm))))-toInt(investment.value)); investment.value=''"
+          (click)="onDeleteInvestment(toInt(investment.value), toInt(element.loanId), (toInt(investment.value) * (1 + (((toInt(element.profitability)/365*1)/100)*toInt(element.absoluteTerm))))-toInt(investment.value)); investment.value=''; investment.added=false"
           mat-flat-button color="warn">Видалити</button>
       </mat-action-row>
     </mat-expansion-panel>

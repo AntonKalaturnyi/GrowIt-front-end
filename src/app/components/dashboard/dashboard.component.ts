@@ -79,7 +79,6 @@ export class DashboardComponent implements OnInit {
     this.prevSummarizedInvestment -= amt;
     this.percentIncome -= percent;
     const index = this.deepIndexOf(this.investments, { loanId: id, amount: amt });
-    console.log('INDEX1: ' + index);
     if (index > -1) {
       this.investments.splice(index, 1);
     }
@@ -90,8 +89,6 @@ export class DashboardComponent implements OnInit {
     this.summarizedInvestment += amt;
     this.percentIncome += percent;
     this.investments.push({ loanId: id, amount: amt });
-
-    console.log('^^^ amt: ' + this.investments[0].amount + ' id: ' + this.investments[0].loanId);
   }
 
   addToPercentIncome(amount: number) {
@@ -115,6 +112,7 @@ export interface InvestmentDto {
 }
 
 export interface DashboardLoanDto {
+  added: boolean;
   loanId: number;
   /*** Front loan data*/
   rank: string;

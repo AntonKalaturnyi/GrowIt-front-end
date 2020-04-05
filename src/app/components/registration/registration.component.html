@@ -26,7 +26,7 @@
         <input type="password" class="form-control" formControlName="password2" placeholder="Password confirm">
       </div>
 
-      <button type="submit" class="btn btn-primary">Register</button>
+      <button type="submit" [disabled]="!registerForm.value.accountType" class="btn btn-primary">Register</button>
     </form>
   </div>
 </div>
