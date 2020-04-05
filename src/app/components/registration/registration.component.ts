@@ -31,19 +31,8 @@ export class RegistrationComponent implements OnInit {
   }
 
 login(creds: Creds, urlToGo: string) {
-  this.userService.authUser(creds).subscribe(data => {
-    data.roles.forEach(element => {
-      console.log('ROLE: ' + element);
-      localStorage.setItem(element, 'true');
-      });
-    localStorage.setItem('token', data.token);
-    console.log(data.token);
-    localStorage.setItem('email', data.username);
-    this.alertService.successMessage('Well done!', 'You have successfully logged in.');
-    this.router.navigateByUrl(urlToGo);
-}, error => {
-    this.alertService.timeoutError('Password or email is incorrect', 'Bad credantials', 4200);
-});
+  this.userService.authUser(creds);
+  this.router.navigateByUrl(urlToGo);
 }
 
   submit(form) {

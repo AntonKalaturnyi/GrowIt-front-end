@@ -2,30 +2,22 @@ import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorResponse, HttpHeaders, HttpClient } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
+import { PermissionService } from './permission.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private permissionService: PermissionService) { }
 
   submitInvestments(dto: any) {
-    const headers = this.getTokenHeader();
+    const headers = this.permissionService.getTokenHeader();
     return this.http.post('http://localhost:8080/GrowIt/invest/submit-investments', dto, { headers })
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(this.permissionService.errorHandler));
   }
 
 
-  errorHandler(error: HttpErrorResponse) {
-    return throwError(error || 'Server error');
-  }
 
-  private getTokenHeader() {
-    let headers = new HttpHeaders();
-    const token = localStorage.getItem('token');
-    if (token) {
-      return headers = headers.append('authorization', 'Bearer ' + token);
-    }
-  }
+
 }
