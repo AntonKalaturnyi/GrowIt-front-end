@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PermissionService } from './services/permission.service';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +9,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   title = 'GrowIt-front-end';
+
+  constructor(public permissionService: PermissionService) { }
 
   logOut() {
     localStorage.clear();
