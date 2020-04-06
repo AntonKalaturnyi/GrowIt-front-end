@@ -1,0 +1,72 @@
+<div *ngIf="this.permissionService.registeredUserPermission() && this.permissionService.investorPermission() else accessDenied"
+    class="dash">
+
+
+    <div class="example-spacer">
+
+        <div class="row">
+            <div class="col-3 ml-5">Вибрано інвестицій на суму<br />Потенційний відсотковий дохід
+            </div>
+            <div class="col-1 mr-5" >
+                {{amount | number:'1.1-2' : 'uk'}} грн<br />
+                {{profit  | number:'1.1-2' : 'uk'}} грн
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+        <br /><br />
+        <p>Mutual Non-Disclosure Agreement (NDA)
+
+            This Mutual Non-Disclosure Agreement ("Agreement") is entered into between <br />
+
+            XYZ<br />
+            Street<br />
+            Postal Code<br />
+            Country<br />
+            Commercial registration number<br />
+            <br />
+            - „XYZ AG“ in the following –<br />
+
+            And
+
+            Virtido by Recentis GmbH<br />
+            c/o Daniel Hasler<br />
+            Ankerstrasse 27<br />
+            8004 Zürich<br />
+            Swiss UID CHE-335.744.640<br />
+
+            - „Virtido“ in the following –<br />
+
+            For the purposes of this Agreement, XYZ and Virtido can also each individually be referred to as a "Party"
+            or collectively as the "Parties".
+
+
+            regarding [project name]<br />
+
+            Introductory remarks:<br />
+            The term „party“ and „parties“ mean in the context of this agreement the party itself as well as all
+            corporations, companies or other entities, now or hereafter, directly or indirectly, owned or controlled by,
+            or owning or controlling or otherwise related company.
+        </p>
+        <span class="font-weight-bold"><mat-checkbox [(ngModel)]="policy">Згоден з <a href="">Правилами сервісу</a> та <a href="">Політикою
+                конфіденційності</a></mat-checkbox></span><br />
+                <span class="font-weight-bold"><mat-checkbox [(ngModel)]="contract">Підписуюсь під умовами договору</mat-checkbox></span>
+    </div>
+    <!-- (click)="sendInvestments()" -->
+
+
+
+    <div class="example-spacer mt-3">
+        <button [disabled]="policy==false || contract==false" mat-flat-button (click)="sendInvestments()"
+            color="accent">Підтвердити </button>
+
+    </div>
+</div>
+
+<ng-template #accessDenied>
+    <div class="denied mt-3 p-5 alert-danger">
+        <h2 class="text-danger mt-3">ACCESS DENIED !!!</h2>
+        <p class="mt-4">You dont have permissions to access this resource.<br><br> Please contact your administrator.
+        </p>
+    </div>
+</ng-template>

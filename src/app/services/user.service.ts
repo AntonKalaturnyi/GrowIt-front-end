@@ -6,6 +6,7 @@ import { InvestorPassportDto } from '../model/InvestorPassportDto';
 import { PermissionService } from './permission.service';
 import { AlertService } from './alert.service';
 import { throwError } from 'rxjs';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,7 @@ export class UserService {
           console.log('ROLE: ' + element);
           localStorage.setItem(element, 'true');
         });
-        localStorage.setItem('password', creds.password);
+        localStorage.setItem('password', CryptoJS.AES.encrypt(creds.password, 'baf387t8ft83fvb83').toString() );
         localStorage.setItem('email', data.username);
         localStorage.setItem('tokenReceivedAt', new Date().getTime() + '');
         this.alertService.successMessage('Well done!', 'You have successfully logged in.');

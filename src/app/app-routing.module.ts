@@ -14,6 +14,7 @@ import { EducationFillComponent } from './components/registration/borrower/educa
 import { LoanCalculatorComponent } from './components/loan-calculator/loan-calculator.component';
 import { AssetsFillComponent } from './components/registration/borrower/assets-fill/assets-fill.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { InvestorDocumentSignComponent } from './components/investor-document-sign/investor-document-sign.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -30,8 +31,8 @@ const routes: Routes = [
   { path: 'new-loan/calculator', component: LoanCalculatorComponent },
   { path: 'borrower/fill-education', component: EducationFillComponent },
   { path: 'borrower/fill-assets', component: AssetsFillComponent },
-  { path: 'dashboard', component: DashboardComponent }
-
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'i/contract-sign', component: InvestorDocumentSignComponent }
 ];
 
 @NgModule({
