@@ -54,6 +54,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FooterComponent } from './components/footer/footer.component';
 import { InvestorDocumentSignComponent } from './components/investor-document-sign/investor-document-sign.component';
+import { RegNavPanelComponent } from './components/registration/borrower/reg-nav-panel/reg-nav-panel.component';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { InvestorDocumentSignComponent } from './components/investor-document-si
     NavbarComponent,
     FooterComponent,
     InvestorDocumentSignComponent,
+    RegNavPanelComponent,
   ],
   imports: [
     BrowserAnimationsModule,

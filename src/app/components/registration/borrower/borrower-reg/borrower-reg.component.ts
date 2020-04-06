@@ -64,7 +64,6 @@ matitalStatuses: string[] = ['Male', 'Female'];
       this.personalInfoForm.controls.kidsAfter18yo.setValue(this.regData.kidsAfter18yo);
       this.personalInfoForm.controls.instagram.setValue(this.regData.instagram);
       this.personalInfoForm.controls.facebook.setValue(this.regData.facebook);
-      console.log(this.regData.birthday);
     });
   }
 
