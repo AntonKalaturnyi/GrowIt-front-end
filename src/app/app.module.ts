@@ -51,6 +51,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -71,6 +72,7 @@ import { MatListModule } from '@angular/material/list';
     AssetsFillComponent,
     DashboardComponent,
     NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserAnimationsModule,
