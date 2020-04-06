@@ -15,4 +15,10 @@ export class BorrowerEmploymentData {
     paymentFrequency: string;
     monthlyExpenses: string;
     monthlyObligations: string;
+    contactPerson1phone: string;
+    contactPerson2phone: string;
+    contactPerson1Name: string;
+    contactPerson2Name: string;
+    relation1: string;
+    relation2: string;
 }
