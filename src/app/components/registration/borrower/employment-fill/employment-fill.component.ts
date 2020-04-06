@@ -54,6 +54,12 @@ export class EmploymentFillComponent implements OnInit {
     'Стипендія',
     'Інший дохід'];
 
+    relations1: string[] = [
+      'Начальник', 'Менеджер', 'Колега'];
+
+      relations2: string[] = [
+        'Начальник', 'Менеджер', 'Колега', 'Родич', 'Друг'];
+
 
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
@@ -74,6 +80,12 @@ export class EmploymentFillComponent implements OnInit {
       paymentFrequency: ['', [Validators.required]],
       monthlyExpenses: ['', [Validators.required]],
       monthlyObligations: ['', [Validators.required]],
+      contactPerson1phone:  ['', [Validators.required, Validators.pattern('^([5-9][0-9]\\d{7})$')]],
+      contactPerson2phone:  ['', [Validators.required, Validators.pattern('^([5-9][0-9]\\d{7})$')]],
+      contactPerson1Name: ['', [Validators.required]],
+      contactPerson2Name: ['', [Validators.required]],
+      relation1: ['', [Validators.required]],
+      relation2: ['', [Validators.required]]
     });
   }
 
@@ -96,6 +108,15 @@ export class EmploymentFillComponent implements OnInit {
       this.dataForm.controls.paymentFrequency.setValue(this.emplData.paymentFrequency);
       this.dataForm.controls.monthlyExpenses.setValue(this.emplData.monthlyExpenses);
       this.dataForm.controls.monthlyObligations.setValue(this.emplData.monthlyObligations);
+
+      this.dataForm.controls.contactPerson1phone.setValue(this.emplData.contactPerson1phone);
+      this.dataForm.controls.contactPerson2phone.setValue(this.emplData.contactPerson2phone);
+      this.dataForm.controls.contactPerson1Name.setValue(this.emplData.contactPerson1Name);
+      this.dataForm.controls.contactPerson2Name.setValue(this.emplData.contactPerson2Name);
+      this.dataForm.controls.relation1.setValue(this.emplData.relation1);
+      this.dataForm.controls.relation2.setValue(this.emplData.relation2);
+
+
     });
   }
 
@@ -105,6 +126,8 @@ export class EmploymentFillComponent implements OnInit {
 
   submit(form) {
     form.nextPaymentDate = JSON.stringify(form.nextPaymentDate).replace('Z', '').replace('"', '').replace('"', '').replace('T', ' ');
+    form.contactPerson1phone = '+380' + form.contactPerson1phone;
+    form.contactPerson2phone = '+380' + form.contactPerson2phone;
     this.userService.saveBorrowerEmployment(form).subscribe(data => {
       this.alertService.successMessage('Залишилось лише 2 кроки!', 'Супер');
       this.router.navigateByUrl('borrower/fill-education');
