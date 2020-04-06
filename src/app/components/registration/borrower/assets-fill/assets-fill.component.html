@@ -1,5 +1,7 @@
 <div *ngIf="this.permissionService.registeredUserPermission() else accessDenied"
   class="form my-3 col-lg-7 offset-sm-3 text-center frm">
+      <app-reg-nav-panel></app-reg-nav-panel>
+
   <h2>Активи (6/6)</h2><br /><br />
 
   <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">

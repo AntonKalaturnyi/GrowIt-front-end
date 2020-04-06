@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AlertService } from 'src/app/services/alert.service';
 import { Creds } from 'src/app/model/Creds';
+import { PermissionService } from 'src/app/services/permission.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 loginForm;
 creds: Creds;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService,
+  constructor(private permissionService: PermissionService, private formBuilder: FormBuilder, private userService: UserService,
               private router: Router, private alertService: AlertService) {
     this.loginForm = this.formBuilder.group({
       email: '',
@@ -31,6 +32,15 @@ creds: Creds;
     this.creds.username = form.email;
     this.creds.password = form.password;
     this.userService.authUser(this.creds);
+
+    // if (this.permissionService.registeredUserPermission() && !this.permissionService.investorPermission()) {
+    //   this.router.navigateByUrl('new-borrower');
+    // }
+
+    // if (this.permissionService.investorPermission()) {
+    //   this.router.navigateByUrl('dashboard');
+    // }
+
   }
 
   toSignUp() {
