@@ -21,6 +21,14 @@ export class PermissionService {
     }
   }
 
+  investorPermission(): boolean {
+    if (localStorage.getItem('INVESTOR')) {
+      return true;
+    } else {
+    return false;
+    }
+  }
+
   public getTokenHeader(): HttpHeaders {
     if (((Number.parseInt(localStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) < 0 ) {  // fix: when remove +3600000 it disturbs the request and red in console
       localStorage.clear();
