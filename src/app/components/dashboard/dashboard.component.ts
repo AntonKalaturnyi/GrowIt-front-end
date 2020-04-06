@@ -12,6 +12,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { fromMatSort, sortRows } from './datasource-utils';
 import { fromMatPaginator, paginateRows } from './datasource-utils';
 import { InvestService } from 'src/app/services/invest.service';
+import { InvestorDocumentSignComponent } from '../investor-document-sign/investor-document-sign.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +25,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-    private loanService: LoanService, private investService: InvestService, private router: Router) { }
+              private loanService: LoanService, private investService: InvestService, private router: Router) { }
 
   // tslint:disable-next-line: max-line-length
   displayedColumns: string[] = ['rating', 'amount', 'term', 'profitability', 'loanPurpose', 'applyDate', 'timeLeft', 'amountFunded', 'button'];
@@ -66,8 +67,8 @@ export class DashboardComponent implements OnInit {
   }
 
   deepIndexOf(arr, obj) {
-    return arr.findIndex(function (cur) {
-      return Object.keys(obj).every(function (key) {
+    return arr.findIndex(function(cur) {
+      return Object.keys(obj).every(function(key) {
         return obj[key] === cur[key];
       });
     });
@@ -95,16 +96,29 @@ export class DashboardComponent implements OnInit {
     this.percentIncome += amount;
   }
 
-  sendInvestments() {
-    this.investService.submitInvestments(this.investments).subscribe(data => {
-      this.alertService.successMessage('Інвестицію(ї) оформлено!', 'Супер');
-      // this.router.navigateByUrl('new-borrower');
-    }, error => {
-      console.log(error);
-      this.alertService.errorMessage(error.error.message, 'Помилка!');
-    });
-  }
+//   sendInvestments() {
+//     this.investService.submitInvestments(this.investments).subscribe(data => {
+//       this.alertService.successMessage('Інвестицію(ї) оформлено!', 'Супер');
+//       // this.router.navigateByUrl('new-borrower');
+//     }, error => {
+//       console.log(error);
+//       this.alertService.errorMessage(error.error.message, 'Помилка!');
+//     });
+//   }
+// }
+
+sendInvestments(amount, profit, investments: InvestmentDto[]) {
+  InvestorDocumentSignComponent.investments = this.investments;
+  InvestorDocumentSignComponent.amount = amount;
+  InvestorDocumentSignComponent.profit = profit;
+  InvestorDocumentSignComponent.investments = investments;
+
+  this.router.navigateByUrl('i/contract-sign');
+
 }
+}
+
+
 
 export interface InvestmentDto {
   loanId: number;

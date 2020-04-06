@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { Creds } from '../model/Creds';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,7 @@ export class PermissionService {
     if ( ((Number.parseInt(localStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) <= 1800000 ) {
         const creds = new Creds();
         creds.username = localStorage.getItem('email');
-        creds.password = localStorage.getItem('password');
+        creds.password = CryptoJS.AES.decrypt(localStorage.getItem('password'), 'baf387t8ft83fvb83').toString(CryptoJS.enc.Utf8);
         this.userService.authUser(creds);
       }
     return headers = headers.append('authorization', 'Bearer ' + localStorage.getItem('token'));

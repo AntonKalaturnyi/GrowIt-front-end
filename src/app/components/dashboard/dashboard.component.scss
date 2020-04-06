@@ -1,3 +1,5 @@
+@import "@angular/material/prebuilt-themes/purple-green.css";
+
 .dash {
     width: 99%;
     margin-left: auto;
@@ -20,7 +22,6 @@
     font-size: small;
   }
 
-  @import "@angular/material/prebuilt-themes/purple-green.css";
 
 
   .mat-accordion .mat-header-row {

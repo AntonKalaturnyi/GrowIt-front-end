@@ -1,4 +1,4 @@
-<div *ngIf="this.permissionService.registeredUserPermission() else accessDenied" class="dash">
+<div *ngIf="this.permissionService.registeredUserPermission() && this.permissionService.investorPermission() else accessDenied" class="dash">
   <div class="orient">
     <div class="row">
       <div class="col-3 ml-5">Вибрано інвестицій на суму<br />
@@ -9,7 +9,7 @@
         {{percentIncome  | number:'1.1-2' : 'uk'}} грн
       </div>
       <div class="col-1">
-        <button [disabled]="summarizedInvestment == 0" mat-flat-button (click)="sendInvestments()" color="accent">Підтвердити </button>
+        <button [disabled]="summarizedInvestment == 0" (click)="sendInvestments(summarizedInvestment, percentIncome, investments)" mat-flat-button  color="accent">Підтвердити </button>
       </div>
     </div>
   </div>
@@ -109,6 +109,7 @@
 
   <mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
 </div>
 <ng-template #accessDenied>
   <div class="denied mt-3 p-5 alert-danger">
