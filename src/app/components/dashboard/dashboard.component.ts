@@ -76,6 +76,9 @@ export class DashboardComponent implements OnInit {
 
   onDeleteInvestment(amt: number, id: number, percent: number) {
     if (isNaN(amt)) { return; }
+
+    if ((this.summarizedInvestment - amt) >= 0 && (this.percentIncome - percent) >= 0) {
+
     this.summarizedInvestment -= amt;
     this.prevSummarizedInvestment -= amt;
     this.percentIncome -= percent;
@@ -83,6 +86,7 @@ export class DashboardComponent implements OnInit {
     if (index > -1) {
       this.investments.splice(index, 1);
     }
+  }
   }
 
   addToSelectedInvestments(amt: number, id: number, percent: number) {
