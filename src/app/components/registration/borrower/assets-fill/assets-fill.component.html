@@ -1,14 +1,10 @@
 <div *ngIf="this.permissionService.registeredUserPermission() else accessDenied"
-  class="form my-3 col-lg-7 offset-sm-3 text-center frm">
+  class="form">
       <app-reg-nav-panel></app-reg-nav-panel>
-
+<div class="my-3 col-lg-7 offset-sm-3 text-center frm">
   <h2>Активи (6/6)</h2><br /><br />
 
-  <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
-
-    <div class="form-group row">
-
-    </div>
+  <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form">
 
     <div class="form-group row">
       <label id="example-radio-group-label" class="mr-5">Чи є у вас у власності квартира(и)?</label><br />
@@ -66,7 +62,7 @@
     <button type="submit" class="btn btn-primary mx-auto"
     [disabled]="(dataForm.controls['hasCar'].value === 'Так' && dataForm.controls['carAge'].value === null) || !dataForm.valid">Відправити</button>
   </form>
-
+</div>
 </div>
 <ng-template #accessDenied>
   <div class="denied mt-3 p-5 alert-danger">
