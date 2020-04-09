@@ -1,9 +1,8 @@
-<div *ngIf="this.permissionService.registeredUserPermission() else accessDenied"
-  class="form my-3 col-lg-7 offset-sm-3 text-center frm">
+<div *ngIf="this.permissionService.registeredUserPermission() else accessDenied" class="form">
       <app-reg-nav-panel></app-reg-nav-panel>
+<div class="my-3 col-lg-7 offset-sm-3 text-center frm">
 
   <h2>Освіта (5/6)</h2><br /><br />
-
   <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
 
     <div class="form-group row">
@@ -36,7 +35,7 @@
     (dataForm.controls['educationLevel'].value !== 'Середньотехнічна/спеціальна') && 
     !(!!dataForm.controls['educationField'].value)) ">Далі</button>
   </form>
-
+</div>
 </div>
 <ng-template #accessDenied>
   <div class="denied mt-3 p-5 alert-danger">
