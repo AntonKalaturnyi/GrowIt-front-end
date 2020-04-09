@@ -115,7 +115,7 @@ import { RegNavPanelComponent } from './components/registration/borrower/reg-nav
         progressBar: true,
         newestOnTop: true,
         autoDismiss: true,
-        countDuplicates: true,
+        countDuplicates: false,
         preventDuplicates: true }),
     BrowserModule,
     NgxPaginationModule,

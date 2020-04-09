@@ -2,6 +2,7 @@
 /* Add application styles & imports to this file! */
 // @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import "@angular/material/prebuilt-themes/purple-green.css";
+@import "../node_modules/ngx-toastr/toastr.css";
 
 html, body {
     height: 100%;
