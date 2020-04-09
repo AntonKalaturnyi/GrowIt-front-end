@@ -1,25 +1,4 @@
-<mat-toolbar>
-  <mat-toolbar-row>
-    <span>GrowIt</span>
-
-    <div *ngIf="permissionService.investorPermission()" class="right-con mr-2 row">
-      <button class="" [routerLink]="['/dashboard']" class="btn btn-outline-info" type="button">Dashboard</button>
-     <div class="ml-2"> <button  (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary" type="button">Log out</button></div>
-    </div>
-
-
-    <div *ngIf="permissionService.registeredUserPermission() && !permissionService.investorPermission()" class="right-con mr-2 row">
-      <button class="" [routerLink]="['/new-borrower']" class="btn btn-outline-info" type="button">Register</button>
-    </div>
-
-    <div class="" *ngIf="permissionService.registeredUserPermission() && !permissionService.investorPermission()">
-      <button (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary" type="button">Log out</button>
-    </div>
-    <a class="right-con" *ngIf="!permissionService.registeredUserPermission()" routerLink="login" routerLinkActive="active">Login</a>
-  </mat-toolbar-row>
-</mat-toolbar>
-
-
+<app-navbar></app-navbar>
 <section class="mt-4">
   <router-outlet></router-outlet>
 </section>

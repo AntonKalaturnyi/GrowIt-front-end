@@ -10,10 +10,6 @@ export class AppComponent {
 
   title = 'GrowIt-front-end';
 
-  constructor(public permissionService: PermissionService) { }
-
-  logOut() {
-    localStorage.clear();
-  }
+  constructor() { }
 
 }

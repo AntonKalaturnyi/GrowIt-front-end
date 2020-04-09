@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { PermissionService } from 'src/app/services/permission.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +8,9 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class NavbarComponent {
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+    constructor(public permissionService: PermissionService) { }
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
-
+    logOut() {
+      localStorage.clear();
+    }
 }
