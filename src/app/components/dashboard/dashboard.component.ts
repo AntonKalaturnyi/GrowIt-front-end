@@ -100,29 +100,14 @@ export class DashboardComponent implements OnInit {
     this.percentIncome += amount;
   }
 
-//   sendInvestments() {
-//     this.investService.submitInvestments(this.investments).subscribe(data => {
-//       this.alertService.successMessage('Інвестицію(ї) оформлено!', 'Супер');
-//       // this.router.navigateByUrl('new-borrower');
-//     }, error => {
-//       console.log(error);
-//       this.alertService.errorMessage(error.error.message, 'Помилка!');
-//     });
-//   }
-// }
-
 sendInvestments(amount, profit, investments: InvestmentDto[]) {
   InvestorDocumentSignComponent.investments = this.investments;
   InvestorDocumentSignComponent.amount = amount;
   InvestorDocumentSignComponent.profit = profit;
   InvestorDocumentSignComponent.investments = investments;
-
   this.router.navigateByUrl('i/contract-sign');
-
 }
 }
-
-
 
 export interface InvestmentDto {
   loanId: number;

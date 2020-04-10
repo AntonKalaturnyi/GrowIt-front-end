@@ -93,6 +93,7 @@ export class EmploymentFillComponent implements OnInit {
 
     this.dataService.getBorrowerEmploymentData().subscribe(data => {
       this.emplData = data;
+      if (data.socialStatus !== null) {
       this.dataForm.controls.socialStatus.setValue(this.emplData.socialStatus);
       this.dataForm.controls.workSphere.setValue(this.emplData.workSphere);
       this.dataForm.controls.lengthOfTotalEmploymentMo.setValue(this.emplData.lengthOfTotalEmploymentMo);
@@ -108,15 +109,13 @@ export class EmploymentFillComponent implements OnInit {
       this.dataForm.controls.paymentFrequency.setValue(this.emplData.paymentFrequency);
       this.dataForm.controls.monthlyExpenses.setValue(this.emplData.monthlyExpenses);
       this.dataForm.controls.monthlyObligations.setValue(this.emplData.monthlyObligations);
-
       this.dataForm.controls.contactPerson1phone.setValue(this.emplData.contactPerson1phone);
       this.dataForm.controls.contactPerson2phone.setValue(this.emplData.contactPerson2phone);
       this.dataForm.controls.contactPerson1Name.setValue(this.emplData.contactPerson1Name);
       this.dataForm.controls.contactPerson2Name.setValue(this.emplData.contactPerson2Name);
       this.dataForm.controls.relation1.setValue(this.emplData.relation1);
       this.dataForm.controls.relation2.setValue(this.emplData.relation2);
-
-
+    }
     });
   }
 
