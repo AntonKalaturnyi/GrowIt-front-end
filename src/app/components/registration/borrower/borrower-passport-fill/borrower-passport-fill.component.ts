@@ -25,7 +25,7 @@ export class BorrowerPassportFillComponent implements OnInit {
 
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-              private userService: UserService, private dataService: PrevDataService, private router: Router) {
+    private userService: UserService, private dataService: PrevDataService, private router: Router) {
     this.docsForm = this.formBuilder.group({
       passportType: ['', [Validators.required]],
       idPassNumber: [''],
@@ -50,29 +50,29 @@ export class BorrowerPassportFillComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.getBorrowerDocsInputData().subscribe(data => {
       this.docsData = data;
-      if (this.docsData.postalCode !== null) {
-      this.docsForm.controls.passportType.setValue(this.docsData.idPassport ? 'ID-картка' : 'Паперовий паспорт');
-      this.docsForm.controls.idPassNumber.setValue(this.docsData.idPassNumber);
-      this.docsForm.controls.paperPassSeries.setValue(this.docsData.paperPassSeries);
-      this.docsForm.controls.paperPassNumber.setValue(this.docsData.paperPassNumber);
-      this.docsForm.controls.issueDate.setValue(this.docsData.issueDate);
-      this.docsForm.controls.issuerRegion.setValue(this.docsData.issuer.substring(0, this.docsData.issuer.indexOf(' МВ ')));
-      // tslint:disable-next-line: max-line-length
-      this.docsForm.controls.issuerName.setValue(this.docsData.issuer.substring(this.docsData.issuer.indexOf(' МВ ') + 4, this.docsData.issuer.indexOf(' в')));
-      // tslint:disable-next-line: max-line-length
-      this.docsForm.controls.issuerLocationRegion.setValue(this.docsData.issuer.substring(this.docsData.issuer.indexOf(' в ') + 3, this.docsData.issuer.length - 8));
-      this.docsForm.controls.region.setValue(this.docsData.region);
-      this.docsForm.controls.district.setValue(this.docsData.district);
-      this.docsForm.controls.postalCode.setValue(this.docsData.postalCode);
-      this.docsForm.controls.settlement.setValue(this.docsData.settlement);
-      this.docsForm.controls.street.setValue(this.docsData.street);
-      this.docsForm.controls.number.setValue(this.docsData.number);
-      this.docsForm.controls.corpsNo.setValue(this.docsData.corpsNo);
-      this.docsForm.controls.door.setValue(this.docsData.door);
-      this.docsForm.controls.itnNumber.setValue(this.docsData.itnNumber);
-      this.fileName = this.docsData.fileName;
-      this.selectedFile = new File([], this.fileName);
-}
+      if (data.settlement !== null) {
+        this.docsForm.controls.passportType.setValue(this.docsData.idPassport ? 'ID-картка' : 'Паперовий паспорт');
+        this.docsForm.controls.idPassNumber.setValue(this.docsData.idPassNumber);
+        this.docsForm.controls.paperPassSeries.setValue(this.docsData.paperPassSeries);
+        this.docsForm.controls.paperPassNumber.setValue(this.docsData.paperPassNumber);
+        this.docsForm.controls.issueDate.setValue(this.docsData.issueDate);
+        this.docsForm.controls.issuerRegion.setValue(this.docsData.issuer.substring(0, this.docsData.issuer.indexOf(' МВ ')));
+        // tslint:disable-next-line: max-line-length
+        this.docsForm.controls.issuerName.setValue(this.docsData.issuer.substring(this.docsData.issuer.indexOf(' МВ ') + 4, this.docsData.issuer.indexOf(' в')));
+        // tslint:disable-next-line: max-line-length
+        this.docsForm.controls.issuerLocationRegion.setValue(this.docsData.issuer.substring(this.docsData.issuer.indexOf(' в ') + 3, this.docsData.issuer.length - 8));
+        this.docsForm.controls.region.setValue(this.docsData.region);
+        this.docsForm.controls.district.setValue(this.docsData.district);
+        this.docsForm.controls.postalCode.setValue(this.docsData.postalCode);
+        this.docsForm.controls.settlement.setValue(this.docsData.settlement);
+        this.docsForm.controls.street.setValue(this.docsData.street);
+        this.docsForm.controls.number.setValue(this.docsData.number);
+        this.docsForm.controls.corpsNo.setValue(this.docsData.corpsNo);
+        this.docsForm.controls.door.setValue(this.docsData.door);
+        this.docsForm.controls.itnNumber.setValue(this.docsData.itnNumber);
+        this.fileName = this.docsData.fileName;
+        this.selectedFile = new File([], this.fileName);
+      }
     });
   }
 

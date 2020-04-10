@@ -36,6 +36,7 @@ export class AddressFillComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.getBorrowerAddressData().subscribe(data => {
       this.addrData = data;
+      if (data.settlement !== null) {
       this.dataForm.controls.sameAddressInPassport.setValue(this.addrData.sameAddressInPassport);
       this.dataForm.controls.region.setValue(this.addrData.region);
       this.dataForm.controls.district.setValue(this.addrData.district);
@@ -45,6 +46,7 @@ export class AddressFillComponent implements OnInit {
       this.dataForm.controls.number.setValue(this.addrData.number);
       this.dataForm.controls.corpsNo.setValue(this.addrData.corpsNo);
       this.dataForm.controls.door.setValue(this.addrData.door);
+      }
     });
   }
 

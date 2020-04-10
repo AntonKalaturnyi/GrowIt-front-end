@@ -8,6 +8,7 @@ import { BorrowerAddressData } from '../model/BorrowerAddressData';
 import { BorrowerEmploymentData } from '../model/BorrowerEmploymentData';
 import { BorrowerEducationData } from '../model/BorrowerEducationData';
 import { PermissionService } from './permission.service';
+import { AssetsDataDto } from '../components/registration/borrower/assets-fill/assets-fill.component';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,12 @@ export class PrevDataService {
   getBorrowerEducationData(): Observable<BorrowerEducationData> {
     const headers = this.permissionService.getTokenHeader();
     return this.http.get<BorrowerEducationData>('http://localhost:8080/GrowIt/borrower/education-data', { headers })
+    .pipe(catchError(this.permissionService.errorHandler));
+  }
+
+  getBorrowerAssetsData(): Observable<AssetsDataDto> {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.get<AssetsDataDto>('http://localhost:8080/GrowIt/borrower/assets-data', { headers })
     .pipe(catchError(this.permissionService.errorHandler));
   }
 }

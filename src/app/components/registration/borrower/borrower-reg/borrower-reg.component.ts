@@ -16,28 +16,28 @@ import { BorrowerRegData } from 'src/app/model/BorrowerRegData';
 })
 export class BorrowerRegComponent implements OnInit {
 
-phoneNum: string;
-regData: BorrowerRegData;
-personalInfoForm;
-codeForm: FormGroup;
-serverCode: string;
-moveToCode = false;
-genders: string[] = ['Male', 'Female'];
-// matitalStatus: string;
-matitalStatuses: string[] = ['Male', 'Female'];
+  phoneNum: string;
+  regData: BorrowerRegData;
+  personalInfoForm;
+  codeForm: FormGroup;
+  serverCode: string;
+  moveToCode = false;
+  genders: string[] = ['Male', 'Female'];
+  // matitalStatus: string;
+  matitalStatuses: string[] = ['Male', 'Female'];
   task: any;
 
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-              private userService: UserService, private dataService: PrevDataService, private router: Router) {
+    private userService: UserService, private dataService: PrevDataService, private router: Router) {
     this.personalInfoForm = this.formBuilder.group({
-      lastName:  ['', [Validators.required]],
-      name:  ['', [Validators.required]],
-      middleName:  ['', [Validators.required]],
-      gender:  ['', [Validators.required]],
-      birthday:  ['', [Validators.required]],
-      phone:  ['', [Validators.required, Validators.pattern('^([5-9][0-9]\\d{7})$')]],
-      maritalStatus:  ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      middleName: ['', [Validators.required]],
+      gender: ['', [Validators.required]],
+      birthday: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.pattern('^([5-9][0-9]\\d{7})$')]],
+      maritalStatus: ['', [Validators.required]],
       kidsBefore18yo: ['', [Validators.required]],
       kidsAfter18yo: ['', [Validators.required]],
       instagram: ['', [Validators.required]],
@@ -45,25 +45,27 @@ matitalStatuses: string[] = ['Male', 'Female'];
     });
     this.codeForm = new FormGroup({
       code: new FormControl()
-   });
-   }
+    });
+  }
 
   ngOnInit(): void {
 
     this.dataService.getBorrowerRegInputData().subscribe(data => {
       this.regData = data;
-      this.personalInfoForm.controls.lastName.setValue(this.regData.lastName);
-      this.personalInfoForm.controls.name.setValue(this.regData.name);
-      this.personalInfoForm.controls.middleName.setValue(this.regData.middleName);
-      this.personalInfoForm.controls.gender.setValue(this.regData.gender);
-      this.personalInfoForm.controls.birthday.setValue(this.regData.birthday);
-      this.personalInfoForm.controls.phone.setValue(this.regData.phone);
-      this.phoneNum = this.regData.phone;
-      this.personalInfoForm.controls.maritalStatus.setValue(this.regData.maritalStatus);
-      this.personalInfoForm.controls.kidsBefore18yo.setValue(this.regData.kidsBefore18yo);
-      this.personalInfoForm.controls.kidsAfter18yo.setValue(this.regData.kidsAfter18yo);
-      this.personalInfoForm.controls.instagram.setValue(this.regData.instagram);
-      this.personalInfoForm.controls.facebook.setValue(this.regData.facebook);
+      if (data.name !== null) {
+        this.personalInfoForm.controls.lastName.setValue(this.regData.lastName);
+        this.personalInfoForm.controls.name.setValue(this.regData.name);
+        this.personalInfoForm.controls.middleName.setValue(this.regData.middleName);
+        this.personalInfoForm.controls.gender.setValue(this.regData.gender);
+        this.personalInfoForm.controls.birthday.setValue(this.regData.birthday);
+        this.personalInfoForm.controls.phone.setValue(this.regData.phone);
+        this.phoneNum = this.regData.phone;
+        this.personalInfoForm.controls.maritalStatus.setValue(this.regData.maritalStatus);
+        this.personalInfoForm.controls.kidsBefore18yo.setValue(this.regData.kidsBefore18yo);
+        this.personalInfoForm.controls.kidsAfter18yo.setValue(this.regData.kidsAfter18yo);
+        this.personalInfoForm.controls.instagram.setValue(this.regData.instagram);
+        this.personalInfoForm.controls.facebook.setValue(this.regData.facebook);
+      }
     });
   }
 

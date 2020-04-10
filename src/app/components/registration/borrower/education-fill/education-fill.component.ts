@@ -59,8 +59,10 @@ export class EducationFillComponent implements OnInit {
   ngOnInit(): void {
     this.dataService.getBorrowerEducationData().subscribe(data => {
       this.eduData = data;
+      if (data.educationLevel !== null) {
       this.dataForm.controls.educationLevel.setValue(this.eduData.educationLevel);
       this.dataForm.controls.educationField.setValue(this.eduData.educationField);
+      }
     });
   }
 
