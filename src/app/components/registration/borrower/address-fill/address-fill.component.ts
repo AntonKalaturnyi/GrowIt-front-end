@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { PrevDataService } from 'src/app/services/prev-data.service';
 import { BorrowerAddressData } from 'src/app/model/BorrowerAddressData';
+import { RegNavPanelComponent } from '../reg-nav-panel/reg-nav-panel.component';
 
 @Component({
   selector: 'app-address-fill',
@@ -14,6 +15,7 @@ import { BorrowerAddressData } from 'src/app/model/BorrowerAddressData';
 })
 export class AddressFillComponent implements OnInit {
 
+  docsFilled: boolean;
   dataForm;
   addrData: BorrowerAddressData;
 
@@ -47,6 +49,9 @@ export class AddressFillComponent implements OnInit {
       this.dataForm.controls.corpsNo.setValue(this.addrData.corpsNo);
       this.dataForm.controls.door.setValue(this.addrData.door);
       }
+    });
+    this.dataService.getWhichSectionsFilledData().subscribe(data => {
+      this.docsFilled = data.docsFilled;
     });
   }
 

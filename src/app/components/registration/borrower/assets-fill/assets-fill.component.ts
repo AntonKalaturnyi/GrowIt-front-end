@@ -14,7 +14,7 @@ import { PrevDataService } from 'src/app/services/prev-data.service';
 export class AssetsFillComponent implements OnInit {
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-    private userService: UserService, private dataService: PrevDataService, private router: Router) {
+              private userService: UserService, private dataService: PrevDataService, private router: Router) {
     this.dataForm = this.formBuilder.group({
       flat: ['', [Validators.required]],
       hasHouse: ['', [Validators.required]],
@@ -62,7 +62,7 @@ export class AssetsFillComponent implements OnInit {
 
     this.userService.saveBorrowerAssets(form).subscribe(data => {
       this.alertService.successMessage('Реєстрацію завершено!', 'Супер');
-      this.router.navigateByUrl('borrower-cabinet');
+      this.router.navigateByUrl('new-borrower');
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Invalid input');
