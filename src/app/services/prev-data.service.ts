@@ -9,6 +9,7 @@ import { BorrowerEmploymentData } from '../model/BorrowerEmploymentData';
 import { BorrowerEducationData } from '../model/BorrowerEducationData';
 import { PermissionService } from './permission.service';
 import { AssetsDataDto } from '../components/registration/borrower/assets-fill/assets-fill.component';
+import { SectionsFilledData } from '../components/registration/borrower/reg-nav-panel/reg-nav-panel.component';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,12 @@ export class PrevDataService {
   getBorrowerAssetsData(): Observable<AssetsDataDto> {
     const headers = this.permissionService.getTokenHeader();
     return this.http.get<AssetsDataDto>('http://localhost:8080/GrowIt/borrower/assets-data', { headers })
+    .pipe(catchError(this.permissionService.errorHandler));
+  }
+
+  getWhichSectionsFilledData(): Observable<SectionsFilledData> {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.get<SectionsFilledData>('http://localhost:8080/GrowIt/borrower/filled-sections-data', { headers })
     .pipe(catchError(this.permissionService.errorHandler));
   }
 }
