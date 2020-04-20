@@ -29,6 +29,7 @@ export class RegNavPanelComponent implements OnInit {
   }
 
   toCabinet() {
+    localStorage.setItem('BORROWER_ON_CHECK', 'true');
     this.router.navigateByUrl('borrower-cabinet');
   }
 }
