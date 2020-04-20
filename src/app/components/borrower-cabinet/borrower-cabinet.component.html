@@ -1,6 +1,12 @@
 <div *ngIf="this.permissionService.borrowerOnCheckPermission() else accessDenied" class="form"> 
 <!-- to be changed: should be verifiedBorrowerPermission() when VerificationComponent is up -->
-<h3>borrower-cabinet works!</h3>
+<h3>borrower-cabinet works!</h3><br>
+
+<span>availableBalance: {{availableBalance}}</span><br>
+<span>dailyRate: {{dailyRate}}</span><br>
+<span>rank: {{rank}}</span><br>
+<span>score: {{score}}</span><br>
+<span>status: {{status}}</span><br>
 
 </div>
 <ng-template #accessDenied>
