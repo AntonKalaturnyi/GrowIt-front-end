@@ -1,6 +1,6 @@
 <div *ngIf="this.permissionService.registeredUserPermission() else accessDenied" class="form">
     <div class="my-3 col-lg-5 offset-sm-3 text-center frm">
-        <h2>Passport & ITN</h2>
+        <h2>Паспорт та код</h2>
         <br>
         <form [formGroup]="docsForm" (ngSubmit)="submit(docsForm.value)" class="form-inlin justify-content-center">
 

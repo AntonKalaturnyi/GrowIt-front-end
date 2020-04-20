@@ -8,7 +8,7 @@
     </div>
 
 
-    <div *ngIf="permissionService.registeredUserPermission() && !permissionService.investorPermission()" class="right-con mr-2 row">
+    <div *ngIf="!permissionService.registeredUserPermission() || !permissionService.investorPermission()" class="right-con mr-2 row">
       <button class="" [routerLink]="['/new-borrower']" class="btn btn-outline-info" type="button">Register</button>
     </div>
 
