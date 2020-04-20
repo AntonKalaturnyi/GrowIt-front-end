@@ -30,6 +30,22 @@ export class PermissionService {
     }
   }
 
+  borrowerOnCheckPermission(): boolean {
+    if (localStorage.getItem('BORROWER_ON_CHECK')) {
+      return true;
+    } else {
+    return false;
+    }
+  }
+
+  verifiedBorrowerPermission(): boolean {
+    if (localStorage.getItem('VERIFIED_BORROWER')) {
+      return true;
+    } else {
+    return false;
+    }
+  }
+
   public getTokenHeader(): HttpHeaders {
     if (((Number.parseInt(localStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) < 0 ) {  // fix: when remove +3600000 it disturbs the request and red in console
       localStorage.clear();
