@@ -8,7 +8,7 @@
       <label id="example-radio-group-label">Pick type of account</label>
       <mat-radio-group aria-labelledby="example-radio-group-label" class="row" formControlName="accountType">
         <mat-radio-button class="example-radio-button" *ngFor="let type of accountTypes" [value]="type">
-          {{type}}
+          <span class="mr-3">{{type}}</span>
         </mat-radio-button>
       </mat-radio-group>
       <br />
