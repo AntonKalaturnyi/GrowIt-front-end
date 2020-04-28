@@ -24,4 +24,10 @@ export class LoanService {
     return this.http.get<any>('http://localhost:8080/GrowIt/loan/dashboard-loans', { headers })
     .pipe(catchError(this.permissionService.errorHandler));
   }
+
+  getPreviousBorrowerLoans(): any {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.get<any>('http://localhost:8080/GrowIt/borrower-account/get-loans', { headers })
+    .pipe(catchError(this.permissionService.errorHandler));
+  }
 }
