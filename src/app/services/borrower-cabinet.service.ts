@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PermissionService } from './permission.service';
 import { Observable } from 'rxjs';
-import { AssetsDataDto } from '../components/registration/borrower/assets-fill/assets-fill.component';
 import { catchError } from 'rxjs/operators';
 
 @Injectable({
