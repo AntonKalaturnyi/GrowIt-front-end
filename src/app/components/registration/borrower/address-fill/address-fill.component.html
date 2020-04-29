@@ -4,7 +4,7 @@
     <h4>Адреса проживання (3/6)</h4><br />
 
     <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
-      <div class="form-group row">
+      <div *ngIf="docsFilled" class="form-group row">
         <label class="mr-2 my-auto">Адреса проживання така ж як у паспорті</label>
         <input class="my-auto" type="checkbox" formControlName="sameAddressInPassport" />
       </div>
@@ -34,10 +34,19 @@
           <input class="col-sm-1 mr-2 ml-2" type="text" formControlName="door" placeholder="№" />
         </div>
       </div>
+
+      <div class="form-group row">
+        <label class="mr-4">Тип житла</label>
+        <mat-form-field>
+          <select class="border border-dark" formControlName="homeType" matNativeControl>
+            <option selected type="text" *ngFor="let type of types" value="{{type}}">{{type}}</option>
+          </select>
+        </mat-form-field>
+      </div>
       
       <button type="button" (click)="goBack()" class="btn btn-primary mr-5">Назад</button>
 
-      <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid && !dataForm.controls['sameAddressInPassport'].value || (!docsFilled && dataForm.controls['sameAddressInPassport'].value)">Далі</button>
+      <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid">Далі</button>
     </form>
   </div>
 </div>

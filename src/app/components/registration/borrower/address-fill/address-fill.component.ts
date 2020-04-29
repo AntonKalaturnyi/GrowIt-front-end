@@ -19,18 +19,28 @@ export class AddressFillComponent implements OnInit {
   dataForm;
   addrData: BorrowerAddressData;
 
+  types: string[] = [
+    'Власна квартира',
+    'Орендована квартира',
+    'Кімната/гуртожиток',
+    'Власний будинок',
+    'Оселя батьків/родичів',
+    'Готель/хостел'
+  ];
+
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
               private userService: UserService, private dataService: PrevDataService, private router: Router) {
     this.dataForm = this.formBuilder.group({
-      sameAddressInPassport: ['', [Validators.required]],
+      sameAddressInPassport: [''],
       region: ['', [Validators.required]],
-      district: ['', [Validators.required]],
+      district: [''],
       postalCode: ['', [Validators.required]],
       settlement: ['', [Validators.required]],
       street: ['', [Validators.required]],
       number: ['', [Validators.required]],
       corpsNo: [''],
-      door: ['', [Validators.required]]
+      door: ['', [Validators.required]],
+      homeType: ['', [Validators.required]]
     });
   }
 
@@ -39,7 +49,7 @@ export class AddressFillComponent implements OnInit {
     this.dataService.getBorrowerAddressData().subscribe(data => {
       this.addrData = data;
       if (data.settlement !== null) {
-      this.dataForm.controls.sameAddressInPassport.setValue(this.addrData.sameAddressInPassport);
+      this.dataForm.controls.sameAddressInPassport.setValue(this.addrData.sameAddressInPassport === null ? false : this.addrData.sameAddressInPassport);
       this.dataForm.controls.region.setValue(this.addrData.region);
       this.dataForm.controls.district.setValue(this.addrData.district);
       this.dataForm.controls.postalCode.setValue(this.addrData.postalCode);
@@ -48,6 +58,7 @@ export class AddressFillComponent implements OnInit {
       this.dataForm.controls.number.setValue(this.addrData.number);
       this.dataForm.controls.corpsNo.setValue(this.addrData.corpsNo);
       this.dataForm.controls.door.setValue(this.addrData.door);
+      this.dataForm.controls.homeType.setValue(this.addrData.homeType);
       }
     });
     this.dataService.getWhichSectionsFilledData().subscribe(data => {
@@ -62,6 +73,10 @@ export class AddressFillComponent implements OnInit {
 
 
   submit(form) {
+    console.log("SAME_" + form.sameAddressInPassport);
+    if (form.sameAddressInPassport == null || form.sameAddressInPassport === '') {
+      form.sameAddressInPassport = false;
+    }
     this.userService.saveBorrowerAddress(form).subscribe(data => {
       this.alertService.successMessage('Адресу успішно збережено!', 'Супер');
       this.router.navigateByUrl('borrower/fill-employment');

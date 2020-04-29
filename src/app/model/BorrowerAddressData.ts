@@ -9,4 +9,5 @@ export class BorrowerAddressData {
     number: string;
     corpsNo: string;
     door: string;
+    homeType: string;
 }
