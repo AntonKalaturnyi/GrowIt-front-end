@@ -7,13 +7,14 @@ import { PermissionService } from './permission.service';
 import { AlertService } from './alert.service';
 import { throwError } from 'rxjs';
 import * as CryptoJS from 'crypto-js';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private http: HttpClient, private alertService: AlertService) { }
+  constructor(private http: HttpClient, private alertService: AlertService, private router: Router) { }
 
   errorMessage: string;
 
@@ -27,12 +28,15 @@ export class UserService {
         localStorage.setItem('password', CryptoJS.AES.encrypt(creds.password, 'baf387t8ft83fvb83').toString() );
         localStorage.setItem('email', data.username);
         localStorage.setItem('tokenReceivedAt', new Date().getTime() + '');
+        if (localStorage.getItem('BORROWER_ON_CHECK')) {
+          this.router.navigateByUrl('borrower-cabinet');
+        }
+        if (localStorage.getItem('INVESTOR')) {
+          this.router.navigateByUrl('investor-cabinet');
+        }
         this.alertService.successMessage('Well done!', 'You have successfully logged in.');
       }, error => {
-        localStorage.removeItem('password');
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-        localStorage.removeItem('tokenReceivedAt');
+        localStorage.clear();
         this.errorMessage = error;
         this.alertService.timeoutError('Password or email is incorrect', 'Bad credantials', 4200);
       });

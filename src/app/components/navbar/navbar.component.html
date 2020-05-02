@@ -2,23 +2,31 @@
   <mat-toolbar-row>
     <span>GrowIt</span>
 
-    <div *ngIf="permissionService.investorPermission()" class="right-con mr-2 row">
-      <button class="" [routerLink]="['/dashboard']" class="btn btn-outline-info" type="button">Dashboard</button>
-     <div class="ml-2"> <button  (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary" type="button">Log out</button></div>
+    <div *ngIf="permissionService.investorPermission()" class="right-con row">
+      <div class=""> <button [routerLink]="['/dashboard']" class="btn btn-outline-info" type="button">Dashboard</button>
+      </div>
+      <div class="ml-2"> <button [routerLink]="['/investor-cabinet']" class="btn btn-outline-info" type="button">My
+          cabinet</button></div>
+      <div class="ml-2"> <button (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary"
+          type="button">Log out</button></div>
     </div>
 
-
-    <div *ngIf="!permissionService.registeredUserPermission() || !permissionService.investorPermission()" [hidden]="permissionService.borrowerOnCheckPermission() || permissionService.verifiedBorrowerPermission()" class="right-con mr-2 row">
-      <button class="right-con" [routerLink]="['/new-borrower']" class="btn btn-outline-info" type="button">Register</button>
+    <div
+      [hidden]="permissionService.borrowerOnCheckPermission() || permissionService.investorPermission() || !permissionService.registeredUserPermission()"
+      class="right-con mr-2 row">
+      <button class="right-con" [routerLink]="['/new-borrower']" class="btn btn-outline-info"
+        type="button">Register</button>
     </div>
 
-    <div class="" *ngIf="permissionService.borrowerOnCheckPermission()">
+    <div class="right-borr-nav row" [hidden]="!permissionService.borrowerOnCheckPermission()">
       <button [routerLink]="['/borrower-cabinet']" class="btn btn-outline-secondary" type="button">Cabinet</button>
+      <div class="ml-2"><button (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary"
+          type="button">Log out</button></div>
     </div>
 
-    <div class="right-con" *ngIf="permissionService.registeredUserPermission() && !permissionService.investorPermission()">
-      <button (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary" type="button">Log out</button>
+
+    <div class="right-login" [hidden]="permissionService.registeredUserPermission()">
+      <a routerLink="login" routerLinkActive="active">Login</a>
     </div>
-    <a class="right-con" *ngIf="!permissionService.registeredUserPermission()" routerLink="login" routerLinkActive="active">Login</a>
   </mat-toolbar-row>
 </mat-toolbar>

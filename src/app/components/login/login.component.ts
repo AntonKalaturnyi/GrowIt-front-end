@@ -31,6 +31,7 @@ creds: Creds;
     this.creds = new Creds();
     this.creds.username = form.email;
     this.creds.password = form.password;
+    localStorage.clear();
     this.userService.authUser(this.creds);
 
     // if (this.permissionService.registeredUserPermission() && !this.permissionService.investorPermission()) {
