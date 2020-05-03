@@ -1,4 +1,4 @@
-<div *ngIf="this.permissionService.registeredUserPermission() && this.permissionService.investorPermission() else accessDenied"
+<div *ngIf="this.permissionService.investorPermission() else accessDenied"
     class="dash">
 
 

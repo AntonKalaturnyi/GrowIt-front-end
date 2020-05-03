@@ -1,4 +1,4 @@
-<div *ngIf="this.permissionService.registeredUserPermission() && this.permissionService.investorPermission() else accessDenied" class="dash">
+<div *ngIf="this.permissionService.registeredInvestorPermission() else accessDenied" class="dash">
   <div class="orient">
     <div class="row">
       <div class="col-3 ml-5">Вибрано інвестицій на суму<br />

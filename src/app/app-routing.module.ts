@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'borrower/fill-address', component: AddressFillComponent },
   { path: 'borrower/fill-employment', component: EmploymentFillComponent },
   { path: 'borrower/fill-education', component: EducationFillComponent },
-  { path: 'new-loan/calculator', component: LoanCalculatorComponent },
+  { path: 'calculator', component: LoanCalculatorComponent },
   { path: 'borrower/fill-education', component: EducationFillComponent },
   { path: 'borrower/fill-assets', component: AssetsFillComponent },
   { path: 'dashboard', component: DashboardComponent },

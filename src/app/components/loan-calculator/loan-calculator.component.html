@@ -1,4 +1,4 @@
-<div *ngIf="this.permissionService.registeredUserPermission() else accessDenied"
+<div *ngIf="this.permissionService.registeredBorrowerPermission() || this.permissionService.borrowerOnCheckPermission() else accessDenied"
   class="form my-3 col-lg-7 offset-sm-3 text-center frm">
   <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
     <div class="card">
@@ -6,7 +6,7 @@
       <div class="form-group row width">
         <ng5-slider formControlName="amount" [options]="options1"></ng5-slider>
         <div class="">{{dataForm.controls['amount'].value}} грн<br />До повернення:
-          {{math.round(dataForm.controls['amount'].value * ( 1 + dataForm.controls['period'].value / 100))}} грн<span id="star-main"> *</span></div>
+          {{math.round(dataForm.controls['amount'].value * ( 1 + dataForm.controls['period'].value * (22/30) / 100))}} грн<span id="star-main"> *</span></div>  <!-- 22/mo is 0.73 per day from B68-73-->
       </div>
 
       <div class="form-group row width">
@@ -22,7 +22,7 @@
           </select>
         </mat-form-field>
       </div>
-      <div class="form-group frm">
+      <div [hidden]="!this.permissionService.verifiedBorrowerPermission()" class="form-group frm">
         <label class="mr-4">Опишіть, як Ви будете використовувати та повертати займ.<br />Це збільшить довіру інвесторів
           та пришвидшить збір запрошеної Вами суми. </label>
         <div class="row"><textarea maxlength="600" formControlName="description"></textarea> <span class="form-help">{{dataForm.controls['description'].value.length}}/600</span>

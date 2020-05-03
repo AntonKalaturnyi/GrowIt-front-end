@@ -31,7 +31,7 @@ export class UserService {
         if (localStorage.getItem('BORROWER_ON_CHECK')) {
           this.router.navigateByUrl('borrower-cabinet');
         }
-        if (localStorage.getItem('INVESTOR')) {
+        if (localStorage.getItem('INVESTOR') || localStorage.getItem('REGISTERED_INVESTOR')) {
           this.router.navigateByUrl('investor-cabinet');
         }
         this.alertService.successMessage('Well done!', 'You have successfully logged in.');

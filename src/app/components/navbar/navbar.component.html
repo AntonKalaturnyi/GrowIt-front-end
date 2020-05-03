@@ -2,30 +2,24 @@
   <mat-toolbar-row>
     <span>GrowIt</span>
 
-    <div *ngIf="permissionService.investorPermission()" class="right-con row">
-      <div class=""> <button [routerLink]="['/dashboard']" class="btn btn-outline-info" type="button">Dashboard</button>
+    <div *ngIf="permissionService.registeredInvestorPermission()" class="right-con row">
+      <div class=""> <button [routerLink]="['/dashboard']" mat-button type="button">Dashboard</button>
       </div>
-      <div class="ml-2"> <button [routerLink]="['/investor-cabinet']" class="btn btn-outline-info" type="button">My
-          cabinet</button></div>
-      <div class="ml-2"> <button (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary"
+      <div class="ml-2"> <button [routerLink]="['/investor-cabinet']" mat-button type="button">My cabinet</button></div>
+      <div class="ml-2"> <button (click)="logOut()" [routerLink]="['/login']" mat-button
           type="button">Log out</button></div>
     </div>
 
-    <div
-      [hidden]="permissionService.borrowerOnCheckPermission() || permissionService.investorPermission() || !permissionService.registeredUserPermission()"
-      class="right-con mr-2 row">
-      <button class="right-con" [routerLink]="['/new-borrower']" class="btn btn-outline-info"
-        type="button">Register</button>
-    </div>
-
-    <div class="right-borr-nav row" [hidden]="!permissionService.borrowerOnCheckPermission()">
-      <button [routerLink]="['/borrower-cabinet']" class="btn btn-outline-secondary" type="button">Cabinet</button>
-      <div class="ml-2"><button (click)="logOut()" [routerLink]="['/login']" class="btn btn-outline-secondary"
-          type="button">Log out</button></div>
+    <div [hidden]="permissionService.registeredInvestorPermission() || permissionService.emptyStorage()" class="right-bor-btns row">
+      <div class="ml-2"> <button mat-button [routerLink]="['/calculator']" type="button">Calculator</button></div>
+      <div [hidden]="permissionService.borrowerOnCheckPermission()" class="ml-2"> <button [routerLink]="['/new-borrower']" mat-button type="button">Register</button></div>
+      <div class="ml-2"> <button mat-button [routerLink]="['/borrower-cabinet']" type="button">My cabinet</button></div>
+        <div class="ml-2"><button (click)="logOut()" [routerLink]="['/login']" mat-button type="button">Log out</button></div>
     </div>
 
 
-    <div class="right-login" [hidden]="permissionService.registeredUserPermission()">
+
+    <div class="right-login" [hidden]="permissionService.registeredBorrowerPermission() || permissionService.registeredInvestorPermission() || permissionService.borrowerOnCheckPermission()">
       <a routerLink="login" routerLinkActive="active">Login</a>
     </div>
   </mat-toolbar-row>

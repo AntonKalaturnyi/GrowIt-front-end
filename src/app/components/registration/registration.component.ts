@@ -45,7 +45,7 @@ login(creds: Creds, urlToGo: string) {
       if (form.accountType === 'Borrower') {
         this.userService.registerBorrower(this.creds).subscribe(data => {
           this.alertService.successMessage('User successfully created', 'SignUp');
-          this.login(this.creds, 'new-loan/calculator');
+          this.login(this.creds, 'calculator');
         }, error => {
           console.log(error);
           this.alertService.errorMessage(error.error.message, 'Invalid input');

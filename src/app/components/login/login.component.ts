@@ -34,14 +34,6 @@ creds: Creds;
     localStorage.clear();
     this.userService.authUser(this.creds);
 
-    // if (this.permissionService.registeredUserPermission() && !this.permissionService.investorPermission()) {
-    //   this.router.navigateByUrl('new-borrower');
-    // }
-
-    // if (this.permissionService.investorPermission()) {
-    //   this.router.navigateByUrl('dashboard');
-    // }
-
   }
 
   toSignUp() {
