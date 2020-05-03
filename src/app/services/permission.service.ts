@@ -20,10 +20,28 @@ export class PermissionService {
     } else {
     return false;
     }
+  } 
+
+
+  registeredInvestorPermission(): boolean {
+    if (localStorage.getItem('REGISTERED_INVESTOR')) {
+      return true;
+    } else {
+    return false;
+    }
   }
 
   investorPermission(): boolean {
     if (localStorage.getItem('INVESTOR')) {
+      return true;
+    } else {
+    return false;
+    }
+  }
+
+
+  registeredBorrowerPermission(): boolean {
+    if (localStorage.getItem('REGISTERED_BORROWER')) {
       return true;
     } else {
     return false;
@@ -45,6 +63,15 @@ export class PermissionService {
     return false;
     }
   }
+
+  emptyStorage(): boolean {
+    if (  localStorage.length < 1) {
+      return true;
+    } else {
+    return false;
+    }
+  }
+
 
   public getTokenHeader(): HttpHeaders {
     if (((Number.parseInt(localStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) < 0 ) {  // fix: when remove +3600000 it disturbs the request and red in console

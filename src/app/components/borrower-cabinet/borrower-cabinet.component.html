@@ -1,4 +1,4 @@
-<div *ngIf="this.permissionService.borrowerOnCheckPermission() else accessDenied" class="form"> 
+<div *ngIf="this.permissionService.borrowerOnCheckPermission() || permissionService.registeredBorrowerPermission() else accessDenied" class="form"> 
 <!-- to be changed: should be verifiedBorrowerPermission() when VerificationComponent is up -->
 <h3>borrower-cabinet works!</h3><br>
 
