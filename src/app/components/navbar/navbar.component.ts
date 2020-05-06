@@ -11,6 +11,6 @@ export class NavbarComponent {
     constructor(public permissionService: PermissionService) { }
 
     logOut() {
-      localStorage.clear();
+      sessionStorage.clear();
     }
 }

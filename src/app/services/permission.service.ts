@@ -15,7 +15,7 @@ export class PermissionService {
   constructor(private http: HttpClient, private userService: UserService, private router: Router) { }
 
   registeredUserPermission(): boolean {
-    if (localStorage.getItem('REGISTERED_USER')) {
+    if (sessionStorage.getItem('REGISTERED_USER')) {
       return true;
     } else {
     return false;
@@ -24,7 +24,7 @@ export class PermissionService {
 
 
   registeredInvestorPermission(): boolean {
-    if (localStorage.getItem('REGISTERED_INVESTOR')) {
+    if (sessionStorage.getItem('REGISTERED_INVESTOR')) {
       return true;
     } else {
     return false;
@@ -32,7 +32,7 @@ export class PermissionService {
   }
 
   investorPermission(): boolean {
-    if (localStorage.getItem('INVESTOR')) {
+    if (sessionStorage.getItem('INVESTOR')) {
       return true;
     } else {
     return false;
@@ -41,7 +41,7 @@ export class PermissionService {
 
 
   registeredBorrowerPermission(): boolean {
-    if (localStorage.getItem('REGISTERED_BORROWER')) {
+    if (sessionStorage.getItem('REGISTERED_BORROWER')) {
       return true;
     } else {
     return false;
@@ -49,7 +49,7 @@ export class PermissionService {
   }
 
   borrowerOnCheckPermission(): boolean {
-    if (localStorage.getItem('BORROWER_ON_CHECK')) {
+    if (sessionStorage.getItem('BORROWER_ON_CHECK')) {
       return true;
     } else {
     return false;
@@ -57,7 +57,7 @@ export class PermissionService {
   }
 
   verifiedBorrowerPermission(): boolean {
-    if (localStorage.getItem('VERIFIED_BORROWER')) {
+    if (sessionStorage.getItem('VERIFIED_BORROWER')) {
       return true;
     } else {
     return false;
@@ -65,7 +65,7 @@ export class PermissionService {
   }
 
   emptyStorage(): boolean {
-    if (  localStorage.length < 1) {
+    if (  sessionStorage.length < 1) {
       return true;
     } else {
     return false;
@@ -74,19 +74,19 @@ export class PermissionService {
 
 
   public getTokenHeader(): HttpHeaders {
-    if (((Number.parseInt(localStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) < 0 ) {  // fix: when remove +3600000 it disturbs the request and red in console
-      localStorage.clear();
+    if (((Number.parseInt(sessionStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) < 0 ) {  // fix: when remove +3600000 it disturbs the request and red in console
+      sessionStorage.clear();
       this.router.navigateByUrl('/login');
     }
     let headers = new HttpHeaders();
-    const token = localStorage.getItem('token');
-    if ( ((Number.parseInt(localStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) <= 1800000 ) {
+    const token = sessionStorage.getItem('token');
+    if ( ((Number.parseInt(sessionStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) <= 1800000 ) {
         const creds = new Creds();
-        creds.username = localStorage.getItem('email');
-        creds.password = CryptoJS.AES.decrypt(localStorage.getItem('password'), 'baf387t8ft83fvb83').toString(CryptoJS.enc.Utf8);
+        creds.username = sessionStorage.getItem('email');
+        creds.password = CryptoJS.AES.decrypt(sessionStorage.getItem('password'), 'baf387t8ft83fvb83').toString(CryptoJS.enc.Utf8);
         this.userService.authUser(creds);
       }
-    return headers = headers.append('authorization', 'Bearer ' + localStorage.getItem('token'));
+    return headers = headers.append('authorization', 'Bearer ' + sessionStorage.getItem('token'));
   }
 
   public errorHandler(error: HttpErrorResponse) {

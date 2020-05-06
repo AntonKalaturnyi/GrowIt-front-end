@@ -24,7 +24,7 @@ export class BorrowerCabinetComponent implements OnInit {
               private router: Router, public permissionService: PermissionService, private cabinetService: BorrowerCabinetService) { }
 
   availableBalance: number;
-  dailyRate: number;
+  dailyRate: string;
   rank: string;
   score: string;
   status: string;

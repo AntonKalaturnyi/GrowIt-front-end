@@ -20,23 +20,23 @@ export class UserService {
 
   public authUser(creds: Creds) {
     this.http.post<AuthResponse>('http://localhost:8080/GrowIt/auth/signin', creds).subscribe(data => {
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('token', data.token);
         data.roles.forEach(element => {
           console.log('ROLE: ' + element);
-          localStorage.setItem(element, 'true');
+          sessionStorage.setItem(element, 'true');
         });
-        localStorage.setItem('password', CryptoJS.AES.encrypt(creds.password, 'baf387t8ft83fvb83').toString() );
-        localStorage.setItem('email', data.username);
-        localStorage.setItem('tokenReceivedAt', new Date().getTime() + '');
-        if (localStorage.getItem('BORROWER_ON_CHECK')) {
+        sessionStorage.setItem('password', CryptoJS.AES.encrypt(creds.password, 'baf387t8ft83fvb83').toString() );
+        sessionStorage.setItem('email', data.username);
+        sessionStorage.setItem('tokenReceivedAt', new Date().getTime() + '');
+        if (sessionStorage.getItem('BORROWER_ON_CHECK')) {
           this.router.navigateByUrl('borrower-cabinet');
         }
-        if (localStorage.getItem('INVESTOR') || localStorage.getItem('REGISTERED_INVESTOR')) {
+        if (sessionStorage.getItem('INVESTOR') || sessionStorage.getItem('REGISTERED_INVESTOR')) {
           this.router.navigateByUrl('investor-cabinet');
         }
         this.alertService.successMessage('Well done!', 'You have successfully logged in.');
       }, error => {
-        localStorage.clear();
+        sessionStorage.clear();
         this.errorMessage = error;
         this.alertService.timeoutError('Password or email is incorrect', 'Bad credantials', 4200);
       });
@@ -106,14 +106,14 @@ export class UserService {
 
   public getTokenHeader(): HttpHeaders {
     let headers = new HttpHeaders();
-    const token = localStorage.getItem('token');
-    if ( ((Number.parseInt(localStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) <= 600000) {
+    const token = sessionStorage.getItem('token');
+    if ( ((Number.parseInt(sessionStorage.getItem('tokenReceivedAt')) + 3600000) - new Date().getTime()) <= 600000) {
         const creds = new Creds();
-        creds.username = localStorage.getItem('email');
-        creds.password = localStorage.getItem('password');
+        creds.username = sessionStorage.getItem('email');
+        creds.password = sessionStorage.getItem('password');
         this.authUser(creds);
       }
-    return headers = headers.append('authorization', 'Bearer ' + localStorage.getItem('token'));
+    return headers = headers.append('authorization', 'Bearer ' + sessionStorage.getItem('token'));
   }
 }
 

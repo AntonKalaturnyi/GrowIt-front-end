@@ -27,7 +27,7 @@ genders: string[] = ['Male', 'Female'];
       gender:  ['', [Validators.required]],
       birthday:  ['', [Validators.required]],
       phone:  ['', [Validators.required, Validators.pattern('^([5-9][0-9]\\d{7})$')]],
-      email: localStorage.getItem('email')
+      email: sessionStorage.getItem('email')
     });
 
     this.codeForm = new FormGroup({
