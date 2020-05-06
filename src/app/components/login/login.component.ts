@@ -31,7 +31,7 @@ creds: Creds;
     this.creds = new Creds();
     this.creds.username = form.email;
     this.creds.password = form.password;
-    localStorage.clear();
+    sessionStorage.clear();
     this.userService.authUser(this.creds);
 
   }

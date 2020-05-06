@@ -46,7 +46,7 @@ export class InvestorPassportFillComponent implements OnInit {
       this.dto.paperPassSeries = form.paperPassSeries;
       this.dto.paperPassNumber = form.paperPassNumber;
     }
-    this.dto.email = localStorage.getItem('email');
+    this.dto.email = sessionStorage.getItem('email');
     this.dto.issuer = form.issuerRegion + ' МВ ' + form.issuerName + ' в ' + form.issuerLocationRegion + ' області';
     this.dto.issueDate = JSON.stringify(form.issueDate).replace('Z', '').replace('"', '').replace('"', '').replace('T', ' ');
     this.dto.itnNumber = form.itnNumber;
