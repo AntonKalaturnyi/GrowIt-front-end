@@ -36,7 +36,7 @@ export class BorrowerPassportFillComponent implements OnInit {
       issuerName: ['', [Validators.required]],
       issuerLocationRegion: ['', [Validators.required]],
       region: ['', [Validators.required]],
-      district: ['', [Validators.required]],
+      district: [''],
       postalCode: ['', [Validators.required, Validators.pattern('^\\d{5}')]],
       settlement: ['', [Validators.required]],
       street: ['', [Validators.required]],

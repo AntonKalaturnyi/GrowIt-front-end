@@ -1,6 +1,6 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>GrowIt</span>
+    <span><img src="assets/Logo_growIT.svg" ></span>
 
     <div *ngIf="permissionService.registeredInvestorPermission()" class="right-con row">
       <div class=""> <button [routerLink]="['/dashboard']" mat-button type="button">Dashboard</button>
@@ -10,9 +10,9 @@
           type="button">Log out</button></div>
     </div>
 
-    <div [hidden]="permissionService.registeredInvestorPermission() || permissionService.emptyStorage()" class="right-bor-btns row">
-      <div class="ml-2"> <button mat-button [routerLink]="['/calculator']" type="button">Calculator</button></div>
+    <div [hidden]="permissionService.registeredInvestorPermission() || permissionService.emptyStorage()"  [ngClass]="(this.permissionService.borrowerOnCheckPermission())?'right-bor-btns':'right-reg-btns'" class="row">
       <div [hidden]="permissionService.borrowerOnCheckPermission()" class="ml-2"> <button [routerLink]="['/new-borrower']" mat-button type="button">Register</button></div>
+      <div class="ml-2"> <button mat-button [routerLink]="['/calculator']" type="button">Calculator</button></div>
       <div class="ml-2"> <button mat-button [routerLink]="['/borrower-cabinet']" type="button">My cabinet</button></div>
         <div class="ml-2"><button (click)="logOut()" [routerLink]="['/login']" mat-button type="button">Log out</button></div>
     </div>

@@ -31,6 +31,11 @@ export class UserService {
         if (sessionStorage.getItem('BORROWER_ON_CHECK')) {
           this.router.navigateByUrl('borrower-cabinet');
         }
+
+        if (sessionStorage.getItem('REGISTERED_BORROWER') && !sessionStorage.getItem('BORROWER_ON_CHECK')) {
+          this.router.navigateByUrl('new-borrower');
+        }
+
         if (sessionStorage.getItem('INVESTOR') || sessionStorage.getItem('REGISTERED_INVESTOR')) {
           this.router.navigateByUrl('investor-cabinet');
         }

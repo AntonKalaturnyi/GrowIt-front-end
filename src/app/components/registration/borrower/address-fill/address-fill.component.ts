@@ -29,12 +29,12 @@ export class AddressFillComponent implements OnInit {
   ];
 
   constructor(public permissionService: PermissionService, private formBuilder: FormBuilder, private alertService: AlertService,
-              private userService: UserService, private dataService: PrevDataService, private router: Router) {
+    private userService: UserService, private dataService: PrevDataService, private router: Router) {
     this.dataForm = this.formBuilder.group({
       sameAddressInPassport: [''],
       region: ['', [Validators.required]],
       district: [''],
-      postalCode: ['', [Validators.required]],
+      postalCode: ['', [Validators.required, Validators.pattern('^\\d{5}')]],
       settlement: ['', [Validators.required]],
       street: ['', [Validators.required]],
       number: ['', [Validators.required]],
@@ -49,16 +49,16 @@ export class AddressFillComponent implements OnInit {
     this.dataService.getBorrowerAddressData().subscribe(data => {
       this.addrData = data;
       if (data.settlement !== null) {
-      this.dataForm.controls.sameAddressInPassport.setValue(this.addrData.sameAddressInPassport === null ? false : this.addrData.sameAddressInPassport);
-      this.dataForm.controls.region.setValue(this.addrData.region);
-      this.dataForm.controls.district.setValue(this.addrData.district);
-      this.dataForm.controls.postalCode.setValue(this.addrData.postalCode);
-      this.dataForm.controls.settlement.setValue(this.addrData.settlement);
-      this.dataForm.controls.street.setValue(this.addrData.street);
-      this.dataForm.controls.number.setValue(this.addrData.number);
-      this.dataForm.controls.corpsNo.setValue(this.addrData.corpsNo);
-      this.dataForm.controls.door.setValue(this.addrData.door);
-      this.dataForm.controls.homeType.setValue(this.addrData.homeType);
+        this.dataForm.controls.sameAddressInPassport.setValue(this.addrData.sameAddressInPassport === null ? false : this.addrData.sameAddressInPassport);
+        this.dataForm.controls.region.setValue(this.addrData.region);
+        this.dataForm.controls.district.setValue(this.addrData.district);
+        this.dataForm.controls.postalCode.setValue(this.addrData.postalCode);
+        this.dataForm.controls.settlement.setValue(this.addrData.settlement);
+        this.dataForm.controls.street.setValue(this.addrData.street);
+        this.dataForm.controls.number.setValue(this.addrData.number);
+        this.dataForm.controls.corpsNo.setValue(this.addrData.corpsNo);
+        this.dataForm.controls.door.setValue(this.addrData.door);
+        this.dataForm.controls.homeType.setValue(this.addrData.homeType);
       }
     });
     this.dataService.getWhichSectionsFilledData().subscribe(data => {
@@ -66,6 +66,33 @@ export class AddressFillComponent implements OnInit {
     });
   }
 
+  toggleAutofill(bit: boolean) {
+
+    if (bit) {
+      this.dataService.getBorrowerAddressFromPassword().subscribe(data => {
+          this.dataForm.controls.region.setValue(data.region);
+          this.dataForm.controls.district.setValue(data.district);
+          this.dataForm.controls.postalCode.setValue(data.postalCode);
+          this.dataForm.controls.settlement.setValue(data.settlement);
+          this.dataForm.controls.street.setValue(data.street);
+          this.dataForm.controls.number.setValue(data.number);
+          this.dataForm.controls.corpsNo.setValue(data.corpsNo);
+          this.dataForm.controls.door.setValue(data.door);
+      });
+
+    } else {
+
+      this.dataForm.controls.region.setValue(null);
+      this.dataForm.controls.district.setValue(null);
+      this.dataForm.controls.postalCode.setValue(null);
+      this.dataForm.controls.settlement.setValue(null);
+      this.dataForm.controls.street.setValue(null);
+      this.dataForm.controls.number.setValue(null);
+      this.dataForm.controls.corpsNo.setValue(null);
+      this.dataForm.controls.door.setValue(null);
+
+    }
+  }
 
   goBack() {
     this.router.navigateByUrl('borrower/fill-passport');

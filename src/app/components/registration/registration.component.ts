@@ -60,7 +60,7 @@ login(creds: Creds, urlToGo: string) {
       });
     }
   } else {
-    this.alertService.errorMessage(' enter valid username and password ', 'Invalid input');
+    this.alertService.errorMessage(' Please pick account type. Also enter valid username and password ', 'Invalid input');
   }
   }
 
