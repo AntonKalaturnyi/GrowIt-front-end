@@ -36,6 +36,11 @@ creds: Creds;
 
   }
 
+  socialSignIn(service: string) {
+
+    
+  }
+
   toSignUp() {
     this.router.navigateByUrl('/home/signup');
   }

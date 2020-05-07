@@ -38,6 +38,13 @@ export class PrevDataService {
     .pipe(catchError(this.permissionService.errorHandler));
   }
 
+
+  getBorrowerAddressFromPassword(): Observable<any> {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.get<any>('http://localhost:8080/GrowIt/borrower/passport-address-data', { headers })
+    .pipe(catchError(this.permissionService.errorHandler));
+  }
+
   getBorrowerEmploymentData(): Observable<BorrowerEmploymentData> {
     const headers = this.permissionService.getTokenHeader();
     return this.http.get<BorrowerEmploymentData>('http://localhost:8080/GrowIt/borrower/employment-data', { headers })

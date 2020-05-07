@@ -33,7 +33,6 @@ export class InvestorDocumentSignComponent implements OnInit {
   sendInvestments() {
     this.investService.submitInvestments(InvestorDocumentSignComponent.investments).subscribe(data => {
       this.alertService.successMessage('Інвестицію(ї) оформлено!', 'Супер');
-      // this.router.navigateByUrl('new-borrower');
       InvestorDocumentSignComponent.amount = null;
       InvestorDocumentSignComponent.profit = null;
       InvestorDocumentSignComponent.investments = null;

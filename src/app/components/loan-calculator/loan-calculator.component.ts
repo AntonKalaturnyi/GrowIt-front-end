@@ -21,7 +21,7 @@ export class LoanCalculatorComponent implements OnInit {
       amount: ['', [Validators.required]],
       period: ['', [Validators.required]],
       loanPurpose: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      description: [''],
     });
   }
 
@@ -57,10 +57,13 @@ export class LoanCalculatorComponent implements OnInit {
     step: 1
   };
 
-  //  onRangeValueChange(event: any) {
-  //    const value = event.value;
-  //    this.range = value;
-  //  }
+returnDate: Date = new Date();
+
+
+   onDateChange(numDays: number) {
+    this.returnDate = new Date();
+    this.returnDate.setDate(this.returnDate.getDate() + numDays);
+   }
 
   ngOnInit(): void {
   }

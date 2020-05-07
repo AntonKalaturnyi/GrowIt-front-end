@@ -1,17 +1,34 @@
 <div class="row">
-    <div class="my-5 col-sm-2 offset-sm-5 text-center">
-      <h2>Login page</h2>
+    <div class="my-5 col-lg-4 offset-sm-4 text-center">
+      <h2>Login</h2>
       <br>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="form-inlin justify-content-center">
         <div class="form-group row">
+          <label>Email</label>
           <input type="email" class="form-control" formControlName="email" placeholder="Email">
         </div>
         <div class="form-group row">
+          <label>Password</label>
           <input type="password" class="form-control" formControlName="password" placeholder="Password">
+          <div class="blue hov" (click)="toForgotPassword()">Forgot password?</div>
         </div>
-        <button type="submit" class="btn btn-primary">Sign in</button>
+        <button  mat-raised-button type="submit" class="">Sign in</button> <br><br>
       </form>
-      <a class="blue hov" routerLink="/register">Create User</a>
-      <div class="blue hov" (click)="toForgotPassword()">Forgot password?</div>
+        Or use<br>
+        <hr style="border-top: 1px solid #eee;">  
+                            <div class="row offset-sm-1">  
+                                <div class="col-4  mr-4">  
+                                    <button mat-flat-button color="primary" (click)="socialSignIn('facebook')" class="">  
+                                        Login with Facebook  
+                                    </button>  
+                                </div>  
+                                <div class="col-4  ml-4">  
+                                    <button mat-flat-button color="warn" (click)="socialSignIn('google')" class="">  
+                                        Login with Google  
+                                    </button>  
+                                </div>  
+                            </div>   <br>
+
+      <a class="blue hov" routerLink="/register">Don't have account? Register</a>
     </div>
   </div>

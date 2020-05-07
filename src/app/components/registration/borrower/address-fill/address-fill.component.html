@@ -6,10 +6,9 @@
     <form [formGroup]="dataForm" (ngSubmit)="submit(dataForm.value)" class="form-inlin justify-content-center">
       <div *ngIf="docsFilled" class="form-group row">
         <label class="mr-2 my-auto">Адреса проживання така ж як у паспорті</label>
-        <input class="my-auto" type="checkbox" formControlName="sameAddressInPassport" />
+        <input class="my-auto" (click)="toggleAutofill(!dataForm.controls['sameAddressInPassport'].value)" type="checkbox" formControlName="sameAddressInPassport" />
       </div>
 
-      <div *ngIf="!(!!dataForm.controls['sameAddressInPassport'].value) || !dataForm.controls['sameAddressInPassport'].value">
         <div class="form-group row">
           <label class="mr-2 my-auto">Область</label>
           <input class="col-sm-3 mr-2" type="text" formControlName="region" placeholder="область" />
@@ -33,7 +32,6 @@
           <label class="mr-2 my-auto">Кв.</label>
           <input class="col-sm-1 mr-2 ml-2" type="text" formControlName="door" placeholder="№" />
         </div>
-      </div>
 
       <div class="form-group row">
         <label class="mr-4">Тип житла</label>
@@ -46,7 +44,7 @@
       
       <button type="button" (click)="goBack()" class="btn btn-primary mr-5">Назад</button>
 
-      <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid">Далі</button>
+      <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid && !dataForm.controls['sameAddressInPassport'].value || !dataForm.controls['homeType'].value">Далі</button>
     </form>
   </div>
 </div>
