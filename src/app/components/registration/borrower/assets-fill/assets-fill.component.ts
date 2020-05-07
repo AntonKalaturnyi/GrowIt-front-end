@@ -62,7 +62,7 @@ export class AssetsFillComponent implements OnInit {
 
     this.userService.saveBorrowerAssets(form).subscribe(data => {
       this.alertService.successMessage('Реєстрацію завершено!', 'Супер');
-      this.router.navigateByUrl('new-borrower');
+      this.dataService.moveToUnfilledPage();
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Invalid input');

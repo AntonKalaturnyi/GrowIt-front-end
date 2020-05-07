@@ -106,7 +106,7 @@ export class AddressFillComponent implements OnInit {
     }
     this.userService.saveBorrowerAddress(form).subscribe(data => {
       this.alertService.successMessage('Адресу успішно збережено!', 'Супер');
-      this.router.navigateByUrl('borrower/fill-employment');
+      this.dataService.moveToUnfilledPage();
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Invalid input');

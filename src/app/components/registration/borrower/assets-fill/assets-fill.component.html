@@ -60,7 +60,7 @@
     <button type="button" (click)="goBack()" class="btn btn-primary mr-5">Назад</button>
 
     <button type="submit" class="btn btn-primary mx-auto"
-    [disabled]="(dataForm.controls['hasCar'].value === 'Так' && dataForm.controls['carAge'].value === null) || !dataForm.valid">Відправити</button>
+    [disabled]="(dataForm.controls['hasCar'].value === 'Так' && !(!!(dataForm.controls['carAge'].value))) || !dataForm.valid">Відправити</button>
   </form>
 </div>
 </div>

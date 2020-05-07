@@ -73,7 +73,7 @@ export class EducationFillComponent implements OnInit {
   submit(form) {
     this.userService.saveBorrowerEducation(form).subscribe(data => {
       this.alertService.successMessage('Дані про освіту збережені!', 'Супер');
-      this.router.navigateByUrl('borrower/fill-assets');
+      this.dataService.moveToUnfilledPage();
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Invalid input');

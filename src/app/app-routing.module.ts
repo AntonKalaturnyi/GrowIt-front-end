@@ -15,6 +15,7 @@ import { LoanCalculatorComponent } from './components/loan-calculator/loan-calcu
 import { AssetsFillComponent } from './components/registration/borrower/assets-fill/assets-fill.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InvestorDocumentSignComponent } from './components/investor-document-sign/investor-document-sign.component';
+import { VerificationWaitComponent } from './components/verification-wait/verification-wait.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,9 +30,9 @@ const routes: Routes = [
   { path: 'borrower/fill-employment', component: EmploymentFillComponent },
   { path: 'borrower/fill-education', component: EducationFillComponent },
   { path: 'calculator', component: LoanCalculatorComponent },
-  { path: 'borrower/fill-education', component: EducationFillComponent },
   { path: 'borrower/fill-assets', component: AssetsFillComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'verification', component: VerificationWaitComponent },
   { path: 'i/contract-sign', component: InvestorDocumentSignComponent }
 ];
 
