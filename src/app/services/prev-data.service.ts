@@ -10,18 +10,56 @@ import { BorrowerEducationData } from '../model/BorrowerEducationData';
 import { PermissionService } from './permission.service';
 import { AssetsDataDto } from '../components/registration/borrower/assets-fill/assets-fill.component';
 import { SectionsFilledData } from '../components/registration/borrower/reg-nav-panel/reg-nav-panel.component';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PrevDataService {
 
-  constructor(private http: HttpClient, private permissionService: PermissionService) { }
+  constructor(private http: HttpClient, private permissionService: PermissionService, private router: Router) { }
 
   getBorrowerRegInputData(): Observable<BorrowerRegData> {
     const headers = this.permissionService.getTokenHeader();
     return this.http.get<BorrowerRegData>('http://localhost:8080/GrowIt/borrower/reg-data', { headers })
     .pipe(catchError(this.permissionService.errorHandler));
+  }
+
+  // isAllFilled() {
+  //   return  sessionStorage.getItem('assetsFilled') && 
+  //   sessionStorage.getItem('educationFilled') && 
+  //   sessionStorage.getItem('employmentFilled') && 
+  //   sessionStorage.getItem('addressFilled') && 
+  //   sessionStorage.getItem('docsFilled') && 
+  //   sessionStorage.getItem('personalFilled') ;
+  // }
+
+  moveToUnfilledPage() {
+    if (!sessionStorage.getItem('personalFilled')) {
+      this.router.navigateByUrl('new-borrower');
+      return;
+    }
+    if (!sessionStorage.getItem('docsFilled')) {
+      this.router.navigateByUrl('borrower/fill-passport');
+      return;
+    }
+    if (!sessionStorage.getItem('addressFilled')) {
+      this.router.navigateByUrl('borrower/fill-address');
+      return;
+    }
+    if (!sessionStorage.getItem('employmentFilled')) {
+      this.router.navigateByUrl('borrower/fill-employment');
+      return;
+    }
+    if (!sessionStorage.getItem('educationFilled')) {
+      this.router.navigateByUrl('borrower/fill-education');
+      return;
+    }
+    if (!sessionStorage.getItem('assetsFilled')) {
+      this.router.navigateByUrl('borrower/fill-assets');
+      return;
+    }
+
   }
 
 
