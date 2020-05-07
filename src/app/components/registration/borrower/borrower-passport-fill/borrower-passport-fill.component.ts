@@ -122,7 +122,7 @@ export class BorrowerPassportFillComponent implements OnInit {
 
     this.userService.saveBorrowerPassportAndItn(this.formData).subscribe(data => {
       this.alertService.successMessage('Документи успішно збережено!', 'Супер');
-      this.router.navigateByUrl('borrower/fill-address');
+      this.dataService.moveToUnfilledPage();
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Invalid input');

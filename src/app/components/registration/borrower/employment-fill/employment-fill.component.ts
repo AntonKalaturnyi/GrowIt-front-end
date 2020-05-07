@@ -20,7 +20,7 @@ export class EmploymentFillComponent implements OnInit {
     'Повна зайнятість', 'Часткова зайнятість',
     'Підприємець', 'Студент', 'Зайнятий студент',
     'Пенсіонер', 'Зайнятий пенсіонер',
-    'Тимчасово не працюю', 'Робота за кордоном/сезонна',
+    'Тимчасово безробітний', 'Робота за кордоном/сезонна',
     'Самозайнята особа', 'Декрента відпустка'];
 
   workSpheres: string[] = [
@@ -43,19 +43,26 @@ export class EmploymentFillComponent implements OnInit {
     'Раз у 3 тижні', 'Раз у місяць',
     'Рідше разу в місяць'];
 
+    unemployed: string[] = [
+      'менше 1 місяця', '1-3 місяці',
+      '3-6 місяців', 'більше 6 місяців'];
+
   sources: string[] = [
-    'Фінансова(соціальна) допомога',
+    'Фінансова (державна) допомога',
     'Інша робота (підробіток)',
     'Продаж цінних паперів',
     'Кредити, позики',
     'Орендний дохід',
     'Депозити, інші вклади',
     'Страхові виплати',
+    'Гранти / державні програми',
     'Стипендія',
+    'Підтримка родичів / близьких',
+
     'Інший дохід'];
 
     relations1: string[] = [
-      'Начальник', 'Менеджер', 'Колега'];
+      'Начальник', 'Менеджер', 'Колега', 'Партнер'];
 
       relations2: string[] = [
         'Начальник', 'Менеджер', 'Колега', 'Родич', 'Друг'];
@@ -69,6 +76,7 @@ export class EmploymentFillComponent implements OnInit {
       workSphere: [''],
       lengthOfTotalEmploymentMo: [''],
       lengthOfCurrentEmploymentMo: [''],
+      termOfUnemployment: [''],
       employerCount: [''],
       monthlyIncomeOfficial: [''],
       monthlyIncomeAdditional: [''],
@@ -129,7 +137,7 @@ export class EmploymentFillComponent implements OnInit {
     form.contactPerson2phone = '+380' + form.contactPerson2phone;
     this.userService.saveBorrowerEmployment(form).subscribe(data => {
       this.alertService.successMessage('Залишилось лише 2 кроки!', 'Супер');
-      this.router.navigateByUrl('borrower/fill-education');
+      this.dataService.moveToUnfilledPage();
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Invalid input');

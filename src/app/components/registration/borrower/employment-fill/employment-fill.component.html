@@ -18,7 +18,7 @@
 
             <div class="form-group row">
                 <div
-                    *ngIf="dataForm.controls['socialStatus'].value !== 'Студент' && dataForm.controls['socialStatus'].value !== 'Пенсіонер' && dataForm.controls['socialStatus'].value !== 'Зайнятий пенсіонер'">
+                    *ngIf="dataForm.controls['socialStatus'].value !== 'Студент' && dataForm.controls['socialStatus'].value !== 'Пенсіонер'">
                     <label class="mr-4">Сфера зайнятості</label>
                     <mat-form-field>
                         <select class="border border-dark ml-1" formControlName="workSphere" matNativeControl>
@@ -28,6 +28,17 @@
                         </select>
                     </mat-form-field>
                 </div>
+
+                <div *ngIf="dataForm.controls['socialStatus'].value === 'Тимчасово безробітний'">
+                <label class="mr-4">Період безробіття</label>
+                <mat-form-field>
+                    <select class="border border-dark ml-1" formControlName="termOfUnemployment" matNativeControl>
+                        <option selected type="text" *ngFor="let term of unemployed" value="{{term}}">
+                            {{term}}
+                        </option>
+                    </select>
+                </mat-form-field>
+            </div>
 
                 <div
                     *ngIf="dataForm.controls['socialStatus'].value === 'Студент' || dataForm.controls['socialStatus'].value === 'Зайнятий студент'">
@@ -42,11 +53,11 @@
                 </div>
             </div>
 
-            <div *ngIf="(dataForm.controls['socialStatus'].value !== 'Підприємець')" class="form-group row">
-                <label class="mr-3 my-auto">Загальний стаж роботи</label>
+            <div class="form-group row">
+                <label class="mr-3 my-auto">Загальний трудовий стаж</label>
                 <input class="col-sm-1" type="text" formControlName="lengthOfTotalEmploymentMo" placeholder="місяців" />
 
-                <label class="mr-2 ml-3 my-auto">Стаж роботи на поточному місці</label>
+                <label class="mr-2 ml-3 my-auto">Стаж роботи на поточному (останньому) місці</label>
                 <input class="col-sm-1 mr-2" type="text" formControlName="lengthOfCurrentEmploymentMo"
                     placeholder="місяців" />
 
@@ -109,10 +120,10 @@
             </div>
 
             <div class="form-group row">
-                <label class="mr-2 my-auto">Місячні витрати</label>
+                <label class="mr-2 my-auto">Щомісячні витрати</label>
                 <input class="col-sm-2 mr-2" type="text" formControlName="monthlyExpenses" placeholder="грн/міс" />
 
-                <label class="mr-2 ml-3 my-auto">Місячні боргові зобов'язання</label>
+                <label class="mr-2 ml-3 my-auto">Щомісячні боргові зобов'язання</label>
                 <input class="col-sm-2 mr-2" type="text" formControlName="monthlyObligations" placeholder="грн/міс" />
             </div>
             <br><span class="">Контактні особи</span><br /><br />
