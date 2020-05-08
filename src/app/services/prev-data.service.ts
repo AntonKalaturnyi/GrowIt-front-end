@@ -34,6 +34,19 @@ export class PrevDataService {
   //   sessionStorage.getItem('personalFilled') ;
   // }
 
+  updateFilledInfo() {
+    this.getWhichSectionsFilledData().subscribe(data => {
+      data.personalFilled ? sessionStorage.setItem('personalFilled', data.personalFilled.toString()) : console.log();
+      data.docsFilled ? sessionStorage.setItem('docsFilled', data.docsFilled.toString()) : console.log();
+      data.addressFilled ? sessionStorage.setItem('addressFilled', data.addressFilled.toString()) : console.log();
+      data.employmentFilled ? sessionStorage.setItem('employmentFilled', data.employmentFilled.toString()) : console.log();
+      data.educationFilled ? sessionStorage.setItem('educationFilled', data.educationFilled.toString()) : console.log();
+      data.assetsFilled ? sessionStorage.setItem('assetsFilled', data.assetsFilled.toString()) : console.log();
+      this.moveToUnfilledPage();
+    });
+
+  }
+
   moveToUnfilledPage() {
     if (!sessionStorage.getItem('personalFilled')) {
       this.router.navigateByUrl('new-borrower');
@@ -59,7 +72,7 @@ export class PrevDataService {
       this.router.navigateByUrl('borrower/fill-assets');
       return;
     }
-
+    this.router.navigateByUrl('new-borrower');
   }
 
 

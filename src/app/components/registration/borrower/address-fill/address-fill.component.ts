@@ -100,13 +100,13 @@ export class AddressFillComponent implements OnInit {
 
 
   submit(form) {
-    console.log("SAME_" + form.sameAddressInPassport);
     if (form.sameAddressInPassport == null || form.sameAddressInPassport === '') {
       form.sameAddressInPassport = false;
     }
     this.userService.saveBorrowerAddress(form).subscribe(data => {
+      this.dataService.updateFilledInfo();
       this.alertService.successMessage('Адресу успішно збережено!', 'Супер');
-      this.dataService.moveToUnfilledPage();
+      // this.dataService.moveToUnfilledPage();
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Invalid input');

@@ -89,7 +89,9 @@ export class BorrowerRegComponent implements OnInit {
   next(form) {
     console.log('NEXT.code = ' + form.code);
     if (form.code === this.serverCode) {
-      this.dataService.moveToUnfilledPage();
+      // this.dataService.moveToUnfilledPage();
+      this.dataService.updateFilledInfo();
+
     } else {
       this.alertService.errorMessage('Please try again', 'SMS code is incorrect');
     }
