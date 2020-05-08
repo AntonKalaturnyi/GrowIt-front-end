@@ -22,21 +22,21 @@ export class RegNavPanelComponent implements OnInit {
       this.personalFilled = data.personalFilled;
       this.personalFilled ? sessionStorage.setItem('personalFilled', data.personalFilled.toString()) : console.log();
       this.docsFilled = data.docsFilled;
-      this.docsFilled ? sessionStorage.setItem('docsFilled', data.personalFilled.toString()) : console.log();
+      this.docsFilled ? sessionStorage.setItem('docsFilled', data.docsFilled.toString()) : console.log();
       this.addressFilled = data.addressFilled;
-      this.addressFilled ? sessionStorage.setItem('addressFilled', data.personalFilled.toString()) : console.log();
+      this.addressFilled ? sessionStorage.setItem('addressFilled', data.addressFilled.toString()) : console.log();
       this.employmentFilled = data.employmentFilled;
-      this.employmentFilled ? sessionStorage.setItem('employmentFilled', data.personalFilled.toString()) : console.log();
+      this.employmentFilled ? sessionStorage.setItem('employmentFilled', data.employmentFilled.toString()) : console.log();
       this.educationFilled = data.educationFilled;
-      this.educationFilled ? sessionStorage.setItem('educationFilled', data.personalFilled.toString()) : console.log();
+      this.educationFilled ? sessionStorage.setItem('educationFilled', data.educationFilled.toString()) : console.log();
       this.assetsFilled = data.assetsFilled;
-      this.assetsFilled ? sessionStorage.setItem('assetsFilled', data.personalFilled.toString()) : console.log();
+      this.assetsFilled ? sessionStorage.setItem('assetsFilled', data.assetsFilled.toString()) : console.log();
     });
   }
 
   toCabinet() {
     sessionStorage.setItem('BORROWER_ON_CHECK', 'true');
-    this.router.navigateByUrl('verification');
+    this.router.navigateByUrl('borrower-cabinet');
   }
 }
 

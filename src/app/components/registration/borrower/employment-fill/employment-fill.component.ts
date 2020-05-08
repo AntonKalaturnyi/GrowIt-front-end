@@ -25,10 +25,10 @@ export class EmploymentFillComponent implements OnInit {
 
   workSpheres: string[] = [
     'Автосервіс / Транспорт / Логістика', 'Аудит / Юр. сфера / Консалтинг',
-    'Будівництво / Архітектура', 'Важка промисловість',
+    'Будівництво / Архітектура', 'Важка промисловість / Машинобудування',
     'Готелі / Ресторани / Казино', 'Оптова торгівля / Склади',
     'Державне / Місцеве управління', 'Енергетика / Нафта / Газ',
-    'Збройні сили', 'IT / Телекомунікації',
+    'Збройні сили / Оборонна промисловість', 'IT / Телекомунікації',
     'Легка промисловість', 'Медицина / Фармакологія (державна)',
     'Медицина / Фармакологія (комерційна)', 'Медіа / Видавництво / Поліграфія',
     'Поліція / Безпека / Правоохоронні органи', 'Наука',
@@ -136,8 +136,9 @@ export class EmploymentFillComponent implements OnInit {
     form.contactPerson1phone = '+380' + form.contactPerson1phone;
     form.contactPerson2phone = '+380' + form.contactPerson2phone;
     this.userService.saveBorrowerEmployment(form).subscribe(data => {
+      this.dataService.updateFilledInfo();
       this.alertService.successMessage('Залишилось лише 2 кроки!', 'Супер');
-      this.dataService.moveToUnfilledPage();
+      // this.dataService.moveToUnfilledPage();
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Invalid input');

@@ -100,9 +100,10 @@
                 <input type="text" class="form-control" formControlName="facebook" placeholder="Link to Facebook profile" />
             </div>
 
-            <button *ngIf="!moveToCode" type="submit" class="btn btn-info"
-                [disabled]="!personalInfoForm.valid">Далі</button>
+            <button *ngIf="!moveToCode" type="submit" mat-raised-button color="primary" [hidden]="!personalInfoForm.valid">Далі</button>
+
         </form>
+        <button *ngIf="!moveToCode" type="" mat-raised-button color="warn" [hidden]="personalInfoForm.valid">Далі</button>
 
         <form (ngSubmit)="next(codeForm.value)" [formGroup]="codeForm" *ngIf="moveToCode">
             <div class="form-group row my-2">
