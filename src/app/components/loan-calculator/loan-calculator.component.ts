@@ -66,6 +66,17 @@ returnDate: Date = new Date();
    }
 
   ngOnInit(): void {
+      this.loanService.getCalculatorLoan().subscribe(data => {
+        this.dataForm.controls.amount.setValue(data.amount);
+        this.dataForm.controls.period.setValue(data.period);
+        this.dataForm.controls.loanPurpose.setValue(data.loanPurpose);
+            if (this.permissionService.verifiedBorrowerPermission) {
+        this.dataForm.controls.description.setValue(data.description);
+            }
+      });
+
+
+
   }
 
 
@@ -75,8 +86,23 @@ returnDate: Date = new Date();
 
   submit(form) {
     this.loanService.saveCalculatorLoan(form).subscribe(data => {
-      this.alertService.successMessage('Залишилось додати свою інформацію!', 'Супер');
-      this.router.navigateByUrl('new-borrower');
+
+      if (sessionStorage.getItem('REGISTERED_BORROWER') && !sessionStorage.getItem('BORROWER_ON_CHECK')
+      && !sessionStorage.getItem('VERIFIED_BORROWER')) {
+        this.alertService.successMessage('Будь ласка, заповніть свою інформацію, щоб продовжити', 'Заявку на кредит створено!');
+        this.router.navigateByUrl('new-borrower');
+      }
+
+      if (sessionStorage.getItem('BORROWER_ON_CHECK') && !sessionStorage.getItem('VERIFIED_BORROWER')) {
+        this.alertService.successMessage('Будь ласка, дочекайтесь завершення верифікації, щоб продовжити', 'Заявку на кредит створено!');
+        this.router.navigateByUrl('borrower-cabinet');
+      }
+
+      if (sessionStorage.getItem(sessionStorage.getItem('VERIFIED_BORROWER'))) {
+        this.alertService.successMessage('Кредит виставлений на дашборді, та збирає фінансування', 'Заявку на кредит створено!');
+        this.router.navigateByUrl('borrower-cabinet');
+      }
+
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Помилка!');

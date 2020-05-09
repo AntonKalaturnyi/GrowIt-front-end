@@ -26,7 +26,7 @@
           </select>
         </mat-form-field>
       </div>
-      <div [hidden]="!this.permissionService.verifiedBorrowerPermission()" class="form-group frm">
+      <div *ngIf="this.permissionService.verifiedBorrowerPermission()" class="form-group frm">
         <label class="mr-4">Опишіть, як Ви будете використовувати та повертати займ.<br />Це збільшить довіру інвесторів
           та пришвидшить збір запрошеної Вами суми. </label>
         <div class="row"><textarea maxlength="600" formControlName="description"></textarea> <span class="form-help">{{dataForm.controls['description'].value.length}}/600</span>

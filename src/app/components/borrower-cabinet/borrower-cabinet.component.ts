@@ -5,6 +5,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoanService } from 'src/app/services/loan.service';
 import { Observable, of } from 'rxjs';
+import { CountdownComponent } from 'ngx-countdown';
 import { Sort, MatSort } from '@angular/material/sort';
 import { fromMatSort, fromMatPaginator, sortRows, paginateRows } from '../dashboard/datasource-utils';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
@@ -16,7 +17,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./borrower-cabinet.component.scss']
 })
 export class BorrowerCabinetComponent implements OnInit {
-
+  @ViewChild('countdown') counter: CountdownComponent;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -28,6 +29,7 @@ export class BorrowerCabinetComponent implements OnInit {
   rank: string;
   score: string;
   status: string;
+  verified: boolean;
 
   displayedRows$: Observable<PrevLoan[]>;
   totalRows$: Observable<number>;
@@ -35,6 +37,26 @@ export class BorrowerCabinetComponent implements OnInit {
   items: PrevLoan[];
 
 
+  zeroTrigger(e) {
+    if (e.action === 'done') {
+console.log('Gotcha!!!');
+this.cabinetService.toggleVerification().subscribe(data => {
+  this.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+    this.router.navigate(['/borrower-cabinet']);
+});
+});
+    }
+
+  }
+
+  resume() {
+    this.counter.resume();
+
+  }
+
+  pause() {
+    this.counter.pause();
+  }
 
   ngOnInit(): void {
     this.cabinetService.getData().subscribe(data => {
@@ -43,6 +65,11 @@ export class BorrowerCabinetComponent implements OnInit {
       this.rank = data.rank;
       this.score = data.score;
       this.status = data.status;
+      this.verified = data.verified;
+      if (this.verified) {
+        sessionStorage.setItem('VERIFIED_BORROWER', 'true');
+      }
+
     });
 
     this.loanService.getPreviousBorrowerLoans().subscribe(data => {
