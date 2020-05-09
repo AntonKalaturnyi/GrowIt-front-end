@@ -27,6 +27,7 @@ import { MatMomentDateModule, MAT_MOMENT_DATE_FORMATS } from '@angular/material-
 import { Ng5SliderModule } from 'ng5-slider';
 import { LoginComponent } from './components/login/login.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { CountdownModule } from 'ngx-countdown';
 import { HttpClientModule } from '@angular/common/http';
 import { DateRangePickerModule} from '@uiowa/date-range-picker';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -118,6 +119,7 @@ import { RegNavPanelComponent } from './components/registration/borrower/reg-nav
         preventDuplicates: true }),
     BrowserModule,
     NgxPaginationModule,
+    CountdownModule,
     LayoutModule,
     MatToolbarModule,
     MatSidenavModule,

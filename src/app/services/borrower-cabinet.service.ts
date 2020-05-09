@@ -17,4 +17,10 @@ export class BorrowerCabinetService {
     .pipe(catchError(this.permissionService.errorHandler));
   }
 
+  toggleVerification(): Observable<any> {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.get<any>('http://localhost:8080/GrowIt/borrower-account/verification', { headers })
+    .pipe(catchError(this.permissionService.errorHandler));
+  }
+
 }

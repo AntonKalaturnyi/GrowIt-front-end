@@ -33,7 +33,7 @@ export class UserService {
         }
 
         if (sessionStorage.getItem('REGISTERED_BORROWER') && !sessionStorage.getItem('BORROWER_ON_CHECK')) {
-          this.router.navigateByUrl('new-borrower');
+          this.router.navigateByUrl('calculator');
         }
 
         if (sessionStorage.getItem('INVESTOR') || sessionStorage.getItem('REGISTERED_INVESTOR')) {

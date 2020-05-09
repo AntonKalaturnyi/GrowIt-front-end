@@ -30,4 +30,10 @@ export class LoanService {
     return this.http.get<any>('http://localhost:8080/GrowIt/borrower-account/get-loans', { headers })
     .pipe(catchError(this.permissionService.errorHandler));
   }
+
+  getCalculatorLoan(): Observable<any> {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.get<any>('http://localhost:8080/GrowIt/loan/calculator-loan', { headers })
+    .pipe(catchError(this.permissionService.errorHandler));
+  }
 }
