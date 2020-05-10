@@ -1,7 +1,6 @@
 <div
   *ngIf="this.permissionService.borrowerOnCheckPermission() || permissionService.registeredBorrowerPermission() else accessDenied"
   class="form">
-  <!-- to be changed: should be verifiedBorrowerPermission() when VerificationComponent is up -->
 
   <div class=" ml-5 row">
     <div class="mt-1">Баланс: {{availableBalance}} грн </div>
@@ -125,6 +124,11 @@
               <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentDelayInDays}} дн.<br /></div>
               {{element.payedOffInOtherOrgs}}<br />
               {{element.payedInGrowit}}<br />
+            </div>
+
+            <div class=" widther details"><br />Description
+              <div class=" font-weight-light"></div>
+              {{element.description}}<br />
             </div>
           </div>
         </div>
