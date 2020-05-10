@@ -25,6 +25,17 @@ export class LoanService {
     .pipe(catchError(this.permissionService.errorHandler));
   }
 
+  getCabinetCurrentLoan(): any {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.get<any>('http://localhost:8080/GrowIt/borrower-account/current-loan', { headers })
+    .pipe(catchError(this.permissionService.errorHandler));
+  }
+
+  deleteCabinetLoanOnFunding(): Observable<any> {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.delete<any>('http://localhost:8080/GrowIt/borrower-account/delete-on-funding', {headers});
+  }
+
   getPreviousBorrowerLoans(): any {
     const headers = this.permissionService.getTokenHeader();
     return this.http.get<any>('http://localhost:8080/GrowIt/borrower-account/get-loans', { headers })
