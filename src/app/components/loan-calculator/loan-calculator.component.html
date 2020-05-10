@@ -29,7 +29,7 @@
       <div *ngIf="this.permissionService.verifiedBorrowerPermission()" class="form-group frm">
         <label class="mr-4">Опишіть, як Ви будете використовувати та повертати займ.<br />Це збільшить довіру інвесторів
           та пришвидшить збір запрошеної Вами суми. </label>
-        <div class="row"><textarea maxlength="600" formControlName="description"></textarea> <span class="form-help">{{dataForm.controls['description'].value.length}}/600</span>
+        <div class="row"><textarea maxlength="600" formControlName="description"></textarea> <span class="form-help">{{dataForm.controls['description'].value?.length}}/600</span>
         </div>
       </div>
       <span id="star-desc">* на основі середньої ставки для класу надійності B(середній)</span>
@@ -37,7 +37,7 @@
 
 
 
-    <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid">Отримати займ</button>
+    <button type="submit" class="btn btn-primary mx-auto" [disabled]="!dataForm.valid || (this.permissionService.verifiedBorrowerPermission() && !dataForm.controls['description'].value)">Отримати займ</button>
   </form>
 
 </div>
