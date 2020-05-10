@@ -18,11 +18,11 @@ import { map } from 'rxjs/operators';
 })
 export class BorrowerCabinetComponent implements OnInit {
   @ViewChild('countdown') counter: CountdownComponent;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: false }) sort: MatSort;
+@ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(private formBuilder: FormBuilder, private loanService: LoanService,
-              private router: Router, public permissionService: PermissionService, private cabinetService: BorrowerCabinetService) { }
+    private router: Router, public permissionService: PermissionService, private cabinetService: BorrowerCabinetService) { }
 
   availableBalance: number;
   dailyRate: string;
@@ -31,22 +31,26 @@ export class BorrowerCabinetComponent implements OnInit {
   status: string;
   verified: boolean;
 
-  displayedRows$: Observable<PrevLoan[]>;
+  // displayedRows$: Observable<PrevLoan[]>;
   totalRows$: Observable<number>;
-  displayedColumns: string[] = ['status', 'amount', 'term', 'dailyLoanRate', 'rating', 'loanPurpose' , 'closeDate' , 'ratingChange'  ];
+  displayedColumns: string[] = ['status', 'amount', 'term', 'dailyLoanRate', 'rating', 'loanPurpose', 'closeDate', 'ratingChange'];
+  dataSource: CurrentLoanDto[];
+  displayedRows$: Observable<CurrentLoanDto[]>;
   items: PrevLoan[];
-
 
   zeroTrigger(e) {
     if (e.action === 'done') {
-console.log('Gotcha!!!');
-this.cabinetService.toggleVerification().subscribe(data => {
-  this.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
-    this.router.navigate(['/borrower-cabinet']);
-});
-});
+      console.log('Gotcha!!!');
+      this.cabinetService.toggleVerification().subscribe(data => {
+        this.refresh();
+      });
     }
+  }
 
+  refresh() {
+    this.router.navigateByUrl('/login', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['/borrower-cabinet']);
+    });
   }
 
   resume() {
@@ -56,6 +60,17 @@ this.cabinetService.toggleVerification().subscribe(data => {
 
   pause() {
     this.counter.pause();
+  }
+
+  divide(val1, val2) {
+    return Math.round((Number(val1) / Number(val2)) * 100);
+  }
+
+  deleteLoan() {
+    this.loanService.deleteCabinetLoanOnFunding().subscribe(data => {
+      console.log('Deleted: ' + data);
+      this.refresh();
+    });
   }
 
   ngOnInit(): void {
@@ -89,6 +104,26 @@ this.cabinetService.toggleVerification().subscribe(data => {
       this.totalRows$ = rows$.pipe(map(rows => rows.length));
       // this.displayedRows$ = rows$.pipe(sortRows(sortEvents$), paginateRows(pageEvents$));
     });
+
+    this.loanService.getCabinetCurrentLoan().subscribe(data => {
+      this.dataSource = data;
+      const sortEvents$: Observable<Sort> = fromMatSort(this.sort);
+      const pageEvents$: Observable<PageEvent> = fromMatPaginator(this.paginator);
+      const rows$ = of(this.dataSource);
+      this.totalRows$ = rows$.pipe(map(rows => rows.length));
+      this.displayedRows$ = rows$.pipe(sortRows(sortEvents$), paginateRows(pageEvents$));
+      data.forEach(element => {
+        if (element.term.slice(-1) === 'd') {
+          element.absoluteTerm = Number(element.term.substr(0, element.term.indexOf('d')));
+          element.term = element.absoluteTerm + ' дн.';
+        } else {
+          element.absoluteTerm = Number(element.term.substr(0, element.term.indexOf('m'))) * 30;
+          element.term = element.term.substr(0, element.term.indexOf('m')) + ' міс.';
+        }
+      });
+
+
+    });
   }
 
 }
@@ -103,4 +138,41 @@ export interface PrevLoan {
   loanPurpose: string;
   closeDate: any;
   ratingChange: string;
+}
+
+export interface CurrentLoanDto {
+  loanId: number;
+  /*** Front loan data*/
+  amount: number;
+  term: string;
+  absoluteTerm: number;
+  amountToReturn: string;
+  loanPurpose: string;
+  applyDate: Date;
+  deadline: string;
+  amountFunded: number;
+  fulfillment: number;
+  description: string;
+  /*** Expandable details*/
+  /** Borrower data*/
+  registrationDate: any;
+  maritalStatus: string;
+  kidsBefore18yo: number;
+  kidsAfter18yo: number;
+  placeOfLiving: string;
+  /** Financial data*/
+  age: number;
+  socialStatus: string;
+  monthlyIncome: number;
+  monthlyExpenses: number;
+  pti: number;
+  /** Credit history*/
+  currentOpenCredits: number; // DTO
+  currentDebtAmount: number;  // Сумма тек. задолженности
+  hasDelayInCurrentPeriod: boolean; // Признак наличия просрочки в тек.периоде
+  currentOverdueDebtAmount: number;  // Сумма тек. просроченной задолженности
+  currentDelayInDays: number; // Текущее кол-во дней просрочки
+  payedOffInOtherOrgs: number; // DTO
+  payedInGrowit: number;
+  clicked: boolean;
 }
