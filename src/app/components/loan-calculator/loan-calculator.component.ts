@@ -70,7 +70,7 @@ returnDate: Date = new Date();
         this.dataForm.controls.amount.setValue(data.amount);
         this.dataForm.controls.period.setValue(data.period);
         this.dataForm.controls.loanPurpose.setValue(data.loanPurpose);
-            if (this.permissionService.verifiedBorrowerPermission) {
+        if (this.permissionService.verifiedBorrowerPermission) {
         this.dataForm.controls.description.setValue(data.description);
             }
       });
@@ -87,6 +87,12 @@ returnDate: Date = new Date();
   submit(form) {
     this.loanService.saveCalculatorLoan(form).subscribe(data => {
 
+      if (this.permissionService.verifiedBorrowerPermission()) {
+        console.log('redirect!!!');
+        this.alertService.successMessage('Кредит виставлений на дашборді, та збирає фінансування', 'Заявку на кредит створено!');
+        this.router.navigateByUrl('borrower-cabinet');
+      }
+
       if (sessionStorage.getItem('REGISTERED_BORROWER') && !sessionStorage.getItem('BORROWER_ON_CHECK')
       && !sessionStorage.getItem('VERIFIED_BORROWER')) {
         this.alertService.successMessage('Будь ласка, заповніть свою інформацію, щоб продовжити', 'Заявку на кредит створено!');
@@ -97,12 +103,6 @@ returnDate: Date = new Date();
         this.alertService.successMessage('Будь ласка, дочекайтесь завершення верифікації, щоб продовжити', 'Заявку на кредит створено!');
         this.router.navigateByUrl('borrower-cabinet');
       }
-
-      if (sessionStorage.getItem(sessionStorage.getItem('VERIFIED_BORROWER'))) {
-        this.alertService.successMessage('Кредит виставлений на дашборді, та збирає фінансування', 'Заявку на кредит створено!');
-        this.router.navigateByUrl('borrower-cabinet');
-      }
-
     }, error => {
       console.log(error);
       this.alertService.errorMessage(error.error.message, 'Помилка!');
