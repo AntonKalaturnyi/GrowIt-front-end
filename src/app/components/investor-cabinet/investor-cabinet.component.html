@@ -1,7 +1,15 @@
 <div *ngIf="this.permissionService.registeredInvestorPermission() else accessDenied" class="form">
 
-    <p>investor-cabinet works!</p>
+  <div class=" ml-5 row">
+    <div class="mt-1">Баланс: {{availableBalance}} грн </div><br><br>
 
+
+    <div class="ml-3 "> <button [routerLink]="['/#']" mat-button type="button">Вивести</button></div>
+    <div class="ml-3 "> <button [routerLink]="['/#']" mat-button type="button">Погасити</button></div>
+  </div>
+  <div class="ml-5 mt-1">Invested: {{investedFunds}} грн </div><br>
+
+  <br>
 </div>
 <ng-template #accessDenied>
   <div class="denied mt-3 p-5 alert-danger">
