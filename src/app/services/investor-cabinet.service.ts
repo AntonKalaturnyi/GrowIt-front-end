@@ -16,4 +16,10 @@ export class InvestorCabinetService {
     return this.http.get<any>('http://localhost:8080/GrowIt/investor-account/get-data', { headers })
     .pipe(catchError(this.permissionService.errorHandler));
   }
+
+  getInvestments(): any {
+    const headers = this.permissionService.getTokenHeader();
+    return this.http.get<any>('http://localhost:8080/GrowIt/investor-account/investments', { headers })
+    .pipe(catchError(this.permissionService.errorHandler));
+  }
 }
