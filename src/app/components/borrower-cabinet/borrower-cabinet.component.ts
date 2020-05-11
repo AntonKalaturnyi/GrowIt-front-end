@@ -19,7 +19,7 @@ import { map } from 'rxjs/operators';
 export class BorrowerCabinetComponent implements OnInit {
   @ViewChild('countdown') counter: CountdownComponent;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
-@ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(private formBuilder: FormBuilder, private loanService: LoanService,
     private router: Router, public permissionService: PermissionService, private cabinetService: BorrowerCabinetService) { }
