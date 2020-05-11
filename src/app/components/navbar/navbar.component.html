@@ -2,7 +2,8 @@
   <mat-toolbar-row>
     <span><img src="assets/Logo_growIT.svg" ></span>
 
-    <div *ngIf="permissionService.registeredInvestorPermission()" class="right-con row">
+    <div *ngIf="permissionService.registeredInvestorPermission()" class="right-inv row">
+      <div [hidden]="permissionService.investorPermission()" class="ml-2"> <button [routerLink]="['/new-investor']" mat-button type="button">Register</button></div>
       <div class=""> <button [routerLink]="['/dashboard']" mat-button type="button">Dashboard</button>
       </div>
       <div class="ml-2"> <button [routerLink]="['/investor-cabinet']" mat-button type="button">My cabinet</button></div>

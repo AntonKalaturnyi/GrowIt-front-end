@@ -53,6 +53,7 @@ export class InvestorPassportFillComponent implements OnInit {
 
     this.userService.saveInvestorPassportAndItn(this.dto).subscribe(data => {
       this.alertService.successMessage('Реєстрація успішно завершена!', 'Супер');
+      sessionStorage.setItem('INVESTOR', 'true');
       this.router.navigateByUrl('investor-cabinet');
     }, error => {
       console.log(error);
