@@ -3,10 +3,10 @@
   class="form">
 
   <div class=" ml-5 row">
-    <div class="mt-1">Баланс: {{availableBalance}} грн </div>
+    <div class="mt-1">Balance: {{availableBalance}} грн </div>
 
-    <div class="ml-3 "> <button [routerLink]="['/#']" mat-button type="button">Вивести</button></div>
-    <div class="ml-3 "> <button [routerLink]="['/#']" mat-button type="button">Погасити</button></div>
+    <div class="ml-3 "> <button [routerLink]="['/#']" mat-button type="button">Withdraw</button></div>
+    <div class="ml-3 "> <button [routerLink]="['/#']" mat-button type="button">Repay</button></div>
   </div>
   <br>
 
@@ -14,7 +14,7 @@
 
   <div class="card width bg-light mb-3">
 
-    <div class="card-body "> <strong>Рейтинг</strong> </div>
+    <div class="card-body "> <strong>Rating</strong> </div>
 
     <div *ngIf="!this.verified && this.permissionService.borrowerOnCheckPermission()" class="ml-3 mb-3 row">
       <countdown #countdown (event)="zeroTrigger($event)" [config]="{leftTime: 5}"></countdown>
@@ -30,18 +30,18 @@
 
       <div class="row">
         <div class="col-sm">
-          <span>Клас</span><br>
+          <span>Rank</span><br>
           <div class="ml-1 display-4">{{rank}}</div>
         </div>
         <div class="col-sm">
-          <span class="mr-4">Скоринговий бал</span>
+          <span class="mr-4">Score</span>
           <div class="ml-5 display-4">{{score}}</div>
         </div>
         <div class="col-sm">
-          <span>Денна ставка</span>
+          <span>Dayly rate</span>
           <div class="ml-1 display-4">{{dailyRate}}</div>
         </div>
-        <div class="ml-3 "> <button [routerLink]="['/#']" mat-button type="button">Зменшити ставку</button></div>
+        <div class="ml-3 "> <button [routerLink]="['/#']" mat-button type="button">Improve score</button></div>
 
       </div>
     </div>
@@ -55,24 +55,24 @@
 
     <mat-accordion *ngIf="status=='ON_FUNDING'" displayMode="flat" multi class="mat-table">
       <section matSort class="mat-elevation-z2 mat-header-row">
-        <span class="mat-header-cell" mat-sort-header="fulfillment">Заповненість</span>
+        <span class="mat-header-cell" mat-sort-header="fulfillment">Fulfillment</span>
         <span class="mat-header-cell" mat-sort-header="deadline">Deadline</span>
-        <span class="mat-header-cell" mat-sort-header="amount">Сума</span>
-        <span class="mat-header-cell" mat-sort-header="term">Термін</span>
-        <span class="mat-header-cell" mat-sort-header="amountToReturn">До повернення</span>
-        <span class="mat-header-cell" mat-sort-header="loanPurpose">Призначення</span>
+        <span class="mat-header-cell" mat-sort-header="amount">Amount</span>
+        <span class="mat-header-cell" mat-sort-header="term">Term</span>
+        <span class="mat-header-cell" mat-sort-header="amountToReturn">To return</span>
+        <span class="mat-header-cell" mat-sort-header="loanPurpose">Purpose</span>
         <span class="mat-header-cell" mat-sort-header="pti">PTI</span>
-        <span class="mat-header-cell" mat-sort-header="applyDate">Дата подачі</span>
+        <span class="mat-header-cell" mat-sort-header="applyDate">Apply date</span>
       </section>
 
       <mat-expansion-panel *ngFor="let element of displayedRows$ | async">
         <mat-expansion-panel-header class="mat-row">
           <span class="mat-cell">({{element.fulfillment}}%) {{element.amountFunded}} /
-            {{element.amount}} грн</span>
+            {{element.amount}} uah</span>
           <span class="mat-cell">{{element.deadline}}</span>
-          <span class="mat-cell">{{element.amount}} грн</span>
+          <span class="mat-cell">{{element.amount}} uah</span>
           <span class="mat-cell">{{element.term}}</span>
-          <span class="mat-cell">{{element.amountToReturn}} грн </span>
+          <span class="mat-cell">{{element.amountToReturn}} uah </span>
           <span class="mat-cell">{{element.loanPurpose}}</span>
           <span class="mat-cell">{{element.pti}}%</span>
           <span class="mat-cell">{{element.applyDate}}</span>
