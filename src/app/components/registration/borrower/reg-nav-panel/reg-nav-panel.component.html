@@ -3,37 +3,37 @@
         <div class="col-1 mr-5">
             <span [hidden]="!personalFilled" class="checkGeneral"><img src="assets/done.svg" ></span>
             <span [hidden]="personalFilled" class="questGeneral"><img src="assets/help_outline-24px.svg" ></span>
-            <button type="button" mat-button [routerLink]="['/new-borrower']">Особисті дані</button>
+            <button type="button" mat-button [routerLink]="['/new-borrower']">Personal data</button>
         </div> 
 
         <div class="col-1 mr-4">
             <span [hidden]="!docsFilled" class="checkDocs"><img src="assets/done.svg" ></span>
             <span [hidden]="docsFilled" class="questDocs"><img src="assets/help_outline-24px.svg" > </span>
-            <button type="button" mat-button [routerLink]="['/borrower/fill-passport']">Документи</button>
+            <button type="button" mat-button [routerLink]="['/borrower/fill-passport']">Documents</button>
         </div>
 
         <div class="col-1">
             <span [hidden]="!addressFilled" class="checkAddr"><img src="assets/done.svg" ></span>
             <span [hidden]="addressFilled" class="questAddr"><img src="assets/help_outline-24px.svg" > </span>
-            <button type="button" mat-button [routerLink]="['/borrower/fill-address']">Адреса</button>
+            <button type="button" mat-button [routerLink]="['/borrower/fill-address']">Address</button>
         </div>
         
         <div class="col-2">
             <span [hidden]="!employmentFilled" class="checkEmpl"><img src="assets/done.svg" ></span>
             <span [hidden]="employmentFilled" class="questEmpl"><img src="assets/help_outline-24px.svg" > </span>
-            <button type="button" mat-button [routerLink]="['/borrower/fill-employment']">Працевлаштування</button>
+            <button type="button" mat-button [routerLink]="['/borrower/fill-employment']">Employment</button>
         </div>
 
         <div class="col-1">
             <span [hidden]="!educationFilled" class="checkEdu"><img src="assets/done.svg" ></span>
             <span [hidden]="educationFilled" class="questEdu"><img src="assets/help_outline-24px.svg" > </span>
-            <button mat-button [routerLink]="['/borrower/fill-education']">Освіта</button>
+            <button mat-button [routerLink]="['/borrower/fill-education']">Education</button>
         </div>
 
         <div class="col-1">
             <span [hidden]="!assetsFilled" class="checkAssets"><img src="assets/done.svg" ></span>
             <span [hidden]="assetsFilled" class="questAssets"><img src="assets/help_outline-24px.svg" > </span>
-            <button mat-button [routerLink]="['/borrower/fill-assets']">Активи</button>
+            <button mat-button [routerLink]="['/borrower/fill-assets']">Assets</button>
         </div>
   
         <div class="col-1">

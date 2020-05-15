@@ -1,8 +1,8 @@
 <div *ngIf="this.permissionService.registeredInvestorPermission() else accessDenied" class="dash">
   <div class="orient">
     <div class="row">
-      <div class="col-3 ml-5">Вибрано інвестицій на суму<br />
-        Потенційний відсотковий дохід
+      <div class="col-3 ml-5">Choose investments amount<br />
+        Potencial income
       </div>
       <div class="col-1 mr-5">
         {{summarizedInvestment | number:'1.1-2' : 'uk'}} грн<br />
@@ -16,21 +16,21 @@
 
   <mat-accordion displayMode="flat" multi class="mat-table mt-2">
     <section matSort class="mat-elevation-z2 mat-header-row">
-      <span class="mat-header-cell" mat-sort-header="score">Рейтинг</span>
-      <span class="mat-header-cell" mat-sort-header="amount">Сума</span>
-      <span class="mat-header-cell" mat-sort-header="absoluteTerm">Термін</span>
-      <span class="mat-header-cell" mat-sort-header="profitability">Дохідність</span>
-      <span class="mat-header-cell" mat-sort-header="loanPurpose">Призначення</span>
-      <span class="mat-header-cell" mat-sort-header="applyDate">Дата подачі</span>
-      <span class="mat-header-cell" mat-sort-header="timeLeft">Залишилось часу</span>
-      <span class="mat-header-cell" mat-sort-header="fulfillment">Заповненість</span>
+      <span class="mat-header-cell" mat-sort-header="score">Rating</span>
+      <span class="mat-header-cell" mat-sort-header="amount">Amount</span>
+      <span class="mat-header-cell" mat-sort-header="absoluteTerm">Term</span>
+      <span class="mat-header-cell" mat-sort-header="profitability">Profitability</span>
+      <span class="mat-header-cell" mat-sort-header="loanPurpose">Purpose</span>
+      <span class="mat-header-cell" mat-sort-header="applyDate">Apply date</span>
+      <span class="mat-header-cell" mat-sort-header="timeLeft">Time left</span>
+      <span class="mat-header-cell" mat-sort-header="fulfillment">Fulfillment</span>
     </section>
 
     <mat-expansion-panel *ngFor="let element of displayedRows$ | async">
       <mat-expansion-panel-header class="mat-row">
         <span class="mat-cell"><span class="font-weight-bold">{{element.rank}}</span><span
             class="score font-weight-light">{{element.score}}</span></span>
-        <span class="mat-cell">{{element.amount}} грн</span>
+        <span class="mat-cell">{{element.amount}} uah</span>
         <span class="mat-cell">{{element.term}}</span>
         <span class="mat-cell">{{element.profitability}} % </span>
         <span class="mat-cell">{{element.loanPurpose}}</span>
@@ -44,12 +44,12 @@
 
           <div class="col details">
             <!-- Дані позичальника -->
-            Дата реєстрації<br />
-            Сімейний стан<br />
-            <div *ngIf="element.kidsBefore18yo !== '0'"> Діти до 18 р.<br /></div>
-            <div *ngIf="element.kidsBefore18yo == '0' && element.kidsAfter18yo == '0'">Діти<br /></div>
-            <div *ngIf="element.kidsAfter18yo !== '0'">Діти старше 18 р.<br /></div>
-            Місце проживання<br />
+            Registration date<br />
+            Marital status<br />
+            <div *ngIf="element.kidsBefore18yo !== '0'"> Kids below 18<br /></div>
+            <div *ngIf="element.kidsBefore18yo == '0' && element.kidsAfter18yo == '0'">Kids<br /></div>
+            <div *ngIf="element.kidsAfter18yo !== '0'">Kids above 18<br /></div>
+            Location<br />
           </div>
           <div class="col details font-weight-light">
             {{element.registrationDate}}<br />
@@ -59,32 +59,30 @@
             {{element.placeOfLiving}}<br />
           </div>
           <div class="col details">
-            Вік<br />
-            Соціальний статус<br />
-            Щомісячний дохід<br />
-            Щомісячні витрати<br />
-            PTI<br />
+            Age<br />
+            Social status<br />
+            Monthly income<br />
+            Monthly expenses<br />
           </div>
           <div class="col details font-weight-light">
             {{element.age}} р.<br />
             {{element.socialStatus}}<br />
-            {{element.monthlyIncome}} грн<br />
-            {{element.monthlyExpenses}} грн<br />
-            {{element.pti}}%<br />
+            {{element.monthlyIncome}} uah<br />
+            {{element.monthlyExpenses}} uah<br />
           </div>
           <div class="col-3 details">
             Відкритих кр. на зараз<br />
-            <div *ngIf="element.currentOpenCredits !== 0">Cума поточної заборгованості<br /></div>
-            <div *ngIf="element.hasDelayInCurrentPeriod">Прострочка за цей період<br /></div>
-            <div *ngIf="element.hasDelayInCurrentPeriod">Тривалість просрочки<br /></div>
+            <div *ngIf="element.currentOpenCredits !== 0">Current debt<br /></div>
+            <div *ngIf="element.hasDelayInCurrentPeriod">Current overdue<br /></div>
+            <div *ngIf="element.hasDelayInCurrentPeriod">Days overdue<br /></div>
             Виплачених у інших орг.<br />
             Виплачених на GrowIt<br />
           </div>
           <div class="col details font-weight-light">
             {{element.currentOpenCredits}}<br />
-            <div *ngIf="element.currentOpenCredits !== 0">{{element.currentDebtAmount}} грн<br /></div>
-            <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentOverdueDebtAmount}} грн<br /></div>
-            <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentDelayInDays}} дн.<br /></div>
+            <div *ngIf="element.currentOpenCredits !== 0">{{element.currentDebtAmount}} uah<br /></div>
+            <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentOverdueDebtAmount}} ‰<br /></div>
+            <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentDelayInDays}} d.<br /></div>
             {{element.payedOffInOtherOrgs}}<br />
             {{element.payedInGrowit}}<br />
           </div>
