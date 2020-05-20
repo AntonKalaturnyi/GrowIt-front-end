@@ -23,7 +23,11 @@ export class InvestorCabinetComponent implements OnInit {
 
   totalRows$: Observable<number>;
   dataSource: InvestmentDto[];
+  transactions: TransactionDto[];
+
   displayedRows$: Observable<InvestmentDto[]>;
+  displayedTransactions$: Observable<TransactionDto[]>;
+
 
   ngOnInit(): void {
     this.cabinetService.getData().subscribe(data => {
@@ -49,11 +53,32 @@ export class InvestorCabinetComponent implements OnInit {
         }
       });
     });
+
+    this.cabinetService.getTransactions().subscribe(data => {
+      this.transactions = data;
+      const sortEvents$: Observable<Sort> = fromMatSort(this.sort);
+      const pageEvents$: Observable<PageEvent> = fromMatPaginator(this.paginator);
+      const transRows$ = of(this.transactions);
+      this.totalRows$ = transRows$.pipe(map(rows => rows.length));
+      this.displayedTransactions$ = transRows$.pipe(sortRows(sortEvents$), paginateRows(pageEvents$));
+      this.displayedTransactions$ = transRows$.pipe(sortRows(sortEvents$), paginateRows(pageEvents$));
+
+    });
   }
 
   }
 
 }
+export interface TransactionDto {
+  date: any;
+  amount: number;
+  commission: number;
+  status: string;
+  type: string;
+  description: string;
+  previousBalance: number;
+}
+
 
 export interface InvestmentDto {
   investmentId: number;

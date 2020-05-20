@@ -12,98 +12,135 @@
   <div class="card width bg-light mb-3">
     <div class="card-body "> <strong>My investments</strong> <br>
 
-    <mat-accordion displayMode="flat" multi class="mat-table">
-      <section matSort class="mat-elevation-z2 mat-header-row">
-        <span class="mat-header-cell" mat-sort-header="fulfillment">Fulfillment</span>
-        <span class="mat-header-cell" mat-sort-header="investedAmount">Invested</span>
-        <span class="mat-header-cell" mat-sort-header="plannedReturn">Planned return</span>
-        <span class="mat-header-cell" mat-sort-header="amount">Amount</span>
-        <span class="mat-header-cell" mat-sort-header="term">Term</span>
-        <span class="mat-header-cell" mat-sort-header="interestRate">Interest rate</span>
-        <span class="mat-header-cell" mat-sort-header="loanPurpose">Purpose</span>
-        <span class="mat-header-cell" mat-sort-header="deadline">Deadline</span>
-        <span class="mat-header-cell" mat-sort-header="dateInvested">Date invested</span>
-      </section>
+      <mat-accordion displayMode="flat" multi class="mat-table">
+        <section matSort class="mat-elevation-z2 mat-header-row">
+          <span class="mat-header-cell" mat-sort-header="fulfillment">Fulfillment</span>
+          <span class="mat-header-cell" mat-sort-header="investedAmount">Invested</span>
+          <span class="mat-header-cell" mat-sort-header="plannedReturn">Planned return</span>
+          <span class="mat-header-cell" mat-sort-header="amount">Amount</span>
+          <span class="mat-header-cell" mat-sort-header="term">Term</span>
+          <span class="mat-header-cell" mat-sort-header="interestRate">Interest rate</span>
+          <span class="mat-header-cell" mat-sort-header="loanPurpose">Purpose</span>
+          <span class="mat-header-cell" mat-sort-header="deadline">Deadline</span>
+          <span class="mat-header-cell" mat-sort-header="dateInvested">Date invested</span>
+        </section>
 
-      <mat-expansion-panel *ngFor="let element of displayedRows$ | async">
-        <mat-expansion-panel-header class="mat-row">
-          <span class="mat-cell">({{element.fulfillment}}%) {{element.amountFunded}} /
-            {{element.amount}}</span>
-          <span class="mat-cell">{{element.investedAmount}} uah</span>
-          <span class="mat-cell">{{element.plannedReturn}} uah</span>
-          <span class="mat-cell">{{element.amount}} uah</span>
-          <span class="mat-cell">{{element.term}}</span>
-          <span class="mat-cell">{{element.interestRate}}%</span>
-          <span class="mat-cell">{{element.loanPurpose}}</span>
-          <span class="mat-cell">{{element.deadline}}</span>
-          <span class="mat-cell">{{element.dateInvested}}</span>
-        </mat-expansion-panel-header>
-        <div class="container">
-          <div class="row">
+        <mat-expansion-panel *ngFor="let element of displayedRows$ | async">
+          <mat-expansion-panel-header class="mat-row">
+            <span class="mat-cell">({{element.fulfillment}}%) {{element.amountFunded}} /
+              {{element.amount}}</span>
+            <span class="mat-cell">{{element.investedAmount}} uah</span>
+            <span class="mat-cell">{{element.plannedReturn}} uah</span>
+            <span class="mat-cell">{{element.amount}} uah</span>
+            <span class="mat-cell">{{element.term}}</span>
+            <span class="mat-cell">{{element.interestRate}}%</span>
+            <span class="mat-cell">{{element.loanPurpose}}</span>
+            <span class="mat-cell">{{element.deadline}}</span>
+            <span class="mat-cell">{{element.dateInvested}}</span>
+          </mat-expansion-panel-header>
+          <div class="container">
+            <div class="row">
 
-            <div class="col details">
-              Registration date<br />
-              Marital status<br />
-              <div *ngIf="element.kidsBefore18yo !== '0'"> Kids below 18<br /></div>
-              <div *ngIf="element.kidsBefore18yo == '0' && element.kidsAfter18yo == '0'">Kids<br /></div>
-              <div *ngIf="element.kidsAfter18yo !== '0'">Kids above 18<br /></div>
-              Location<br />
-            </div>
-            <div class="col details font-weight-light">
-              {{element.registrationDate}}<br />
-              {{element.maritalStatus}}<br />
-              {{element.kidsBefore18yo}}<br />
-              <div *ngIf="element.kidsAfter18yo !== '0'">{{element.kidsAfter18yo}}<br /></div>
-              {{element.placeOfLiving}}<br />
-            </div>
-            <div class="col details">
-              Age<br />
-              Social status<br />
-              Monthly income<br />
-              Monthly expenses<br />
-            </div>
-            <div class="col details font-weight-light">
-              {{element.age}} р.<br />
-              {{element.socialStatus}}<br />
-              {{element.monthlyIncome}} uah<br />
-              {{element.monthlyExpenses}} uah<br />
-            </div>
-            <div class="col-3 details">
-              Відкритих кр. на зараз<br />
-              <div *ngIf="element.currentOpenCredits !== 0">Current debt<br /></div>
-              <div *ngIf="element.hasDelayInCurrentPeriod">Current overdue<br /></div>
-              <div *ngIf="element.hasDelayInCurrentPeriod">Days overdue<br /></div>
-              Виплачених у інших орг.<br />
-              Виплачених на GrowIt<br />
-            </div>
-            <div class="col details font-weight-light">
-              {{element.currentOpenCredits}}<br />
-              <div *ngIf="element.currentOpenCredits !== 0">{{element.currentDebtAmount}} uah<br /></div>
-              <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentOverdueDebtAmount}} ‰<br /></div>
-              <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentDelayInDays}} d.<br /></div>
-              {{element.payedOffInOtherOrgs}}<br />
-              {{element.payedInGrowit}}<br />
-            </div>
+              <div class="col details">
+                Registration date<br />
+                Marital status<br />
+                <div *ngIf="element.kidsBefore18yo !== '0'"> Kids below 18<br /></div>
+                <div *ngIf="element.kidsBefore18yo == '0' && element.kidsAfter18yo == '0'">Kids<br /></div>
+                <div *ngIf="element.kidsAfter18yo !== '0'">Kids above 18<br /></div>
+                Location<br />
+              </div>
+              <div class="col details font-weight-light">
+                {{element.registrationDate}}<br />
+                {{element.maritalStatus}}<br />
+                {{element.kidsBefore18yo}}<br />
+                <div *ngIf="element.kidsAfter18yo !== '0'">{{element.kidsAfter18yo}}<br /></div>
+                {{element.placeOfLiving}}<br />
+              </div>
+              <div class="col details">
+                Age<br />
+                Social status<br />
+                Monthly income<br />
+                Monthly expenses<br />
+                PTI<br />
+              </div>
+              <div class="col details font-weight-light">
+                {{element.age}} р.<br />
+                {{element.socialStatus}}<br />
+                {{element.monthlyIncome}} uah<br />
+                {{element.monthlyExpenses}} uah<br />
+                {{element.pti}}%<br />
+              </div>
+              <div class="col-3 details">
+                Відкритих кр. на зараз<br />
+                <div *ngIf="element.currentOpenCredits !== 0">Current debt<br /></div>
+                <div *ngIf="element.hasDelayInCurrentPeriod">Current overdue<br /></div>
+                <div *ngIf="element.hasDelayInCurrentPeriod">Days overdue<br /></div>
+                Виплачених у інших орг.<br />
+                Виплачених на GrowIt<br />
+              </div>
+              <div class="col details font-weight-light">
+                {{element.currentOpenCredits}}<br />
+                <div *ngIf="element.currentOpenCredits !== 0">{{element.currentDebtAmount}} uah<br /></div>
+                <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentOverdueDebtAmount}} ‰<br /></div>
+                <div *ngIf="element.hasDelayInCurrentPeriod">{{element.currentDelayInDays}} d.<br /></div>
+                {{element.payedOffInOtherOrgs}}<br />
+                {{element.payedInGrowit}}<br />
+              </div>
 
-            <div class=" widther details"><br />Description
-              <div class=" font-weight-light"></div>
-              {{element.description}}<br />
+              <div class=" widther details"><br />Description
+                <div class=" font-weight-light"></div>
+                {{element.description}}<br />
+              </div>
             </div>
           </div>
-        </div>
 
-      </mat-expansion-panel>
-    </mat-accordion>
-    <mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10"
-      [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
 
+    </div>
   </div>
-</div>
 
 
   <div class="card width bg-light mb-3">
     <div class="card-body ">
       Transactions
+      <mat-accordion displayMode="flat" multi class="mat-table">
+        <section matSort class="mat-elevation-z2 mat-header-row">
+          <span class="mat-header-cell" mat-sort-header="date">Дата</span>
+          <span class="mat-header-cell" mat-sort-header="amount">Сума</span>
+          <span class="mat-header-cell" mat-sort-header="commission">Комісія</span>
+          <span class="mat-header-cell" mat-sort-header="status">Статус</span>
+        </section>
+
+        <mat-expansion-panel *ngFor="let element of displayedTransactions$ | async">
+          <mat-expansion-panel-header class="mat-row">
+            <span class="mat-cell">{{element.date}}</span>
+            <span class="mat-cell">
+              <span *ngIf="element.type == 'INVESTMENT' || element.type == 'WITHDRAWAL'; else plus">- </span><ng-template #plus>+ </ng-template>{{element.amount}} грн</span>
+            <span class="mat-cell">{{element.commission}} грн</span>
+            <span class="mat-cell">{{element.status}}</span>
+          </mat-expansion-panel-header>
+          
+          <div class="container">
+            <label>Опис</label><br>
+            {{element.description}}<br><br>
+
+            <label>Cума</label><br>
+            {{element.amount}} грн<br><br>
+
+            <label>Попередній баланс</label><br>
+            {{element.previousBalance}} грн<br><br>
+
+            <label>Дата</label><br>
+            {{element.date}}
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+      <mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
   </div>
 
